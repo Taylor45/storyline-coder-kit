@@ -1,12 +1,45 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState, useCallback } from "react";
+import CourseSidebar from "@/components/CourseSidebar";
+import ModuleContent from "@/components/ModuleContent";
+import { courseModules } from "@/data/courseData";
 
 const Index = () => {
+  const [currentModule, setCurrentModule] = useState(1);
+  const [completedModules, setCompletedModules] = useState<number[]>([]);
+
+  const module = courseModules.find((m) => m.id === currentModule)!;
+
+  const handleComplete = useCallback(() => {
+    setCompletedModules((prev) =>
+      prev.includes(currentModule) ? prev : [...prev, currentModule]
+    );
+  }, [currentModule]);
+
+  const handlePrev = () => {
+    if (currentModule > 1) setCurrentModule(currentModule - 1);
+  };
+
+  const handleNext = () => {
+    if (currentModule < courseModules.length) setCurrentModule(currentModule + 1);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="flex min-h-screen w-full bg-background">
+      <CourseSidebar
+        currentModule={currentModule}
+        completedModules={completedModules}
+        onSelectModule={setCurrentModule}
+      />
+      <ModuleContent
+        key={currentModule}
+        module={module}
+        onComplete={handleComplete}
+        onPrev={handlePrev}
+        onNext={handleNext}
+        isFirst={currentModule === 1}
+        isLast={currentModule === courseModules.length}
+        isCompleted={completedModules.includes(currentModule)}
+      />
     </div>
   );
 };
