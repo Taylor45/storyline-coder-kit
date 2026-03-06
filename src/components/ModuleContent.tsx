@@ -250,10 +250,10 @@ const ModuleContent = ({
 
         <button
           onClick={onNext}
-          disabled={isLast || !isCompleted}
+          disabled={isLast}
           className={cn(
             "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all",
-            isLast || !isCompleted
+            isLast
               ? "text-muted-foreground/40 cursor-not-allowed"
               : "bg-primary text-primary-foreground hover:opacity-90"
           )}
