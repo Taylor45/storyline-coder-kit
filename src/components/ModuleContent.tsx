@@ -38,7 +38,7 @@ const ModuleContent = ({
     { id: "lesson", label: "Lesson", icon: BookOpen, show: true },
     { id: "quiz", label: "Knowledge Check", icon: Code, show: !!module.quiz },
     { id: "project", label: "Mini Project", icon: Wrench, show: !!module.miniProject },
-    { id: "certificate", label: "Certificate", icon: Award, show: !!allCompleted },
+    
   ];
 
   return (
