@@ -1,11 +1,14 @@
 import { courseModules } from "@/data/courseData";
-import { Check, Lock } from "lucide-react";
+import { Check, Award } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface CourseSidebarProps {
   currentModule: number;
   completedModules: number[];
   onSelectModule: (id: number) => void;
+  showCompletion?: boolean;
+  isCompletionView?: boolean;
+  onSelectCompletion?: () => void;
 }
 
 const CourseSidebar = ({ currentModule, completedModules, onSelectModule }: CourseSidebarProps) => {
