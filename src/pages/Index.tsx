@@ -33,6 +33,8 @@ const Index = () => {
     return <WelcomeScreen onStart={handleStart} />;
   }
 
+  const allCompleted = completedModules.length === courseModules.length;
+
   return (
     <div className="flex min-h-screen w-full bg-background">
       <CourseSidebar
@@ -49,6 +51,8 @@ const Index = () => {
         isFirst={currentModule === 1}
         isLast={currentModule === courseModules.length}
         isCompleted={completedModules.includes(currentModule)}
+        allCompleted={allCompleted}
+        userName={userName}
       />
     </div>
   );
