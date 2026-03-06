@@ -208,17 +208,6 @@ const ModuleContent = ({
                 </div>
               </motion.div>
             )}
-            {activeTab === "certificate" && allCompleted && userName && (
-              <motion.div
-                key="certificate"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.15 }}
-              >
-                <CompletionCertificate userName={userName} />
-              </motion.div>
-            )}
           </AnimatePresence>
         </div>
       </main>
