@@ -41,6 +41,7 @@ const Index = () => {
         currentModule={currentModule}
         completedModules={completedModules}
         onSelectModule={setCurrentModule}
+        allCompleted={allCompleted}
       />
       <ModuleContent
         key={currentModule}
