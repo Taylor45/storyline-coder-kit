@@ -1,8 +1,9 @@
 import { CourseModule } from "@/data/courseData";
-import { ChevronLeft, ChevronRight, BookOpen, Code, Wrench } from "lucide-react";
+import { ChevronLeft, ChevronRight, BookOpen, Code, Wrench, Award } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import KnowledgeCheck from "./KnowledgeCheck";
+import CompletionCertificate from "./CompletionCertificate";
 import { cn } from "@/lib/utils";
 
 interface ModuleContentProps {
@@ -13,9 +14,11 @@ interface ModuleContentProps {
   isFirst: boolean;
   isLast: boolean;
   isCompleted: boolean;
+  allCompleted?: boolean;
+  userName?: string;
 }
 
-type Tab = "lesson" | "quiz" | "project";
+type Tab = "lesson" | "quiz" | "project" | "certificate";
 
 const ModuleContent = ({
   module,
@@ -25,6 +28,8 @@ const ModuleContent = ({
   isFirst,
   isLast,
   isCompleted,
+  allCompleted,
+  userName,
 }: ModuleContentProps) => {
   const [activeTab, setActiveTab] = useState<Tab>("lesson");
   const Icon = module.icon;
@@ -33,6 +38,7 @@ const ModuleContent = ({
     { id: "lesson", label: "Lesson", icon: BookOpen, show: true },
     { id: "quiz", label: "Knowledge Check", icon: Code, show: !!module.quiz },
     { id: "project", label: "Mini Project", icon: Wrench, show: !!module.miniProject },
+    { id: "certificate", label: "Certificate", icon: Award, show: !!allCompleted },
   ];
 
   return (
@@ -200,6 +206,17 @@ const ModuleContent = ({
                     ))}
                   </div>
                 </div>
+              </motion.div>
+            )}
+            {activeTab === "certificate" && allCompleted && userName && (
+              <motion.div
+                key="certificate"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
+                <CompletionCertificate userName={userName} />
               </motion.div>
             )}
           </AnimatePresence>
