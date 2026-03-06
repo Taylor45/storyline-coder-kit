@@ -1,13 +1,19 @@
 import { useState, useCallback } from "react";
 import CourseSidebar from "@/components/CourseSidebar";
 import ModuleContent from "@/components/ModuleContent";
+import WelcomeScreen from "@/components/WelcomeScreen";
 import { courseModules } from "@/data/courseData";
 
 const Index = () => {
+  const [userName, setUserName] = useState<string | null>(null);
   const [currentModule, setCurrentModule] = useState(1);
   const [completedModules, setCompletedModules] = useState<number[]>([]);
 
   const module = courseModules.find((m) => m.id === currentModule)!;
+
+  const handleStart = (name: string, surname: string) => {
+    setUserName(`${name} ${surname}`);
+  };
 
   const handleComplete = useCallback(() => {
     setCompletedModules((prev) =>
@@ -22,6 +28,10 @@ const Index = () => {
   const handleNext = () => {
     if (currentModule < courseModules.length) setCurrentModule(currentModule + 1);
   };
+
+  if (!userName) {
+    return <WelcomeScreen onStart={handleStart} />;
+  }
 
   return (
     <div className="flex min-h-screen w-full bg-background">
