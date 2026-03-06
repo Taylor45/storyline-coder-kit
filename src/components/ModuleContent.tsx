@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, BookOpen, Code, Wrench } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import KnowledgeCheck from "./KnowledgeCheck";
-import CompletionCertificate from "./CompletionCertificate";
+
 import { cn } from "@/lib/utils";
 
 interface ModuleContentProps {
