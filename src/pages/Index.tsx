@@ -26,7 +26,9 @@ const Index = () => {
   };
 
   const handleNext = () => {
-    if (currentModule < courseModules.length) setCurrentModule(currentModule + 1);
+    if (currentModule < courseModules.length && completedModules.includes(currentModule)) {
+      setCurrentModule(currentModule + 1);
+    }
   };
 
   if (!userName) {
