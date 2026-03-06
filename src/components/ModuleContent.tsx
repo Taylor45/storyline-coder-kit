@@ -18,7 +18,7 @@ interface ModuleContentProps {
   userName?: string;
 }
 
-type Tab = "lesson" | "quiz" | "project" | "certificate";
+type Tab = "lesson" | "quiz" | "project";
 
 const ModuleContent = ({
   module,
