@@ -1,9 +1,9 @@
 import { CourseModule } from "@/data/courseData";
-import { ChevronLeft, ChevronRight, BookOpen, Code, Wrench, Award } from "lucide-react";
+import { ChevronLeft, ChevronRight, BookOpen, Code, Wrench } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import KnowledgeCheck from "./KnowledgeCheck";
-import CompletionCertificate from "./CompletionCertificate";
+
 import { cn } from "@/lib/utils";
 
 interface ModuleContentProps {
@@ -18,7 +18,7 @@ interface ModuleContentProps {
   userName?: string;
 }
 
-type Tab = "lesson" | "quiz" | "project" | "certificate";
+type Tab = "lesson" | "quiz" | "project";
 
 const ModuleContent = ({
   module,
@@ -38,7 +38,7 @@ const ModuleContent = ({
     { id: "lesson", label: "Lesson", icon: BookOpen, show: true },
     { id: "quiz", label: "Knowledge Check", icon: Code, show: !!module.quiz },
     { id: "project", label: "Mini Project", icon: Wrench, show: !!module.miniProject },
-    { id: "certificate", label: "Certificate", icon: Award, show: !!allCompleted },
+    
   ];
 
   return (
@@ -206,17 +206,6 @@ const ModuleContent = ({
                     ))}
                   </div>
                 </div>
-              </motion.div>
-            )}
-            {activeTab === "certificate" && allCompleted && userName && (
-              <motion.div
-                key="certificate"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.15 }}
-              >
-                <CompletionCertificate userName={userName} />
               </motion.div>
             )}
           </AnimatePresence>

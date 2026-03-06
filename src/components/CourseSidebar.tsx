@@ -1,14 +1,17 @@
 import { courseModules } from "@/data/courseData";
-import { Check, Lock } from "lucide-react";
+import { Check, Award } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface CourseSidebarProps {
   currentModule: number;
   completedModules: number[];
   onSelectModule: (id: number) => void;
+  showCompletion?: boolean;
+  isCompletionView?: boolean;
+  onSelectCompletion?: () => void;
 }
 
-const CourseSidebar = ({ currentModule, completedModules, onSelectModule }: CourseSidebarProps) => {
+const CourseSidebar = ({ currentModule, completedModules, onSelectModule, showCompletion, isCompletionView, onSelectCompletion }: CourseSidebarProps) => {
   const totalModules = courseModules.length;
   const progress = Math.round((completedModules.length / totalModules) * 100);
 
@@ -85,6 +88,27 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule }: Cour
             </button>
           );
         })}
+        {showCompletion && (
+          <button
+            onClick={onSelectCompletion}
+            className={cn(
+              "w-full flex items-start gap-3 px-5 py-3 text-left transition-colors mt-2 border-t border-sidebar-border pt-4",
+              isCompletionView
+                ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                : "hover:bg-sidebar-accent/50 text-sidebar-foreground/80"
+            )}
+          >
+            <div className="mt-0.5 flex items-center justify-center w-7 h-7 rounded-md shrink-0 bg-success text-success-foreground">
+              <Award className="w-3.5 h-3.5" />
+            </div>
+            <div className="min-w-0">
+              <p className={cn("text-sm font-medium truncate", isCompletionView && "text-sidebar-primary-foreground")}>
+                Completion
+              </p>
+              <p className="text-[11px] text-sidebar-foreground/50 truncate">Certificate & Results</p>
+            </div>
+          </button>
+        )}
       </nav>
 
       {/* Footer */}
