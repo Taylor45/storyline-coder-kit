@@ -26,7 +26,9 @@ const Index = () => {
   };
 
   const handleNext = () => {
-    if (currentModule < courseModules.length) setCurrentModule(currentModule + 1);
+    if (currentModule < courseModules.length && completedModules.includes(currentModule)) {
+      setCurrentModule(currentModule + 1);
+    }
   };
 
   if (!userName) {
@@ -41,6 +43,7 @@ const Index = () => {
         currentModule={currentModule}
         completedModules={completedModules}
         onSelectModule={setCurrentModule}
+        allCompleted={allCompleted}
       />
       <ModuleContent
         key={currentModule}
