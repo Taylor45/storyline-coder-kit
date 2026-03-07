@@ -18,7 +18,16 @@ interface ModuleContentProps {
   userName?: string;
 }
 
-type Tab = "lesson" | "quiz" | "project";
+type Tab = "intro" | "lesson" | "quiz" | "project";
+
+const learningObjectives = [
+  "Understand how the web works and the client-server model",
+  "Structure learning content using semantic HTML",
+  "Style and layout educational interfaces with CSS",
+  "Add interactivity to learning experiences using JavaScript",
+  "Build complete interactive e-learning activities from scratch",
+  "Deploy and host your learning content on the web",
+];
 
 const ModuleContent = ({
   module,
@@ -31,10 +40,11 @@ const ModuleContent = ({
   allCompleted,
   userName,
 }: ModuleContentProps) => {
-  const [activeTab, setActiveTab] = useState<Tab>("lesson");
+  const [activeTab, setActiveTab] = useState<Tab>("intro");
   const Icon = module.icon;
 
   const tabs: { id: Tab; label: string; shortLabel: string; icon: typeof BookOpen; show: boolean }[] = [
+    { id: "intro", label: "Introduction", shortLabel: "Intro", icon: Target, show: true },
     { id: "lesson", label: "Lesson", shortLabel: "Lesson", icon: BookOpen, show: true },
     { id: "quiz", label: "Knowledge Check", shortLabel: "Quiz", icon: Code, show: !!module.quiz },
     { id: "project", label: "Mini Project", shortLabel: "Project", icon: Wrench, show: !!module.miniProject },
