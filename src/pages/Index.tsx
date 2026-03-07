@@ -4,12 +4,17 @@ import ModuleContent from "@/components/ModuleContent";
 import WelcomeScreen from "@/components/WelcomeScreen";
 import CompletionPage from "@/components/CompletionPage";
 import { courseModules } from "@/data/courseData";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Menu } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Index = () => {
   const [userName, setUserName] = useState<string | null>(null);
   const [currentModule, setCurrentModule] = useState(1);
   const [completedModules, setCompletedModules] = useState<number[]>([]);
   const [showCompletion, setShowCompletion] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const module = courseModules.find((m) => m.id === currentModule)!;
 
@@ -40,6 +45,12 @@ const Index = () => {
   const handleSelectModule = (id: number) => {
     setShowCompletion(false);
     setCurrentModule(id);
+    setSidebarOpen(false);
+  };
+
+  const handleSelectCompletion = () => {
+    setShowCompletion(true);
+    setSidebarOpen(false);
   };
 
   if (!userName) {
@@ -48,32 +59,64 @@ const Index = () => {
 
   const allCompleted = completedModules.length === courseModules.length;
 
+  const sidebarContent = (
+    <CourseSidebar
+      currentModule={currentModule}
+      completedModules={completedModules}
+      onSelectModule={handleSelectModule}
+      showCompletion={allCompleted}
+      isCompletionView={showCompletion}
+      onSelectCompletion={handleSelectCompletion}
+    />
+  );
+
   return (
     <div className="flex min-h-screen w-full bg-background">
-      <CourseSidebar
-        currentModule={currentModule}
-        completedModules={completedModules}
-        onSelectModule={handleSelectModule}
-        showCompletion={allCompleted}
-        isCompletionView={showCompletion}
-        onSelectCompletion={() => setShowCompletion(true)}
-      />
-      {showCompletion && allCompleted ? (
-        <CompletionPage userName={userName} />
-      ) : (
-        <ModuleContent
-          key={currentModule}
-          module={module}
-          onComplete={handleComplete}
-          onPrev={handlePrev}
-          onNext={handleNext}
-          isFirst={currentModule === 1}
-          isLast={currentModule === courseModules.length}
-          isCompleted={completedModules.includes(currentModule)}
-          allCompleted={allCompleted}
-          userName={userName}
-        />
+      {/* Desktop sidebar */}
+      {!isMobile && sidebarContent}
+
+      {/* Mobile sidebar via Sheet */}
+      {isMobile && (
+        <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
+          <SheetContent side="left" className="p-0 w-72">
+            {sidebarContent}
+          </SheetContent>
+        </Sheet>
       )}
+
+      <div className="flex-1 flex flex-col min-h-screen">
+        {/* Mobile top bar with hamburger */}
+        {isMobile && (
+          <div className="h-12 border-b border-border bg-card flex items-center px-4 shrink-0">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="p-2 rounded-md hover:bg-muted transition-colors"
+            >
+              <Menu className="w-5 h-5 text-foreground" />
+            </button>
+            <span className="ml-3 text-sm font-semibold truncate">
+              Coding Basics for IDs
+            </span>
+          </div>
+        )}
+
+        {showCompletion && allCompleted ? (
+          <CompletionPage userName={userName} />
+        ) : (
+          <ModuleContent
+            key={currentModule}
+            module={module}
+            onComplete={handleComplete}
+            onPrev={handlePrev}
+            onNext={handleNext}
+            isFirst={currentModule === 1}
+            isLast={currentModule === courseModules.length}
+            isCompleted={completedModules.includes(currentModule)}
+            allCompleted={allCompleted}
+            userName={userName}
+          />
+        )}
+      </div>
     </div>
   );
 };

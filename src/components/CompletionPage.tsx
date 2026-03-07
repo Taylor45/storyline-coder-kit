@@ -10,7 +10,6 @@ interface CompletionPageProps {
 
 const CompletionPage = ({ userName }: CompletionPageProps) => {
   useEffect(() => {
-    // Fire confetti bursts
     const duration = 3000;
     const end = Date.now() + duration;
 
@@ -33,7 +32,6 @@ const CompletionPage = ({ userName }: CompletionPageProps) => {
     };
     frame();
 
-    // Big burst
     setTimeout(() => {
       confetti({
         particleCount: 100,
@@ -45,8 +43,8 @@ const CompletionPage = ({ userName }: CompletionPageProps) => {
   }, []);
 
   return (
-    <div className="flex-1 flex flex-col min-h-screen">
-      <header className="h-14 border-b border-border bg-card flex items-center px-6 shrink-0">
+    <div className="flex-1 flex flex-col min-h-0">
+      <header className="h-14 border-b border-border bg-card flex items-center px-4 md:px-6 shrink-0">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center">
             <Trophy className="w-4 h-4 text-primary" />
@@ -59,27 +57,27 @@ const CompletionPage = ({ userName }: CompletionPageProps) => {
       </header>
 
       <main className="flex-1 overflow-y-auto">
-        <div className="max-w-3xl mx-auto px-6 py-8">
+        <div className="max-w-3xl mx-auto px-4 md:px-6 py-6 md:py-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="text-center mb-10"
+            className="text-center mb-6 md:mb-10"
           >
             <motion.div
               initial={{ rotate: -10, scale: 0 }}
               animate={{ rotate: 0, scale: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-4"
+              className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-primary/10 mb-4"
             >
-              <PartyPopper className="w-10 h-10 text-primary" />
+              <PartyPopper className="w-8 h-8 md:w-10 md:h-10 text-primary" />
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-3xl font-bold mb-2"
+              className="text-2xl md:text-3xl font-bold mb-2"
             >
               🎉 Congratulations, {userName}!
             </motion.h1>
@@ -88,7 +86,7 @@ const CompletionPage = ({ userName }: CompletionPageProps) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
-              className="text-muted-foreground max-w-md mx-auto"
+              className="text-sm md:text-base text-muted-foreground max-w-md mx-auto"
             >
               You've successfully completed all modules of the Coding Basics for
               Instructional Designers course. Download your certificate below!
