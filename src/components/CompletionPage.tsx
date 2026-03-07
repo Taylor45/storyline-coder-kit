@@ -88,8 +88,8 @@ const CompletionPage = ({ userName }: CompletionPageProps) => {
               transition={{ delay: 0.6 }}
               className="text-sm md:text-base text-muted-foreground max-w-md mx-auto"
             >
-              You've successfully completed all modules of the Coding Basics for
-              Instructional Designers course. Download your certificate below!
+              You've successfully completed all modules of the JavaScript Coding Basics
+              for Instructional Design course. Download your certificate below!
             </motion.p>
           </motion.div>
 

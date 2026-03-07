@@ -64,7 +64,7 @@ const Index = () => {
       currentModule={currentModule}
       completedModules={completedModules}
       onSelectModule={handleSelectModule}
-      showCompletion={allCompleted}
+      allCompleted={allCompleted}
       isCompletionView={showCompletion}
       onSelectCompletion={handleSelectCompletion}
     />
@@ -95,7 +95,7 @@ const Index = () => {
               <Menu className="w-5 h-5 text-foreground" />
             </button>
             <span className="ml-3 text-sm font-semibold truncate">
-              Coding Basics for IDs
+              JS Coding Basics for ID
             </span>
           </div>
         )}

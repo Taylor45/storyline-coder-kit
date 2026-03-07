@@ -29,7 +29,7 @@ const WelcomeScreen = ({ onStart }: WelcomeScreenProps) => {
           <div className="absolute bottom-0 left-0 w-16 h-16 rounded-full bg-[hsl(var(--primary)/0.3)] -translate-x-4 translate-y-4" />
 
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 relative z-10 italic text-primary-foreground">
-            Coding Basics for Instructional Designers
+            JavaScript Coding Basics for Instructional Design
           </h2>
 
           <img
