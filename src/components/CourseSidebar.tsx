@@ -1,17 +1,17 @@
 import { courseModules } from "@/data/courseData";
-import { Check, Award } from "lucide-react";
+import { Check, Award, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface CourseSidebarProps {
   currentModule: number;
   completedModules: number[];
   onSelectModule: (id: number) => void;
-  showCompletion?: boolean;
+  allCompleted: boolean;
   isCompletionView?: boolean;
   onSelectCompletion?: () => void;
 }
 
-const CourseSidebar = ({ currentModule, completedModules, onSelectModule, showCompletion, isCompletionView, onSelectCompletion }: CourseSidebarProps) => {
+const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCompleted, isCompletionView, onSelectCompletion }: CourseSidebarProps) => {
   const totalModules = courseModules.length;
   const progress = Math.round((completedModules.length / totalModules) * 100);
 
@@ -20,9 +20,9 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, showCo
       {/* Header */}
       <div className="p-5 border-b border-sidebar-border">
         <h1 className="text-base font-bold tracking-tight text-sidebar-primary-foreground">
-          Coding Basics for IDs
+          JavaScript Coding Basics
         </h1>
-        <p className="text-xs text-sidebar-foreground/60 mt-1">Interactive Course</p>
+        <p className="text-xs text-sidebar-foreground/60 mt-1">For Instructional Design</p>
       </div>
 
       {/* Progress */}
@@ -87,27 +87,35 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, showCo
             </button>
           );
         })}
-        {showCompletion && (
-          <button
-            onClick={onSelectCompletion}
-            className={cn(
-              "w-full flex items-start gap-3 px-5 py-3 text-left transition-colors mt-2 border-t border-sidebar-border pt-4",
-              isCompletionView
-                ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                : "hover:bg-sidebar-accent/50 text-sidebar-foreground/80"
-            )}
-          >
-            <div className="mt-0.5 flex items-center justify-center w-7 h-7 rounded-md shrink-0 bg-success text-success-foreground">
-              <Award className="w-3.5 h-3.5" />
-            </div>
-            <div className="min-w-0">
-              <p className={cn("text-sm font-medium truncate", isCompletionView && "text-sidebar-primary-foreground")}>
-                Completion
-              </p>
-              <p className="text-[11px] text-sidebar-foreground/50 truncate">Certificate & Results</p>
-            </div>
-          </button>
-        )}
+
+        {/* Completion tab - always visible, locked when not all complete */}
+        <button
+          onClick={() => allCompleted && onSelectCompletion?.()}
+          disabled={!allCompleted}
+          className={cn(
+            "w-full flex items-start gap-3 px-5 py-3 text-left transition-colors mt-2 border-t border-sidebar-border pt-4",
+            !allCompleted
+              ? "opacity-50 cursor-not-allowed"
+              : isCompletionView
+              ? "bg-sidebar-accent text-sidebar-accent-foreground"
+              : "hover:bg-sidebar-accent/50 text-sidebar-foreground/80"
+          )}
+        >
+          <div className={cn(
+            "mt-0.5 flex items-center justify-center w-7 h-7 rounded-md shrink-0",
+            allCompleted ? "bg-success text-success-foreground" : "bg-sidebar-accent text-sidebar-foreground/50"
+          )}>
+            {allCompleted ? <Award className="w-3.5 h-3.5" /> : <Lock className="w-3.5 h-3.5" />}
+          </div>
+          <div className="min-w-0">
+            <p className={cn("text-sm font-medium truncate", isCompletionView && "text-sidebar-primary-foreground")}>
+              Completion
+            </p>
+            <p className="text-[11px] text-sidebar-foreground/50 truncate">
+              {allCompleted ? "Certificate & Results" : "Complete all modules to unlock"}
+            </p>
+          </div>
+        </button>
       </nav>
 
       {/* Footer */}
