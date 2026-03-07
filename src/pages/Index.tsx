@@ -64,7 +64,7 @@ const Index = () => {
       currentModule={currentModule}
       completedModules={completedModules}
       onSelectModule={handleSelectModule}
-      showCompletion={allCompleted}
+      allCompleted={allCompleted}
       isCompletionView={showCompletion}
       onSelectCompletion={handleSelectCompletion}
     />
