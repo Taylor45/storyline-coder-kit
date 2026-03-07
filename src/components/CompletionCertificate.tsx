@@ -32,9 +32,9 @@ const CompletionCertificate = ({ userName }: CompletionCertificateProps) => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
             <Award className="w-5 h-5 text-accent" />
           </div>
           <div>
@@ -42,17 +42,17 @@ const CompletionCertificate = ({ userName }: CompletionCertificateProps) => {
             <p className="text-sm text-muted-foreground">Congratulations on completing the course!</p>
           </div>
         </div>
-        <Button onClick={handleDownload} className="gap-2">
+        <Button onClick={handleDownload} className="gap-2 w-full sm:w-auto">
           <Download className="w-4 h-4" />
           Download PDF
         </Button>
       </div>
 
-      {/* Certificate Preview */}
-      <div className="flex justify-center">
+      {/* Certificate Preview - scrollable on mobile */}
+      <div className="flex justify-center overflow-x-auto">
         <div
           ref={certRef}
-          className="w-[800px] bg-white text-gray-900 p-0 rounded-none"
+          className="w-[800px] min-w-[800px] bg-white text-gray-900 p-0 rounded-none"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
           <div

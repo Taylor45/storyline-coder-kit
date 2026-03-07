@@ -34,35 +34,34 @@ const ModuleContent = ({
   const [activeTab, setActiveTab] = useState<Tab>("lesson");
   const Icon = module.icon;
 
-  const tabs: { id: Tab; label: string; icon: typeof BookOpen; show: boolean }[] = [
-    { id: "lesson", label: "Lesson", icon: BookOpen, show: true },
-    { id: "quiz", label: "Knowledge Check", icon: Code, show: !!module.quiz },
-    { id: "project", label: "Mini Project", icon: Wrench, show: !!module.miniProject },
-    
+  const tabs: { id: Tab; label: string; shortLabel: string; icon: typeof BookOpen; show: boolean }[] = [
+    { id: "lesson", label: "Lesson", shortLabel: "Lesson", icon: BookOpen, show: true },
+    { id: "quiz", label: "Knowledge Check", shortLabel: "Quiz", icon: Code, show: !!module.quiz },
+    { id: "project", label: "Mini Project", shortLabel: "Project", icon: Wrench, show: !!module.miniProject },
   ];
 
   return (
-    <div className="flex-1 flex flex-col min-h-screen">
+    <div className="flex-1 flex flex-col min-h-0">
       {/* Top bar */}
-      <header className="h-14 border-b border-border bg-card flex items-center px-6 shrink-0">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center">
+      <header className="h-14 border-b border-border bg-card flex items-center px-4 md:px-6 shrink-0">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
             <Icon className="w-4 h-4 text-primary" />
           </div>
-          <div>
+          <div className="min-w-0">
             <p className="text-xs text-muted-foreground">Module {module.id}</p>
-            <h2 className="text-sm font-semibold leading-tight">{module.title}</h2>
+            <h2 className="text-sm font-semibold leading-tight truncate">{module.title}</h2>
           </div>
         </div>
         {isCompleted && (
-          <span className="ml-auto text-xs bg-success/10 text-success px-3 py-1 rounded-full font-medium">
+          <span className="ml-auto text-xs bg-success/10 text-success px-3 py-1 rounded-full font-medium shrink-0">
             Completed
           </span>
         )}
       </header>
 
       {/* Tabs */}
-      <div className="border-b border-border bg-card px-6">
+      <div className="border-b border-border bg-card px-4 md:px-6">
         <div className="flex gap-0">
           {tabs
             .filter((t) => t.show)
@@ -71,14 +70,15 @@ const ModuleContent = ({
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={cn(
-                  "px-4 py-3 text-sm font-medium border-b-2 transition-colors flex items-center gap-2",
+                  "px-3 md:px-4 py-3 text-xs md:text-sm font-medium border-b-2 transition-colors flex items-center gap-1.5 md:gap-2",
                   activeTab === tab.id
                     ? "border-primary text-primary"
                     : "border-transparent text-muted-foreground hover:text-foreground"
                 )}
               >
                 <tab.icon className="w-4 h-4" />
-                {tab.label}
+                <span className="hidden sm:inline">{tab.label}</span>
+                <span className="sm:hidden">{tab.shortLabel}</span>
               </button>
             ))}
         </div>
@@ -86,7 +86,7 @@ const ModuleContent = ({
 
       {/* Content */}
       <main className="flex-1 overflow-y-auto">
-        <div className="max-w-3xl mx-auto px-6 py-8">
+        <div className="max-w-3xl mx-auto px-4 md:px-6 py-6 md:py-8">
           <AnimatePresence mode="wait">
             {activeTab === "lesson" && (
               <motion.div
@@ -96,16 +96,16 @@ const ModuleContent = ({
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.15 }}
               >
-                <div className="mb-8">
-                  <h1 className="text-2xl font-bold mb-2">{module.title}</h1>
-                  <p className="text-muted-foreground">{module.subtitle}</p>
+                <div className="mb-6 md:mb-8">
+                  <h1 className="text-xl md:text-2xl font-bold mb-2">{module.title}</h1>
+                  <p className="text-sm md:text-base text-muted-foreground">{module.subtitle}</p>
                 </div>
 
-                <div className="space-y-10">
+                <div className="space-y-8 md:space-y-10">
                   {module.sections.map((section, i) => (
                     <section key={i}>
-                      <h3 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center">
+                      <h3 className="text-base md:text-lg font-semibold mb-3 flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center shrink-0">
                           {i + 1}
                         </span>
                         {section.title}
@@ -147,7 +147,7 @@ const ModuleContent = ({
                             <Code className="w-3.5 h-3.5" />
                             {section.codeLanguage?.toUpperCase() || "CODE"}
                           </div>
-                          <pre className="course-code-block text-xs leading-relaxed">
+                          <pre className="course-code-block text-xs leading-relaxed overflow-x-auto">
                             <code>{section.codeExample}</code>
                           </pre>
                         </div>
@@ -184,9 +184,9 @@ const ModuleContent = ({
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.15 }}
               >
-                <div className="rounded-xl border border-border bg-card p-6 max-w-2xl mx-auto">
+                <div className="rounded-xl border border-border bg-card p-4 md:p-6 max-w-2xl mx-auto">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
                       <Wrench className="w-5 h-5 text-accent" />
                     </div>
                     <div>
@@ -213,25 +213,26 @@ const ModuleContent = ({
       </main>
 
       {/* Bottom nav */}
-      <footer className="h-16 border-t border-border bg-card flex items-center justify-between px-6 shrink-0">
+      <footer className="h-14 md:h-16 border-t border-border bg-card flex items-center justify-between px-4 md:px-6 shrink-0">
         <button
           onClick={onPrev}
           disabled={isFirst}
           className={cn(
-            "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all",
+            "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all",
             isFirst
               ? "text-muted-foreground/40 cursor-not-allowed"
               : "text-foreground hover:bg-muted"
           )}
         >
           <ChevronLeft className="w-4 h-4" />
-          Previous
+          <span className="hidden sm:inline">Previous</span>
+          <span className="sm:hidden">Prev</span>
         </button>
 
         {!isCompleted && (
           <button
             onClick={onComplete}
-            className="px-5 py-2 rounded-lg bg-success text-success-foreground text-sm font-medium hover:opacity-90 transition-opacity"
+            className="px-3 md:px-5 py-2 rounded-lg bg-success text-success-foreground text-xs md:text-sm font-medium hover:opacity-90 transition-opacity"
           >
             Mark Complete
           </button>
@@ -241,7 +242,7 @@ const ModuleContent = ({
           onClick={onNext}
           disabled={isLast}
           className={cn(
-            "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all",
+            "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all",
             isLast
               ? "text-muted-foreground/40 cursor-not-allowed"
               : "bg-primary text-primary-foreground hover:opacity-90"

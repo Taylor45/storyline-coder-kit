@@ -16,7 +16,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, showCo
   const progress = Math.round((completedModules.length / totalModules) * 100);
 
   return (
-    <aside className="w-72 min-h-screen flex flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border shrink-0">
+    <aside className="w-72 min-h-screen flex flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border shrink-0 max-h-screen overflow-hidden">
       {/* Header */}
       <div className="p-5 border-b border-sidebar-border">
         <h1 className="text-base font-bold tracking-tight text-sidebar-primary-foreground">
@@ -46,8 +46,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, showCo
       <nav className="flex-1 overflow-y-auto py-3">
         {courseModules.map((mod) => {
           const isCompleted = completedModules.includes(mod.id);
-          const isCurrent = currentModule === mod.id;
-          const Icon = mod.icon;
+          const isCurrent = currentModule === mod.id && !isCompletionView;
 
           return (
             <button
