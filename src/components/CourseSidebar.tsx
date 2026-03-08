@@ -74,7 +74,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
 
         {courseModules.map((mod) => {
           const isCompleted = completedModules.includes(mod.id);
-          const isCurrent = currentModule === mod.id && !isCompletionView;
+          const isCurrent = currentModule === mod.id && !isCompletionView && !isIntroView;
 
           return (
             <button
