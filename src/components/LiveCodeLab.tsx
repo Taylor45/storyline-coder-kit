@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useRef, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, Send, Eye, ChevronRight, ChevronLeft, Terminal, CheckCircle2, XCircle, RotateCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Prism from "prismjs";
+import "prismjs/components/prism-javascript";
 
 interface Challenge {
   id: number;
