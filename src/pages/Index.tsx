@@ -139,6 +139,7 @@ const Index = () => {
             onComplete={handleComplete}
             onPrev={handlePrev}
             onNext={handleNext}
+            onFinish={handleSelectCompletion}
             isFirst={currentModule === 1}
             isLast={currentModule === courseModules.length}
             isCompleted={completedModules.includes(currentModule)}
