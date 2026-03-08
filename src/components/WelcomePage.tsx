@@ -28,7 +28,7 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
         )}
       </header>
 
-      <main className="flex-1 overflow-hidden bg-gradient-to-br from-[hsl(210,40%,96%)] via-[hsl(210,30%,98%)] to-[hsl(220,40%,95%)]">
+      <main className="flex-1 overflow-y-auto bg-gradient-to-br from-[hsl(210,40%,96%)] via-[hsl(210,30%,98%)] to-[hsl(220,40%,95%)]">
         {/* Subtle geometric background shapes */}
         <div className="relative">
           <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[hsl(210,60%,90%)] rounded-full opacity-30 -translate-y-1/2 translate-x-1/3 blur-3xl" />
