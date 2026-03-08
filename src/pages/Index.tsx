@@ -81,6 +81,7 @@ const Index = () => {
       isIntroView={showIntro}
       onSelectCompletion={handleSelectCompletion}
       onSelectIntro={handleSelectIntro}
+      onHome={() => setUserName(null)}
     />
   );
 
