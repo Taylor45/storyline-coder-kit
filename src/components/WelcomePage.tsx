@@ -109,7 +109,7 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="rounded-xl border border-[hsl(210,30%,88%)] bg-white/60 backdrop-blur-sm overflow-hidden mb-3 shadow-[0_2px_12px_rgba(0,80,200,0.06)]"
+              className="rounded-xl border border-[hsl(210,30%,88%)] bg-white/60 backdrop-blur-sm overflow-hidden mb-8 shadow-[0_2px_12px_rgba(0,80,200,0.06)]"
             >
               <div className="flex flex-col md:flex-row">
                 <div className="md:w-[35%] bg-gradient-to-br from-[hsl(210,40%,94%)] to-[hsl(210,50%,90%)] p-4 flex items-center justify-center">
