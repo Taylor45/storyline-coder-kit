@@ -134,25 +134,20 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
                     <Sparkles className="w-5 h-5 text-[hsl(210,100%,42%)]" />
                     <h3 className="text-lg font-bold text-[hsl(215,30%,15%)]">What You'll Learn</h3>
                   </div>
-                  <ul className="space-y-4">
-                    <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-[hsl(155,60%,40%)] shrink-0 mt-0.5" />
-                      <span className="text-sm text-[hsl(215,15%,30%)]">
-                        Add Storyline triggers with <strong className="font-semibold">JavaScript</strong>
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-[hsl(155,60%,40%)] shrink-0 mt-0.5" />
-                      <span className="text-sm text-[hsl(215,15%,30%)]">
-                        Create <strong className="font-semibold">dynamic</strong> variables in your projects
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-[hsl(155,60%,40%)] shrink-0 mt-0.5" />
-                      <span className="text-sm text-[hsl(215,15%,30%)]">
-                        Build interactive components for <strong className="font-semibold">e-learning</strong>
-                      </span>
-                    </li>
+                  <ul className="space-y-3">
+                    {[
+                      "Understand how the web works and the client-server model",
+                      "Structure learning content using semantic HTML",
+                      "Style and layout educational interfaces with CSS",
+                      "Add interactivity to learning experiences using JavaScript",
+                      "Build complete interactive e-learning activities from scratch",
+                      "Deploy and host your learning content on the web",
+                    ].map((objective, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <CheckCircle className="w-5 h-5 text-[hsl(155,60%,40%)] shrink-0 mt-0.5" />
+                        <span className="text-sm text-[hsl(215,15%,30%)]">{objective}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
