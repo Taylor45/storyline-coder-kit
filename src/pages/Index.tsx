@@ -112,7 +112,7 @@ const Index = () => {
 
       <div className="flex-1 flex flex-col min-h-screen">
         {/* Top bar with sidebar toggle */}
-        {isMobile ? (
+        {isMobile && (
           <div className="h-12 border-b border-border bg-card flex items-center px-4 shrink-0">
             <button
               onClick={() => setSidebarOpen(true)}
@@ -124,8 +124,6 @@ const Index = () => {
               JS Coding Basics for ID
             </span>
           </div>
-        ) : (
-          <div className="h-10 border-b border-border bg-card shrink-0" />
         )}
 
         {showCompletion && allCompleted ? (
