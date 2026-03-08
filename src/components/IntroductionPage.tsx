@@ -60,6 +60,22 @@ const IntroductionPage = ({ onBack, onNext }: IntroductionPageProps) => {
                 ))}
               </div>
             </div>
+
+            {/* Navigation Buttons */}
+            <div className="flex items-center justify-between mt-8">
+              {onBack && (
+                <Button variant="outline" onClick={onBack} className="gap-2">
+                  <ChevronLeft className="w-4 h-4" />
+                  Back
+                </Button>
+              )}
+              {onNext && (
+                <Button onClick={onNext} className="gap-2 ml-auto">
+                  Next
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
+              )}
+            </div>
           </motion.div>
         </div>
       </main>
