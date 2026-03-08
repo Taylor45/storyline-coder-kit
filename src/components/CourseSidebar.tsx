@@ -151,7 +151,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
             !allCompleted
               ? "opacity-50"
               : isCompletionView
-              ? "bg-sidebar-accent text-sidebar-accent-foreground"
+              ? "bg-[hsl(210,100%,92%)] text-sidebar-accent-foreground"
               : "text-sidebar-foreground/80"
           )}
         >
