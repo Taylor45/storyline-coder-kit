@@ -16,7 +16,7 @@ const learningObjectives = [
   "Deploy and host your learning content on the web",
 ];
 
-const IntroductionPage = () => {
+const IntroductionPage = ({ onBack, onNext }: IntroductionPageProps) => {
   return (
     <div className="flex-1 flex flex-col min-h-0">
       <header className="h-14 border-b border-border bg-card flex items-center px-4 md:px-6 shrink-0">
