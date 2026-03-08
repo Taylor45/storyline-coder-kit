@@ -4,6 +4,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import KnowledgeCheck from "./KnowledgeCheck";
 import LiveCodeLab from "./LiveCodeLab";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogAction,
+} from "./ui/alert-dialog";
 
 import { cn } from "@/lib/utils";
 
