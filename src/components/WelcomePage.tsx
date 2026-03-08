@@ -93,11 +93,11 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
                   </div>
                 </div>
                 <div className="rounded-xl border border-[hsl(210,30%,88%)] bg-white/70 backdrop-blur-sm px-4 py-2.5 flex items-center gap-3 shadow-[0_2px_12px_rgba(0,80,200,0.06)]">
-                  <div className="w-9 h-9 rounded-full bg-[hsl(40,70%,92%)] flex items-center justify-center shrink-0">
-                    <Award className="w-4 h-4 text-[hsl(35,80%,45%)]" />
+                  <div className="w-9 h-9 rounded-full bg-[hsl(210,60%,94%)] flex items-center justify-center shrink-0">
+                    <Award className="w-4 h-4 text-[hsl(210,100%,42%)]" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-[hsl(215,30%,15%)]">Certificate</h3>
+                    <h3 className="text-sm font-bold text-[hsl(210,100%,42%)]">Certificate</h3>
                     <p className="text-[11px] text-[hsl(215,15%,50%)]">Earn on completion</p>
                   </div>
                 </div>
