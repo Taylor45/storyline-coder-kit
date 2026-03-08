@@ -319,11 +319,3 @@ const ModuleContent = ({
 };
 
 export default ModuleContent;
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </div>
-  );
-};
-
-export default ModuleContent;
