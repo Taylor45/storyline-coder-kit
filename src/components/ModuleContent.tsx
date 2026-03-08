@@ -147,7 +147,29 @@ const ModuleContent = ({
                   <p className="text-sm md:text-base text-muted-foreground">{module.subtitle}</p>
                 </div>
 
-                <div className="space-y-8 md:space-y-10">
+                {module.flashCards && module.flashCards.length > 0 && (
+                  <div className="mb-8">
+                    <h2 className="text-xs font-bold text-foreground uppercase tracking-wider mb-2">
+                      Key Concepts
+                    </h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      {module.flashCards.map((card, i) => (
+                        <div
+                          key={i}
+                          className="rounded-xl border border-border bg-card/70 backdrop-blur-sm px-4 py-2.5 flex items-center gap-3 shadow-sm"
+                        >
+                          <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-lg">
+                            {card.icon}
+                          </div>
+                          <div>
+                            <h3 className="text-sm font-bold text-primary">{card.title}</h3>
+                            <p className="text-[11px] text-muted-foreground">{card.description}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
                   {module.sections.map((section, i) => (
                     <section key={i}>
                       <h3 className="text-base md:text-lg font-semibold mb-3 flex items-center gap-2">
