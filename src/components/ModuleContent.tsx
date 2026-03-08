@@ -37,6 +37,26 @@ const ModuleContent = ({
   const [activeTab, setActiveTab] = useState<Tab>("lesson");
   const Icon = module.icon;
 
+  const visibleTabs = [
+    { id: "lesson" as Tab, show: true },
+    { id: "codelab" as Tab, show: module.id === 7 },
+    { id: "quiz" as Tab, show: !!module.quiz },
+    { id: "project" as Tab, show: !!module.miniProject },
+  ].filter((t) => t.show).map((t) => t.id);
+
+  const currentTabIndex = visibleTabs.indexOf(activeTab);
+  const isLastTab = currentTabIndex >= visibleTabs.length - 1;
+
+  const handleNext = () => {
+    if (!isLastTab) {
+      setActiveTab(visibleTabs[currentTabIndex + 1]);
+    } else if (isLast) {
+      onFinish?.();
+    } else {
+      onNext();
+    }
+  };
+
   const tabs: { id: Tab; label: string; shortLabel: string; icon: typeof BookOpen; show: boolean }[] = [
     { id: "lesson", label: "Lesson", shortLabel: "Lesson", icon: BookOpen, show: true },
     { id: "codelab", label: "Code Lab", shortLabel: "Lab", icon: FlaskConical, show: module.id === 7 },
