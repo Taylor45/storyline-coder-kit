@@ -46,12 +46,20 @@ const Index = () => {
 
   const handleSelectModule = (id: number) => {
     setShowCompletion(false);
+    setShowIntro(false);
     setCurrentModule(id);
     setSidebarOpen(false);
   };
 
   const handleSelectCompletion = () => {
     setShowCompletion(true);
+    setShowIntro(false);
+    setSidebarOpen(false);
+  };
+
+  const handleSelectIntro = () => {
+    setShowIntro(true);
+    setShowCompletion(false);
     setSidebarOpen(false);
   };
 
