@@ -128,6 +128,8 @@ const Index = () => {
 
         {showCompletion && allCompleted ? (
           <CompletionPage userName={userName} />
+        ) : showWelcome ? (
+          <WelcomePage />
         ) : showIntro ? (
           <IntroductionPage />
         ) : (
