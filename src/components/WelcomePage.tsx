@@ -64,13 +64,13 @@ const WelcomePage = ({ onGetStarted }: WelcomePageProps) => {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="rounded-xl border border-border bg-card p-5 flex flex-col items-center text-center"
+                className="rounded-xl border border-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(220,100%,60%)] p-5 flex flex-col items-center text-center"
               >
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mb-3">
-                  <Clock className="w-5 h-5 text-primary" />
+                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-3">
+                  <Clock className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-sm font-semibold text-foreground mb-1">Duration</h3>
-                <p className="text-xs text-muted-foreground">~30 minutes</p>
+                <h3 className="text-sm font-semibold text-white mb-1">Duration</h3>
+                <p className="text-xs text-white/80">~30 minutes</p>
               </motion.div>
 
               <motion.div
