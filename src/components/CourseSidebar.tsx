@@ -141,17 +141,15 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
           );
         })}
 
-        {/* Completion tab - always visible, locked when not all complete */}
-        <button
-          onClick={() => allCompleted && onSelectCompletion?.()}
-          disabled={!allCompleted}
+        {/* Completion tab */}
+        <div
           className={cn(
             "w-full flex items-start gap-3 px-5 py-3 text-left transition-colors mt-2 border-t border-sidebar-border pt-4",
             !allCompleted
-              ? "opacity-50 cursor-not-allowed"
+              ? "opacity-50"
               : isCompletionView
               ? "bg-sidebar-accent text-sidebar-accent-foreground"
-              : "hover:bg-sidebar-accent/50 text-sidebar-foreground/80"
+              : "text-sidebar-foreground/80"
           )}
         >
           <div className={cn(
@@ -168,7 +166,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
               {allCompleted ? "Certificate & Results" : "Complete all modules to unlock"}
             </p>
           </div>
-        </button>
+        </div>
       </nav>
 
       {/* Footer */}

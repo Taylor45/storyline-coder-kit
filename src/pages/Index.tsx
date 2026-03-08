@@ -129,7 +129,7 @@ const Index = () => {
         {showCompletion && allCompleted ? (
           <CompletionPage userName={userName} />
         ) : showWelcome ? (
-          <WelcomePage />
+          <WelcomePage onGetStarted={handleSelectIntro} />
         ) : showIntro ? (
           <IntroductionPage />
         ) : (
