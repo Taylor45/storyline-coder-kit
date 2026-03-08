@@ -18,7 +18,7 @@ interface CourseSidebarProps {
 
 const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCompleted, isCompletionView, isIntroView, isWelcomeView, onSelectCompletion, onSelectIntro, onSelectWelcome }: CourseSidebarProps) => {
   const totalModules = courseModules.length;
-  const progress = Math.round((completedModules.length / totalModules) * 100);
+  const progress = Math.round(completedModules.length / totalModules * 100);
 
   return (
     <aside className="w-72 min-h-screen flex flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border shrink-0">
@@ -30,8 +30,8 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            className="flex items-center justify-center gap-2 mb-2"
-          >
+            className="flex items-center justify-center gap-2 mb-2">
+            
             <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/30" />
             <Sparkles className="w-3.5 h-3.5 text-white/60" />
             <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/30" />
@@ -40,24 +40,24 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
-            className="text-xl font-extrabold tracking-wide uppercase text-white text-center drop-shadow-[0_0_10px_rgba(100,180,255,0.4)]"
-          >
+            className="text-xl font-extrabold tracking-wide uppercase text-white text-center drop-shadow-[0_0_10px_rgba(100,180,255,0.4)]">
+            
             JavaScript
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.55, ease: "easeOut" }}
-            className="text-xs font-semibold tracking-[0.25em] uppercase text-white/50 text-center mt-0.5"
-          >
+            className="text-xs font-semibold tracking-[0.25em] uppercase text-white/50 text-center mt-0.5">
+            
             Coding Basics
           </motion.p>
           <motion.div
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
-            className="flex items-center justify-center gap-2 mt-2"
-          >
+            className="flex items-center justify-center gap-2 mt-2">
+            
             <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/30" />
             <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
             <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/30" />
@@ -66,8 +66,8 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.85, ease: "easeOut" }}
-            className="text-[9px] tracking-[0.2em] uppercase text-white/40 mt-2 text-center"
-          >
+            className="text-[9px] tracking-[0.2em] uppercase text-white/40 mt-2 text-center">
+            
             For Instructional Design
           </motion.p>
         </div>
@@ -77,13 +77,13 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
       <div className="px-5 py-4 border-b border-sidebar-border">
         <div className="flex items-center justify-between text-xs mb-2">
           <span className="text-sidebar-foreground/70">Progress</span>
-          <span className="font-semibold text-sidebar-primary">{progress}%</span>
+          <span className="font-semibold text-primary-foreground">{progress}%</span>
         </div>
         <div className="h-2 rounded-full bg-white/20 overflow-hidden">
           <div
             className="h-full rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.6),0_0_16px_rgba(100,180,255,0.4)] animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]"
-            style={{ width: `${progress}%`, transition: 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}
-          />
+            style={{ width: `${progress}%`, transition: 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }} />
+          
         </div>
         <p className="text-[11px] text-sidebar-foreground/50 mt-2">
           {completedModules.length} of {totalModules} modules complete
@@ -96,11 +96,11 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
         <div
           className={cn(
             "w-full flex items-start gap-3 px-5 py-2.5 text-left transition-colors",
-            isWelcomeView
-              ? "bg-sidebar-accent text-sidebar-accent-foreground"
-              : "text-sidebar-foreground/80"
-          )}
-        >
+            isWelcomeView ?
+            "bg-sidebar-accent text-sidebar-accent-foreground" :
+            "text-sidebar-foreground/80"
+          )}>
+          
           <div className={cn(
             "mt-0.5 flex items-center justify-center w-7 h-7 rounded-md shrink-0",
             isWelcomeView ? "bg-sidebar-primary text-sidebar-primary-foreground" : "bg-sidebar-accent text-sidebar-foreground/50"
@@ -121,11 +121,11 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
         <div
           className={cn(
             "w-full flex items-start gap-3 px-5 py-2.5 text-left transition-colors mb-1 border-b border-sidebar-border pb-3",
-            isIntroView
-              ? "bg-sidebar-accent text-sidebar-accent-foreground"
-              : "text-sidebar-foreground/80"
-          )}
-        >
+            isIntroView ?
+            "bg-sidebar-accent text-sidebar-accent-foreground" :
+            "text-sidebar-foreground/80"
+          )}>
+          
           <div className={cn(
             "mt-0.5 flex items-center justify-center w-7 h-7 rounded-md shrink-0",
             isIntroView ? "bg-sidebar-primary text-sidebar-primary-foreground" : "bg-sidebar-accent text-sidebar-foreground/50"
@@ -152,23 +152,23 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
               key={mod.id}
               className={cn(
                 "w-full flex items-start gap-3 px-5 py-3 text-left transition-colors",
-                isCurrent
-                  ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                  : isLocked
-                  ? "opacity-60"
-                  : "text-sidebar-foreground/80"
-              )}
-            >
+                isCurrent ?
+                "bg-sidebar-accent text-sidebar-accent-foreground" :
+                isLocked ?
+                "opacity-60" :
+                "text-sidebar-foreground/80"
+              )}>
+              
               <div
                 className={cn(
                   "mt-0.5 flex items-center justify-center w-7 h-7 rounded-md shrink-0 text-xs font-bold",
-                  isCompleted
-                    ? "bg-success text-success-foreground"
-                    : isCurrent
-                    ? "bg-sidebar-primary text-sidebar-primary-foreground"
-                    : "bg-sidebar-accent text-sidebar-foreground/50"
-                )}
-              >
+                  isCompleted ?
+                  "bg-success text-success-foreground" :
+                  isCurrent ?
+                  "bg-sidebar-primary text-sidebar-primary-foreground" :
+                  "bg-sidebar-accent text-sidebar-foreground/50"
+                )}>
+                
                 {isCompleted ? <Check className="w-3.5 h-3.5" /> : isLocked ? <Lock className="w-3.5 h-3.5" /> : mod.id}
               </div>
               <div className="min-w-0">
@@ -176,29 +176,29 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
                   className={cn(
                     "text-sm font-medium truncate",
                     isCurrent && "text-sidebar-primary-foreground"
-                  )}
-                >
+                  )}>
+                  
                   {mod.title}
                 </p>
                 <p className="text-[11px] text-sidebar-foreground/50 truncate">
                   {mod.subtitle}
                 </p>
               </div>
-            </div>
-          );
+            </div>);
+
         })}
 
         {/* Completion tab */}
         <div
           className={cn(
             "w-full flex items-start gap-3 px-5 py-3 text-left transition-colors mt-2 border-t border-sidebar-border pt-4",
-            !allCompleted
-              ? "opacity-50"
-              : isCompletionView
-              ? "bg-sidebar-accent text-sidebar-accent-foreground"
-              : "text-sidebar-foreground/80"
-          )}
-        >
+            !allCompleted ?
+            "opacity-50" :
+            isCompletionView ?
+            "bg-sidebar-accent text-sidebar-accent-foreground" :
+            "text-sidebar-foreground/80"
+          )}>
+          
           <div className={cn(
             "mt-0.5 flex items-center justify-center w-7 h-7 rounded-md shrink-0",
             allCompleted ? "bg-success text-success-foreground" : "bg-sidebar-accent text-sidebar-foreground/50"
@@ -222,8 +222,8 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
           Designed for Instructional Designers
         </p>
       </div>
-    </aside>
-  );
+    </aside>);
+
 };
 
 export default CourseSidebar;
