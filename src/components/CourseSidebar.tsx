@@ -35,9 +35,9 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
           <span className="text-sidebar-foreground/70">Progress</span>
           <span className="font-semibold text-sidebar-primary">{progress}%</span>
         </div>
-        <div className="h-2 rounded-full bg-sidebar-accent overflow-hidden">
+        <div className="h-2 rounded-full bg-white/30 overflow-hidden">
           <div
-            className="h-full rounded-full progress-bar-fill"
+            className="h-full rounded-full bg-white progress-bar-fill"
             style={{ width: `${progress}%` }}
           />
         </div>
