@@ -35,6 +35,7 @@ const ModuleContent = ({
   userName,
 }: ModuleContentProps) => {
   const [activeTab, setActiveTab] = useState<Tab>("lesson");
+  const [quizCompleted, setQuizCompleted] = useState(false);
   const Icon = module.icon;
 
   const visibleTabs = [
@@ -47,7 +48,10 @@ const ModuleContent = ({
   const currentTabIndex = visibleTabs.indexOf(activeTab);
   const isLastTab = currentTabIndex >= visibleTabs.length - 1;
 
+  const nextDisabled = activeTab === "quiz" && !quizCompleted;
+
   const handleNext = () => {
+    if (nextDisabled) return;
     if (!isLastTab) {
       setActiveTab(visibleTabs[currentTabIndex + 1]);
     } else if (isLast) {
@@ -205,7 +209,10 @@ const ModuleContent = ({
                   onPass={() => {
                     setActiveTab("lesson");
                   }}
-                  onAttempt={onComplete}
+                  onAttempt={() => {
+                    setQuizCompleted(true);
+                    onComplete();
+                  }}
                 />
               </motion.div>
             )}
@@ -278,7 +285,13 @@ const ModuleContent = ({
 
         <button
           onClick={handleNext}
-          className="flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all bg-primary text-primary-foreground hover:opacity-90"
+          disabled={nextDisabled}
+          className={cn(
+            "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all",
+            nextDisabled
+              ? "bg-muted text-muted-foreground cursor-not-allowed"
+              : "bg-primary text-primary-foreground hover:opacity-90"
+          )}
         >
           {isLast && isLastTab ? "Finish" : "Next"}
           <ChevronRight className="w-4 h-4" />
