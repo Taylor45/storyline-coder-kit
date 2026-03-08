@@ -6,7 +6,7 @@ import CompletionPage from "@/components/CompletionPage";
 import WelcomePage from "@/components/WelcomePage";
 import { courseModules } from "@/data/courseData";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Menu, PanelLeftClose, PanelLeft } from "lucide-react";
+import { Menu, ChevronLeft, ChevronRight } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Index = () => {
@@ -102,13 +102,13 @@ const Index = () => {
           </div>
           <button
             onClick={() => setDesktopSidebarOpen(!desktopSidebarOpen)}
-            className="absolute top-1/2 -translate-y-1/2 -right-3 z-30 w-6 h-12 rounded-r-md bg-card border border-l-0 border-border hover:bg-muted flex items-center justify-center transition-colors shadow-sm"
+            className="absolute top-1/2 -translate-y-1/2 -right-3 z-30 w-5 h-10 rounded-r-md bg-card border border-l-0 border-border hover:bg-muted flex items-center justify-center transition-colors shadow-sm"
             title={desktopSidebarOpen ? "Close sidebar" : "Open sidebar"}
           >
             {desktopSidebarOpen ? (
-              <PanelLeftClose className="w-3.5 h-3.5 text-foreground" />
+              <ChevronLeft className="w-3.5 h-3.5 text-muted-foreground" />
             ) : (
-              <PanelLeft className="w-3.5 h-3.5 text-foreground" />
+              <ChevronRight className="w-3.5 h-3.5 text-muted-foreground" />
             )}
           </button>
         </div>
