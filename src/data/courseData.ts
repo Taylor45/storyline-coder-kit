@@ -57,6 +57,11 @@ export const courseModules: CourseModule[] = [
         content: "When a browser receives HTML, it builds a Document Object Model (DOM) — a tree-like structure representing every element on the page. CSS is then applied to style these elements, and JavaScript can manipulate the DOM to create interactive experiences.\n\nThis rendering pipeline is important to understand because it affects how quickly your learning content loads and how smoothly interactions feel.",
       },
     ],
+    flashCards: [
+      { icon: "🌐", title: "Client-Server", description: "Browser requests → Server responds with HTML/CSS/JS" },
+      { icon: "🏗️", title: "The Big Three", description: "HTML = structure, CSS = style, JS = interactivity" },
+      { icon: "🌳", title: "The DOM", description: "Tree-like model browsers build from your HTML" },
+    ],
     quiz: [
       {
         question: "What does HTML provide in a web page?",
