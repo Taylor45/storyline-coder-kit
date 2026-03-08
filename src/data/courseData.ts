@@ -691,6 +691,7 @@ if (scormAPI) {
 }`,
         codeLanguage: "javascript",
       },
+    ],
     flashCards: [
       { icon: "📡", title: "Fetch API", description: "Send data to Google Sheets, webhooks & external APIs" },
       { icon: "📥", title: "Load Content", description: "Pull dynamic tips or updates from external JSON files" },
