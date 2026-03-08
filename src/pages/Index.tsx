@@ -91,27 +91,13 @@ const Index = () => {
       {/* Desktop sidebar */}
       {!isMobile && (
         <div
-          className={`shrink-0 relative transition-all duration-300 ease-in-out overflow-visible ${
+          className={`shrink-0 transition-all duration-300 ease-in-out overflow-hidden ${
             desktopSidebarOpen ? "w-72" : "w-0"
           }`}
         >
-          <div className="w-72 min-h-screen overflow-hidden">
+          <div className="w-72 min-h-screen">
             {sidebarContent}
           </div>
-          {/* Toggle button overlaid on sidebar top-right */}
-          <button
-            onClick={() => setDesktopSidebarOpen(!desktopSidebarOpen)}
-            className={`absolute top-2 z-20 w-6 h-6 rounded-full bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(220,80%,15%)] border border-white/10 flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 ${
-              desktopSidebarOpen ? "right-2" : "-right-8"
-            }`}
-            title={desktopSidebarOpen ? "Close sidebar" : "Open sidebar"}
-          >
-            {desktopSidebarOpen ? (
-              <ChevronLeft className="w-3.5 h-3.5 text-white/90" />
-            ) : (
-              <ChevronRight className="w-3.5 h-3.5 text-white/90" />
-            )}
-          </button>
         </div>
       )}
 
@@ -125,8 +111,8 @@ const Index = () => {
       )}
 
       <div className="flex-1 flex flex-col min-h-screen">
-        {/* Mobile top bar */}
-        {isMobile && (
+        {/* Top bar with sidebar toggle */}
+        {isMobile ? (
           <div className="h-12 border-b border-border bg-card flex items-center px-4 shrink-0">
             <button
               onClick={() => setSidebarOpen(true)}
@@ -137,6 +123,20 @@ const Index = () => {
             <span className="ml-3 text-sm font-semibold truncate">
               JS Coding Basics for ID
             </span>
+          </div>
+        ) : (
+          <div className="h-10 border-b border-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(220,80%,15%)] flex items-center px-2 shrink-0">
+            <button
+              onClick={() => setDesktopSidebarOpen(!desktopSidebarOpen)}
+              className="p-1.5 rounded-md hover:bg-white/10 transition-colors"
+              title={desktopSidebarOpen ? "Close sidebar" : "Open sidebar"}
+            >
+              {desktopSidebarOpen ? (
+                <ChevronLeft className="w-4 h-4 text-white/80" />
+              ) : (
+                <ChevronRight className="w-4 h-4 text-white/80" />
+              )}
+            </button>
           </div>
         )}
 
