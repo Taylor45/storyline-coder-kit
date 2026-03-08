@@ -275,10 +275,10 @@ const ModuleContent = ({
         )}
 
         <button
-          onClick={isLast ? onFinish : onNext}
+          onClick={handleNext}
           className="flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all bg-primary text-primary-foreground hover:opacity-90"
         >
-          {isLast ? "Finish" : "Next"}
+          {isLast && isLastTab ? "Finish" : "Next"}
           <ChevronRight className="w-4 h-4" />
         </button>
       </footer>
