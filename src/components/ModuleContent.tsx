@@ -295,7 +295,7 @@ const ModuleContent = ({
                 setShowQuizAlert(false);
                 setActiveTab("quiz");
               }}
-              className={cn(buttonVariants({ variant: "outline" }))}
+              className="bg-transparent border border-border text-foreground hover:bg-muted"
             >
               Go to Knowledge Check
             </AlertDialogAction>
