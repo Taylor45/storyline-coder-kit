@@ -6,7 +6,7 @@ import CompletionPage from "@/components/CompletionPage";
 import WelcomePage from "@/components/WelcomePage";
 import { courseModules } from "@/data/courseData";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Menu } from "lucide-react";
+import { Menu, PanelLeftClose, PanelLeft } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Index = () => {
