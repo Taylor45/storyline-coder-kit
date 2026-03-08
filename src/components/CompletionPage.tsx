@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { PartyPopper, Trophy } from "lucide-react";
+import { PartyPopper, Trophy, UserCircle } from "lucide-react";
 import confetti from "canvas-confetti";
 import CompletionCertificate from "./CompletionCertificate";
 
