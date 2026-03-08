@@ -19,7 +19,7 @@ interface ModuleContentProps {
   userName?: string;
 }
 
-type Tab = "lesson" | "quiz" | "project";
+type Tab = "lesson" | "quiz" | "project" | "codelab";
 
 const ModuleContent = ({
   module,
