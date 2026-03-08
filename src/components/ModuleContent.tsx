@@ -31,11 +31,10 @@ const ModuleContent = ({
   allCompleted,
   userName,
 }: ModuleContentProps) => {
-  const [activeTab, setActiveTab] = useState<Tab>("intro");
+  const [activeTab, setActiveTab] = useState<Tab>("lesson");
   const Icon = module.icon;
 
   const tabs: { id: Tab; label: string; shortLabel: string; icon: typeof BookOpen; show: boolean }[] = [
-    { id: "intro", label: "Introduction", shortLabel: "Intro", icon: Target, show: true },
     { id: "lesson", label: "Lesson", shortLabel: "Lesson", icon: BookOpen, show: true },
     { id: "quiz", label: "Knowledge Check", shortLabel: "Quiz", icon: Code, show: !!module.quiz },
     { id: "project", label: "Mini Project", shortLabel: "Project", icon: Wrench, show: !!module.miniProject },
