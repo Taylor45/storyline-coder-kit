@@ -18,7 +18,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
   const progress = Math.round((completedModules.length / totalModules) * 100);
 
   return (
-    <aside className="w-72 min-h-screen flex flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border shrink-0 max-h-screen overflow-hidden">
+    <aside className="w-72 min-h-screen flex flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border shrink-0">
       {/* Header */}
       <div className="p-5 border-b border-sidebar-border">
         <h1 className="text-base font-bold tracking-tight text-sidebar-primary-foreground text-center">
@@ -45,7 +45,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
       </div>
 
       {/* Module List */}
-      <nav className="flex-1 overflow-y-auto py-3">
+      <nav className="flex-1 py-3">
         {/* Introduction item */}
         <button
           onClick={() => onSelectIntro?.()}
