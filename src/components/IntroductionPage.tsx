@@ -1,10 +1,11 @@
-import { Target, ChevronLeft, ChevronRight } from "lucide-react";
+import { Target, ChevronLeft, ChevronRight, UserCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 interface IntroductionPageProps {
   onBack?: () => void;
   onNext?: () => void;
+  userName?: string;
 }
 
 const learningObjectives = [
