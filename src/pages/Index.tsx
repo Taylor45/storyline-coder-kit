@@ -102,13 +102,13 @@ const Index = () => {
           </div>
           <button
             onClick={() => setDesktopSidebarOpen(!desktopSidebarOpen)}
-            className="absolute top-1/2 -translate-y-1/2 -right-3 z-30 w-5 h-10 rounded-r-md bg-card border border-l-0 border-border hover:bg-muted flex items-center justify-center transition-colors shadow-sm"
+            className="absolute top-1/2 -translate-y-1/2 -right-3 z-30 w-5 h-10 rounded-r-md bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(220,80%,15%)] border border-l-0 border-white/10 flex items-center justify-center shadow-sm transition-all duration-200 hover:-right-5 hover:w-7"
             title={desktopSidebarOpen ? "Close sidebar" : "Open sidebar"}
           >
             {desktopSidebarOpen ? (
-              <ChevronLeft className="w-3.5 h-3.5 text-muted-foreground" />
+              <ChevronLeft className="w-3.5 h-3.5 text-white/80" />
             ) : (
-              <ChevronRight className="w-3.5 h-3.5 text-muted-foreground" />
+              <ChevronRight className="w-3.5 h-3.5 text-white/80" />
             )}
           </button>
         </div>
