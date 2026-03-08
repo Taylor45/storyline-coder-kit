@@ -21,8 +21,6 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
 
   return (
     <aside className="w-72 min-h-screen flex flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border shrink-0">
-      {/* Spacer */}
-      <div className="h-4 bg-sidebar shrink-0" />
       {/* Header */}
       <div className="p-6 border-b border-sidebar-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(220,80%,15%)] relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.08)_0%,_transparent_60%)]" />
