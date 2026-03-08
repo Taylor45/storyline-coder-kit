@@ -53,7 +53,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
           className={cn(
             "w-full flex items-start gap-3 px-5 py-2.5 text-left transition-colors",
             isWelcomeView
-              ? "bg-[hsl(210,100%,92%)] text-sidebar-accent-foreground"
+              ? "bg-sidebar-accent text-sidebar-accent-foreground"
               : "text-sidebar-foreground/80"
           )}
         >
@@ -78,7 +78,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
           className={cn(
             "w-full flex items-start gap-3 px-5 py-2.5 text-left transition-colors mb-1 border-b border-sidebar-border pb-3",
             isIntroView
-              ? "bg-[hsl(210,100%,92%)] text-sidebar-accent-foreground"
+              ? "bg-sidebar-accent text-sidebar-accent-foreground"
               : "text-sidebar-foreground/80"
           )}
         >
@@ -109,7 +109,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
               className={cn(
                 "w-full flex items-start gap-3 px-5 py-3 text-left transition-colors",
                 isCurrent
-                  ? "bg-[hsl(210,100%,92%)] text-sidebar-accent-foreground"
+                  ? "bg-sidebar-accent text-sidebar-accent-foreground"
                   : isLocked
                   ? "opacity-60"
                   : "text-sidebar-foreground/80"
@@ -151,7 +151,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
             !allCompleted
               ? "opacity-50"
               : isCompletionView
-              ? "bg-[hsl(210,100%,92%)] text-sidebar-accent-foreground"
+              ? "bg-sidebar-accent text-sidebar-accent-foreground"
               : "text-sidebar-foreground/80"
           )}
         >
