@@ -203,9 +203,9 @@ const ModuleContent = ({
                 <KnowledgeCheck
                   questions={module.quiz}
                   onPass={() => {
-                    onComplete();
                     setActiveTab("lesson");
                   }}
+                  onAttempt={onComplete}
                 />
               </motion.div>
             )}
