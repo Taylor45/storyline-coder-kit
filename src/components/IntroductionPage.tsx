@@ -1,5 +1,11 @@
-import { Target } from "lucide-react";
+import { Target, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+
+interface IntroductionPageProps {
+  onBack?: () => void;
+  onNext?: () => void;
+}
 
 const learningObjectives = [
   "Understand how the web works and the client-server model",

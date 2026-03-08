@@ -100,7 +100,8 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
 
         {courseModules.map((mod) => {
           const isCompleted = completedModules.includes(mod.id);
-          const isCurrent = currentModule === mod.id && !isCompletionView && !isIntroView;
+          const isCurrent = currentModule === mod.id && !isCompletionView && !isIntroView && !isWelcomeView;
+          const isLocked = !isCompleted && !isCurrent;
 
           return (
             <div
@@ -109,6 +110,8 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
                 "w-full flex items-start gap-3 px-5 py-3 text-left transition-colors",
                 isCurrent
                   ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                  : isLocked
+                  ? "opacity-60"
                   : "text-sidebar-foreground/80"
               )}
             >
@@ -122,7 +125,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
                     : "bg-sidebar-accent text-sidebar-foreground/50"
                 )}
               >
-                {isCompleted ? <Check className="w-3.5 h-3.5" /> : mod.id}
+                {isCompleted ? <Check className="w-3.5 h-3.5" /> : isLocked ? <Lock className="w-3.5 h-3.5" /> : mod.id}
               </div>
               <div className="min-w-0">
                 <p
