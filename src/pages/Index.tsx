@@ -90,14 +90,27 @@ const Index = () => {
     <div className="flex min-h-screen w-full bg-background">
       {/* Desktop sidebar */}
       {!isMobile && (
-        <div
-          className={`transition-all duration-300 ease-in-out overflow-hidden shrink-0 ${
-            desktopSidebarOpen ? "w-72" : "w-0"
-          }`}
-        >
-          <div className="w-72 min-h-screen">
-            {sidebarContent}
+        <div className="relative shrink-0 flex">
+          <div
+            className={`transition-all duration-300 ease-in-out overflow-hidden ${
+              desktopSidebarOpen ? "w-72" : "w-0"
+            }`}
+          >
+            <div className="w-72 min-h-screen">
+              {sidebarContent}
+            </div>
           </div>
+          <button
+            onClick={() => setDesktopSidebarOpen(!desktopSidebarOpen)}
+            className="absolute top-1/2 -translate-y-1/2 -right-3 z-30 w-6 h-12 rounded-r-md bg-card border border-l-0 border-border hover:bg-muted flex items-center justify-center transition-colors shadow-sm"
+            title={desktopSidebarOpen ? "Close sidebar" : "Open sidebar"}
+          >
+            {desktopSidebarOpen ? (
+              <PanelLeftClose className="w-3.5 h-3.5 text-foreground" />
+            ) : (
+              <PanelLeft className="w-3.5 h-3.5 text-foreground" />
+            )}
+          </button>
         </div>
       )}
 
