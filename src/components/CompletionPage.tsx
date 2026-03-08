@@ -51,7 +51,7 @@ const CompletionPage = ({ userName }: CompletionPageProps) => {
           </div>
           <div>
             <p className="text-xs text-white/70">Course Complete</p>
-            <h2 className="text-sm font-semibold leading-tight">Completion</h2>
+            <h2 className="text-sm font-semibold leading-tight text-white">Completion</h2>
           </div>
         </div>
       </header>
