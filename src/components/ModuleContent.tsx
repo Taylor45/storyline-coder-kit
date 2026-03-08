@@ -255,16 +255,10 @@ const ModuleContent = ({
         )}
 
         <button
-          onClick={onNext}
-          disabled={isLast}
-          className={cn(
-            "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all",
-            isLast
-              ? "text-muted-foreground/40 cursor-not-allowed"
-              : "bg-primary text-primary-foreground hover:opacity-90"
-          )}
+          onClick={isLast ? onFinish : onNext}
+          className="flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all bg-primary text-primary-foreground hover:opacity-90"
         >
-          Next
+          {isLast ? "Finish" : "Next"}
           <ChevronRight className="w-4 h-4" />
         </button>
       </footer>
