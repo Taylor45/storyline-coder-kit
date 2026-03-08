@@ -265,7 +265,7 @@ const ModuleContent = ({
           disabled={isFirst && isFirstTab}
           className={cn(
             "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all",
-            isFirst
+            isFirst && isFirstTab
               ? "text-muted-foreground/40 cursor-not-allowed"
               : "text-foreground hover:bg-muted"
           )}
