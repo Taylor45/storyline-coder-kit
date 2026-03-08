@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Clock, Layers, Award, Rocket, CheckCircle, Sparkles, UserCircle } from "lucide-react";
-import courseIllustration from "@/assets/course-illustration.png";
+import courseIllustration from "@/assets/microsites-amico.png";
 
 interface WelcomePageProps {
   onGetStarted: () => void;
