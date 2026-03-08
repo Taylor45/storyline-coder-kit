@@ -14,6 +14,12 @@ export interface ModuleSection {
   codeLanguage?: string;
 }
 
+export interface FlashCard {
+  icon: string;
+  title: string;
+  description: string;
+}
+
 export interface CourseModule {
   id: number;
   title: string;
@@ -21,6 +27,7 @@ export interface CourseModule {
   icon: typeof Globe;
   color: string;
   sections: ModuleSection[];
+  flashCards?: FlashCard[];
   quiz?: QuizQuestion[];
   miniProject?: {
     title: string;
@@ -49,6 +56,11 @@ export const courseModules: CourseModule[] = [
         title: "How Browsers Render Pages",
         content: "When a browser receives HTML, it builds a Document Object Model (DOM) — a tree-like structure representing every element on the page. CSS is then applied to style these elements, and JavaScript can manipulate the DOM to create interactive experiences.\n\nThis rendering pipeline is important to understand because it affects how quickly your learning content loads and how smoothly interactions feel.",
       },
+    ],
+    flashCards: [
+      { icon: "🌐", title: "Client-Server", description: "Browser requests → Server responds with HTML/CSS/JS" },
+      { icon: "🏗️", title: "The Big Three", description: "HTML = structure, CSS = style, JS = interactivity" },
+      { icon: "🌳", title: "The DOM", description: "Tree-like model browsers build from your HTML" },
     ],
     quiz: [
       {
@@ -135,6 +147,11 @@ export const courseModules: CourseModule[] = [
         codeLanguage: "html",
       },
     ],
+    flashCards: [
+      { icon: "🏷️", title: "Semantic HTML", description: "Use meaningful tags like <header>, <main>, <article>" },
+      { icon: "📝", title: "Forms", description: "Radio buttons, checkboxes & inputs for assessments" },
+      { icon: "♿", title: "Accessibility", description: "Alt text & proper structure for screen readers" },
+    ],
     quiz: [
       {
         question: "Why is semantic HTML important for learning content?",
@@ -201,6 +218,11 @@ export const courseModules: CourseModule[] = [
 }`,
         codeLanguage: "css",
       },
+    ],
+    flashCards: [
+      { icon: "📦", title: "Box Model", description: "Content → Padding → Border → Margin" },
+      { icon: "📐", title: "Flexbox & Grid", description: "Modern layout systems for rows, columns & dashboards" },
+      { icon: "📱", title: "Responsive", description: "Media queries adapt layouts for any screen size" },
     ],
     quiz: [
       {
@@ -295,6 +317,11 @@ if (percentage >= 80) {
 player.SetVar("ResultMessage", resultMessage);`,
         codeLanguage: "javascript",
       },
+    ],
+    flashCards: [
+      { icon: "🎮", title: "GetPlayer()", description: "The bridge between JavaScript and Storyline variables" },
+      { icon: "⏱️", title: "Event Timing", description: "Button clicks are the safest trigger for JS execution" },
+      { icon: "🔄", title: "Read & Write", description: "GetVar() reads, SetVar() writes Storyline variables" },
     ],
     quiz: [
       {
@@ -475,6 +502,11 @@ for (var i = 0; i < allText.length; i++) {
 }`,
         codeLanguage: "javascript",
       },
+    ],
+    flashCards: [
+      { icon: "💉", title: "Dynamic Content", description: "Build strings in JS and display via %VariableName%" },
+      { icon: "🌿", title: "Branching Logic", description: "Evaluate multiple variables for complex scenario outcomes" },
+      { icon: "⚠️", title: "DOM Caution", description: "Direct DOM manipulation may break across Storyline versions" },
     ],
     quiz: [
       {
@@ -660,6 +692,11 @@ if (scormAPI) {
         codeLanguage: "javascript",
       },
     ],
+    flashCards: [
+      { icon: "📡", title: "Fetch API", description: "Send data to Google Sheets, webhooks & external APIs" },
+      { icon: "📥", title: "Load Content", description: "Pull dynamic tips or updates from external JSON files" },
+      { icon: "📊", title: "SCORM/xAPI", description: "Report custom learner data beyond basic completion" },
+    ],
     quiz: [
       {
         question: "Why would you use fetch() inside a Storyline JavaScript trigger?",
@@ -711,6 +748,10 @@ if (scormAPI) {
         title: "How It Works",
         content: "Use the **Code Lab** tab to access the interactive editor. For each challenge:\n\n• Read the prompt carefully — each describes a realistic Storyline scenario\n• Write your solution in the dark-themed editor\n• Click **Run** to test your code and see console output\n• Click **Submit** to check if your output matches the expected result\n• Click **View Solution** to reveal the answer with a detailed explanation of how the code works in a Storyline context",
       },
+    ],
+    flashCards: [
+      { icon: "🧪", title: "Hands-On", description: "Write real JavaScript for Storyline scenarios" },
+      { icon: "✅", title: "Test & Submit", description: "Run code, check output, and verify solutions" },
     ],
     quiz: [
       {
