@@ -90,28 +90,13 @@ const Index = () => {
     <div className="flex min-h-screen w-full bg-background">
       {/* Desktop sidebar */}
       {!isMobile && (
-        <div className="shrink-0 flex">
-          <div
-            className={`transition-all duration-300 ease-in-out overflow-hidden ${
-              desktopSidebarOpen ? "w-72" : "w-0"
-            }`}
-          >
-            <div className="w-72 min-h-screen">
-              {sidebarContent}
-            </div>
-          </div>
-          <div className="flex items-center">
-            <button
-              onClick={() => setDesktopSidebarOpen(!desktopSidebarOpen)}
-              className="w-5 h-10 rounded-r-md bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(220,80%,15%)] border border-l-0 border-white/10 flex items-center justify-center shadow-sm transition-all duration-200 hover:w-7"
-              title={desktopSidebarOpen ? "Close sidebar" : "Open sidebar"}
-            >
-              {desktopSidebarOpen ? (
-                <ChevronLeft className="w-3.5 h-3.5 text-white/80" />
-              ) : (
-                <ChevronRight className="w-3.5 h-3.5 text-white/80" />
-              )}
-            </button>
+        <div
+          className={`shrink-0 transition-all duration-300 ease-in-out overflow-hidden ${
+            desktopSidebarOpen ? "w-72" : "w-0"
+          }`}
+        >
+          <div className="w-72 min-h-screen">
+            {sidebarContent}
           </div>
         </div>
       )}
