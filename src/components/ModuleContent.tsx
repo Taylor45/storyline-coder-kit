@@ -57,6 +57,16 @@ const ModuleContent = ({
     }
   };
 
+  const isFirstTab = currentTabIndex <= 0;
+
+  const handlePrev = () => {
+    if (!isFirstTab) {
+      setActiveTab(visibleTabs[currentTabIndex - 1]);
+    } else {
+      onPrev();
+    }
+  };
+
   const tabs: { id: Tab; label: string; shortLabel: string; icon: typeof BookOpen; show: boolean }[] = [
     { id: "lesson", label: "Lesson", shortLabel: "Lesson", icon: BookOpen, show: true },
     { id: "codelab", label: "Code Lab", shortLabel: "Lab", icon: FlaskConical, show: module.id === 7 },
