@@ -26,25 +26,50 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
       <div className="p-6 border-b border-sidebar-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(220,80%,15%)] relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.08)_0%,_transparent_60%)]" />
         <div className="relative z-10">
-          <div className="flex items-center justify-center gap-2 mb-2">
+          <motion.div
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            className="flex items-center justify-center gap-2 mb-2"
+          >
             <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/30" />
             <Sparkles className="w-3.5 h-3.5 text-white/60" />
             <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/30" />
-          </div>
-          <h1 className="text-[15px] font-extrabold tracking-wide uppercase text-white text-center drop-shadow-[0_0_10px_rgba(100,180,255,0.4)]">
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+            className="text-[15px] font-extrabold tracking-wide uppercase text-white text-center drop-shadow-[0_0_10px_rgba(100,180,255,0.4)]"
+          >
             JavaScript
-          </h1>
-          <p className="text-[10px] font-semibold tracking-[0.25em] uppercase text-white/50 text-center mt-0.5">
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.55, ease: "easeOut" }}
+            className="text-[10px] font-semibold tracking-[0.25em] uppercase text-white/50 text-center mt-0.5"
+          >
             Coding Basics
-          </p>
-          <div className="flex items-center justify-center gap-2 mt-2">
+          </motion.p>
+          <motion.div
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={{ scaleX: 1, opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
+            className="flex items-center justify-center gap-2 mt-2"
+          >
             <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/30" />
             <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
             <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/30" />
-          </div>
-          <p className="text-[9px] tracking-[0.2em] uppercase text-white/40 mt-2 text-center">
+          </motion.div>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.85, ease: "easeOut" }}
+            className="text-[9px] tracking-[0.2em] uppercase text-white/40 mt-2 text-center"
+          >
             For Instructional Design
-          </p>
+          </motion.p>
         </div>
       </div>
 
