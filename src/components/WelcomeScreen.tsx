@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import welcomeIllustration from "@/assets/welcome-illustration.png";
+import welcomeIllustration from "@/assets/javascript-frameworks.png";
 
 interface WelcomeScreenProps {
   onStart: (name: string, surname: string) => void;
