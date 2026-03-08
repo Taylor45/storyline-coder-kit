@@ -31,7 +31,9 @@ const Index = () => {
   }, [currentModule]);
 
   const handlePrev = () => {
-    if (currentModule > 1) {
+    if (currentModule === 1) {
+      handleSelectIntro();
+    } else if (currentModule > 1) {
       setShowCompletion(false);
       setCurrentModule(currentModule - 1);
     }
