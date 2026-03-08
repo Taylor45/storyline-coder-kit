@@ -46,6 +46,32 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
 
       {/* Module List */}
       <nav className="flex-1 overflow-y-auto py-3">
+        {/* Introduction item */}
+        <button
+          onClick={() => onSelectIntro?.()}
+          className={cn(
+            "w-full flex items-start gap-3 px-5 py-3 text-left transition-colors mb-1 border-b border-sidebar-border pb-4",
+            isIntroView
+              ? "bg-sidebar-accent text-sidebar-accent-foreground"
+              : "hover:bg-sidebar-accent/50 text-sidebar-foreground/80"
+          )}
+        >
+          <div className={cn(
+            "mt-0.5 flex items-center justify-center w-7 h-7 rounded-md shrink-0",
+            isIntroView ? "bg-sidebar-primary text-sidebar-primary-foreground" : "bg-sidebar-accent text-sidebar-foreground/50"
+          )}>
+            <Target className="w-3.5 h-3.5" />
+          </div>
+          <div className="min-w-0">
+            <p className={cn("text-sm font-medium truncate", isIntroView && "text-sidebar-primary-foreground")}>
+              Introduction
+            </p>
+            <p className="text-[11px] text-sidebar-foreground/50 truncate">
+              Learning Objectives
+            </p>
+          </div>
+        </button>
+
         {courseModules.map((mod) => {
           const isCompleted = completedModules.includes(mod.id);
           const isCurrent = currentModule === mod.id && !isCompletionView;
