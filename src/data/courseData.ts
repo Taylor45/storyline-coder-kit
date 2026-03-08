@@ -147,6 +147,11 @@ export const courseModules: CourseModule[] = [
         codeLanguage: "html",
       },
     ],
+    flashCards: [
+      { icon: "🏷️", title: "Semantic HTML", description: "Use meaningful tags like <header>, <main>, <article>" },
+      { icon: "📝", title: "Forms", description: "Radio buttons, checkboxes & inputs for assessments" },
+      { icon: "♿", title: "Accessibility", description: "Alt text & proper structure for screen readers" },
+    ],
     quiz: [
       {
         question: "Why is semantic HTML important for learning content?",
