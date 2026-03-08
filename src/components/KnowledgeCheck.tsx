@@ -26,10 +26,6 @@ const KnowledgeCheck = ({ questions, onPass, onAttempt }: KnowledgeCheckProps) =
     if (selected === null) return;
     setSubmitted(true);
     if (isCorrect) setCorrectCount((c) => c + 1);
-    if (!attempted) {
-      setAttempted(true);
-      onAttempt?.();
-    }
   };
 
   const handleNext = () => {
@@ -39,10 +35,7 @@ const KnowledgeCheck = ({ questions, onPass, onAttempt }: KnowledgeCheckProps) =
       setSubmitted(false);
     } else {
       setFinished(true);
-      const finalCorrect = correctCount + (isCorrect ? 0 : 0); // already counted
-      if (correctCount + (isCorrect ? 1 : 0) >= passingScore) {
-        // Will be counted in the final check below
-      }
+      onAttempt?.();
     }
   };
 
