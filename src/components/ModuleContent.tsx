@@ -44,6 +44,7 @@ const ModuleContent = ({
   userName,
 }: ModuleContentProps) => {
   const [activeTab, setActiveTab] = useState<Tab>("lesson");
+  const [showQuizAlert, setShowQuizAlert] = useState(false);
   const Icon = module.icon;
 
   const tabs: { id: Tab; label: string; shortLabel: string; icon: typeof BookOpen; show: boolean }[] = [
