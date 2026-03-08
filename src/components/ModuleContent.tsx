@@ -27,6 +27,7 @@ const ModuleContent = ({
   onComplete,
   onPrev,
   onNext,
+  onFinish,
   isFirst,
   isLast,
   isCompleted,
