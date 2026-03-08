@@ -16,6 +16,7 @@ const Index = () => {
   const [showCompletion, setShowCompletion] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [desktopSidebarOpen, setDesktopSidebarOpen] = useState(true);
   const isMobile = useIsMobile();
 
   const module = courseModules.find((m) => m.id === currentModule)!;
