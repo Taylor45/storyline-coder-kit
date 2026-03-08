@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
-import { BookOpen, Clock, Code2, Layers, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Clock, Code2, Layers, Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-const WelcomePage = () => {
+interface WelcomePageProps {
+  onGetStarted: () => void;
+}
+
+const WelcomePage = ({ onGetStarted }: WelcomePageProps) => {
   return (
     <div className="flex-1 flex flex-col min-h-0">
       <header className="h-14 border-b border-border bg-card flex items-center px-4 md:px-6 shrink-0">
