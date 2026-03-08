@@ -16,7 +16,7 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
           <div className="w-8 h-8 rounded-md bg-white/20 flex items-center justify-center shrink-0">
             <Sparkles className="w-4 h-4 text-white" />
           </div>
-          <h2 className="text-sm font-semibold text-white">Welcome</h2>
+          <h2 className="text-sm font-semibold text-white">Introduction</h2>
         </div>
         {userName && (
           <div className="flex items-center gap-2">

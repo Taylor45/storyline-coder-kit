@@ -3,7 +3,6 @@ import CourseSidebar from "@/components/CourseSidebar";
 import ModuleContent from "@/components/ModuleContent";
 import WelcomeScreen from "@/components/WelcomeScreen";
 import CompletionPage from "@/components/CompletionPage";
-import IntroductionPage from "@/components/IntroductionPage";
 import WelcomePage from "@/components/WelcomePage";
 import { courseModules } from "@/data/courseData";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -15,8 +14,7 @@ const Index = () => {
   const [currentModule, setCurrentModule] = useState(1);
   const [completedModules, setCompletedModules] = useState<number[]>([]);
   const [showCompletion, setShowCompletion] = useState(false);
-  const [showIntro, setShowIntro] = useState(false);
-  const [showWelcome, setShowWelcome] = useState(true);
+  const [showIntro, setShowIntro] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const isMobile = useIsMobile();
 
@@ -49,7 +47,6 @@ const Index = () => {
   const handleSelectModule = (id: number) => {
     setShowCompletion(false);
     setShowIntro(false);
-    setShowWelcome(false);
     setCurrentModule(id);
     setSidebarOpen(false);
   };
@@ -57,20 +54,11 @@ const Index = () => {
   const handleSelectCompletion = () => {
     setShowCompletion(true);
     setShowIntro(false);
-    setShowWelcome(false);
     setSidebarOpen(false);
   };
 
   const handleSelectIntro = () => {
     setShowIntro(true);
-    setShowCompletion(false);
-    setShowWelcome(false);
-    setSidebarOpen(false);
-  };
-
-  const handleSelectWelcome = () => {
-    setShowWelcome(true);
-    setShowIntro(false);
     setShowCompletion(false);
     setSidebarOpen(false);
   };
@@ -89,19 +77,15 @@ const Index = () => {
       allCompleted={allCompleted}
       isCompletionView={showCompletion}
       isIntroView={showIntro}
-      isWelcomeView={showWelcome}
       onSelectCompletion={handleSelectCompletion}
       onSelectIntro={handleSelectIntro}
-      onSelectWelcome={handleSelectWelcome}
     />
   );
 
   return (
     <div className="flex min-h-screen w-full bg-background">
-      {/* Desktop sidebar */}
       {!isMobile && sidebarContent}
 
-      {/* Mobile sidebar via Sheet */}
       {isMobile && (
         <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
           <SheetContent side="left" className="p-0 w-72">
@@ -111,7 +95,6 @@ const Index = () => {
       )}
 
       <div className="flex-1 flex flex-col min-h-screen">
-        {/* Mobile top bar with hamburger */}
         {isMobile && (
           <div className="h-12 border-b border-border bg-card flex items-center px-4 shrink-0">
             <button
@@ -128,10 +111,8 @@ const Index = () => {
 
         {showCompletion && allCompleted ? (
           <CompletionPage userName={userName} />
-        ) : showWelcome ? (
-          <WelcomePage onGetStarted={handleSelectIntro} userName={userName} />
         ) : showIntro ? (
-          <IntroductionPage onBack={handleSelectWelcome} onNext={() => handleSelectModule(1)} userName={userName} />
+          <WelcomePage onGetStarted={() => handleSelectModule(1)} userName={userName} />
         ) : (
           <ModuleContent
             key={currentModule}
