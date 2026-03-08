@@ -316,6 +316,10 @@ if (percentage >= 80) {
 player.SetVar("ResultMessage", resultMessage);`,
         codeLanguage: "javascript",
       },
+    flashCards: [
+      { icon: "🎮", title: "GetPlayer()", description: "The bridge between JavaScript and Storyline variables" },
+      { icon: "⏱️", title: "Event Timing", description: "Button clicks are the safest trigger for JS execution" },
+      { icon: "🔄", title: "Read & Write", description: "GetVar() reads, SetVar() writes Storyline variables" },
     ],
     quiz: [
       {
