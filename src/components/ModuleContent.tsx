@@ -1,8 +1,9 @@
 import { CourseModule } from "@/data/courseData";
-import { ChevronLeft, ChevronRight, BookOpen, Code, Wrench } from "lucide-react";
+import { ChevronLeft, ChevronRight, BookOpen, Code, Wrench, FlaskConical } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import KnowledgeCheck from "./KnowledgeCheck";
+import LiveCodeLab from "./LiveCodeLab";
 
 import { cn } from "@/lib/utils";
 
@@ -18,7 +19,7 @@ interface ModuleContentProps {
   userName?: string;
 }
 
-type Tab = "lesson" | "quiz" | "project";
+type Tab = "lesson" | "quiz" | "project" | "codelab";
 
 const ModuleContent = ({
   module,
@@ -36,6 +37,7 @@ const ModuleContent = ({
 
   const tabs: { id: Tab; label: string; shortLabel: string; icon: typeof BookOpen; show: boolean }[] = [
     { id: "lesson", label: "Lesson", shortLabel: "Lesson", icon: BookOpen, show: true },
+    { id: "codelab", label: "Code Lab", shortLabel: "Lab", icon: FlaskConical, show: module.id === 7 },
     { id: "quiz", label: "Knowledge Check", shortLabel: "Quiz", icon: Code, show: !!module.quiz },
     { id: "project", label: "Mini Project", shortLabel: "Project", icon: Wrench, show: !!module.miniProject },
   ];
@@ -173,6 +175,18 @@ const ModuleContent = ({
                     setActiveTab("lesson");
                   }}
                 />
+              </motion.div>
+            )}
+
+            {activeTab === "codelab" && module.id === 7 && (
+              <motion.div
+                key="codelab"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
+                <LiveCodeLab />
               </motion.div>
             )}
 

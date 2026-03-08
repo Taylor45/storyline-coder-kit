@@ -1,4 +1,4 @@
-import { Globe, FileCode, Palette, Zap, Layers, Rocket } from "lucide-react";
+import { Globe, FileCode, Palette, Zap, Layers, Rocket, FlaskConical } from "lucide-react";
 
 export interface QuizQuestion {
   question: string;
@@ -403,6 +403,37 @@ git push -u origin main
         options: ["AWS Lambda", "GitHub Pages", "Docker Hub", "MongoDB Atlas"],
         correctIndex: 1,
         explanation: "GitHub Pages offers free static hosting that integrates directly with your Git repository — perfect for simple learning content.",
+      },
+    ],
+  },
+  {
+    id: 7,
+    title: "Live Code Lab",
+    subtitle: "Practice JavaScript with hands-on coding challenges",
+    icon: FlaskConical,
+    color: "info",
+    sections: [
+      {
+        title: "Hands-On Practice",
+        content: "This module is your coding playground. Instead of reading lessons, you'll write real JavaScript to solve three progressive challenges inspired by instructional design scenarios.\n\nEach challenge builds on the previous one — starting with simple string output, moving to arithmetic logic, and finishing with conditional branching and objects.",
+      },
+      {
+        title: "How It Works",
+        content: "Use the **Code Lab** tab to access the interactive editor. For each challenge:\n\n• Read the prompt carefully\n• Write your solution in the dark-themed editor\n• Click **Run** to test your code and see console output\n• Click **Submit** to check if your output matches the expected result\n• Click **View Solution** to reveal the answer and a detailed explanation",
+      },
+    ],
+    quiz: [
+      {
+        question: "What does Math.round(7/10 * 100) return?",
+        options: ["7", "70", "0.7", "71"],
+        correctIndex: 1,
+        explanation: "7 divided by 10 is 0.7, multiplied by 100 is 70, and Math.round(70) is 70.",
+      },
+      {
+        question: "Which keyword is used to return a value from a function?",
+        options: ["output", "return", "send", "give"],
+        correctIndex: 1,
+        explanation: "The `return` keyword exits a function and sends a value back to the caller.",
       },
     ],
   },
