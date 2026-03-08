@@ -4,6 +4,7 @@ import ModuleContent from "@/components/ModuleContent";
 import WelcomeScreen from "@/components/WelcomeScreen";
 import CompletionPage from "@/components/CompletionPage";
 import IntroductionPage from "@/components/IntroductionPage";
+import WelcomePage from "@/components/WelcomePage";
 import { courseModules } from "@/data/courseData";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Menu } from "lucide-react";
