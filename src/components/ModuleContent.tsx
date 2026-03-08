@@ -209,7 +209,10 @@ const ModuleContent = ({
                   onPass={() => {
                     setActiveTab("lesson");
                   }}
-                  onAttempt={onComplete}
+                  onAttempt={() => {
+                    setQuizCompleted(true);
+                    onComplete();
+                  }}
                 />
               </motion.div>
             )}
