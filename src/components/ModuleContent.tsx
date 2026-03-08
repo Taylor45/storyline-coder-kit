@@ -170,6 +170,8 @@ const ModuleContent = ({
                     </div>
                   </div>
                 )}
+
+                <div className="space-y-8 md:space-y-10">
                   {module.sections.map((section, i) => (
                     <section key={i}>
                       <h3 className="text-base md:text-lg font-semibold mb-3 flex items-center gap-2">
