@@ -89,8 +89,10 @@ const Index = () => {
       allCompleted={allCompleted}
       isCompletionView={showCompletion}
       isIntroView={showIntro}
+      isWelcomeView={showWelcome}
       onSelectCompletion={handleSelectCompletion}
       onSelectIntro={handleSelectIntro}
+      onSelectWelcome={handleSelectWelcome}
     />
   );
 
