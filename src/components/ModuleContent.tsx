@@ -261,8 +261,8 @@ const ModuleContent = ({
       {/* Bottom nav */}
       <footer className="h-14 md:h-16 border-t border-border bg-card flex items-center justify-between px-4 md:px-6 shrink-0">
         <button
-          onClick={onPrev}
-          disabled={isFirst}
+          onClick={handlePrev}
+          disabled={isFirst && isFirstTab}
           className={cn(
             "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all",
             isFirst
