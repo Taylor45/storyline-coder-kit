@@ -114,6 +114,8 @@ const Index = () => {
 
         {showCompletion && allCompleted ? (
           <CompletionPage userName={userName} />
+        ) : showIntro ? (
+          <IntroductionPage />
         ) : (
           <ModuleContent
             key={currentModule}
