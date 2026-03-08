@@ -353,18 +353,35 @@ const LiveCodeLab = () => {
               </button>
             </div>
 
-            {/* Textarea editor */}
-            <textarea
-              value={codes[currentChallenge]}
-              onChange={(e) => {
-                const updated = [...codes];
-                updated[currentChallenge] = e.target.value;
-                setCodes(updated);
-              }}
-              spellCheck={false}
-              className="w-full min-h-[240px] p-4 font-mono text-sm leading-relaxed resize-y bg-[hsl(220,20%,14%)] text-[hsl(210,15%,85%)] focus:outline-none selection:bg-[hsl(210,60%,30%)]"
-              style={{ tabSize: 2 }}
-            />
+            {/* Syntax-highlighted editor with overlay */}
+            <div className="relative min-h-[240px]">
+              <pre
+                className="absolute inset-0 p-4 font-mono text-sm leading-relaxed bg-[hsl(220,20%,14%)] overflow-auto pointer-events-none m-0"
+                aria-hidden="true"
+              >
+                <code
+                  className="language-javascript"
+                  dangerouslySetInnerHTML={{
+                    __html: Prism.highlight(
+                      codes[currentChallenge] + "\n",
+                      Prism.languages.javascript,
+                      "javascript"
+                    ),
+                  }}
+                />
+              </pre>
+              <textarea
+                value={codes[currentChallenge]}
+                onChange={(e) => {
+                  const updated = [...codes];
+                  updated[currentChallenge] = e.target.value;
+                  setCodes(updated);
+                }}
+                spellCheck={false}
+                className="relative w-full min-h-[240px] p-4 font-mono text-sm leading-relaxed resize-y bg-transparent text-transparent caret-[hsl(210,15%,85%)] focus:outline-none selection:bg-[hsl(210,60%,30%)]"
+                style={{ tabSize: 2, caretColor: "hsl(210,15%,85%)" }}
+              />
+            </div>
 
             {/* Action buttons */}
             <div className="flex items-center gap-2 px-4 py-3 bg-[hsl(220,20%,12%)] border-t border-[hsl(220,15%,20%)]">
