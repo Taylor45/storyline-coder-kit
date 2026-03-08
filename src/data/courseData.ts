@@ -500,6 +500,10 @@ for (var i = 0; i < allText.length; i++) {
 }`,
         codeLanguage: "javascript",
       },
+    flashCards: [
+      { icon: "💉", title: "Dynamic Content", description: "Build strings in JS and display via %VariableName%" },
+      { icon: "🌿", title: "Branching Logic", description: "Evaluate multiple variables for complex scenario outcomes" },
+      { icon: "⚠️", title: "DOM Caution", description: "Direct DOM manipulation may break across Storyline versions" },
     ],
     quiz: [
       {
