@@ -56,7 +56,7 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15 }}
               onClick={onGetStarted}
-              className="mb-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[hsl(210,100%,42%)] text-white font-semibold text-sm shadow-[0_4px_16px_rgba(0,100,255,0.35)] hover:shadow-[0_6px_24px_rgba(0,100,255,0.45)] hover:bg-[hsl(210,100%,38%)] transition-all active:scale-[0.98]"
+              className="mb-8 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[hsl(210,100%,42%)] text-white font-semibold text-sm shadow-[0_4px_16px_rgba(0,100,255,0.35)] hover:shadow-[0_6px_24px_rgba(0,100,255,0.45)] hover:bg-[hsl(210,100%,38%)] transition-all active:scale-[0.98]"
             >
               <Rocket className="w-4 h-4" />
               Start Course
