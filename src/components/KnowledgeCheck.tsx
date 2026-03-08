@@ -16,7 +16,6 @@ const KnowledgeCheck = ({ questions, onPass, onAttempt }: KnowledgeCheckProps) =
   const [submitted, setSubmitted] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
   const [finished, setFinished] = useState(false);
-  const [attempted, setAttempted] = useState(false);
 
   const question = questions[currentQ];
   const isCorrect = selected === question?.correctIndex;
