@@ -76,7 +76,9 @@ const Index = () => {
       onSelectModule={handleSelectModule}
       allCompleted={allCompleted}
       isCompletionView={showCompletion}
+      isIntroView={showIntro}
       onSelectCompletion={handleSelectCompletion}
+      onSelectIntro={handleSelectIntro}
     />
   );
 
