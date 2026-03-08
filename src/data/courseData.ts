@@ -1,4 +1,4 @@
-import { Globe, FileCode, Palette, Zap, Layers, Rocket } from "lucide-react";
+import { Globe, FileCode, Palette, Zap, Layers, Rocket, FlaskConical } from "lucide-react";
 
 export interface QuizQuestion {
   question: string;
