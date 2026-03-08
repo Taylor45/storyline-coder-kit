@@ -115,6 +115,19 @@ const WelcomePage = ({ onGetStarted }: WelcomePageProps) => {
                 Basic understanding of <strong className="text-foreground">Articulate Storyline</strong> and familiarity with <strong className="text-foreground">HTML/CSS</strong> and <strong className="text-foreground">JavaScript</strong>.
               </p>
             </motion.div>
+
+            {/* Get Started Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="flex justify-center mt-8"
+            >
+              <Button size="lg" onClick={onGetStarted} className="gap-2 px-8 text-base">
+                Get Started
+                <ArrowRight className="w-4 h-4" />
+              </Button>
+            </motion.div>
           </motion.div>
         </div>
       </main>
