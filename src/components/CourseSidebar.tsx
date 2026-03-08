@@ -12,6 +12,7 @@ interface CourseSidebarProps {
   isIntroView?: boolean;
   onSelectCompletion?: () => void;
   onSelectIntro?: () => void;
+  onHome?: () => void;
 }
 
 const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCompleted, isCompletionView, isIntroView, onSelectCompletion, onSelectIntro }: CourseSidebarProps) => {
