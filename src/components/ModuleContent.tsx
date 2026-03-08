@@ -57,6 +57,16 @@ const ModuleContent = ({
     }
   };
 
+  const isFirstTab = currentTabIndex <= 0;
+
+  const handlePrev = () => {
+    if (!isFirstTab) {
+      setActiveTab(visibleTabs[currentTabIndex - 1]);
+    } else {
+      onPrev();
+    }
+  };
+
   const tabs: { id: Tab; label: string; shortLabel: string; icon: typeof BookOpen; show: boolean }[] = [
     { id: "lesson", label: "Lesson", shortLabel: "Lesson", icon: BookOpen, show: true },
     { id: "codelab", label: "Code Lab", shortLabel: "Lab", icon: FlaskConical, show: module.id === 7 },
@@ -251,11 +261,11 @@ const ModuleContent = ({
       {/* Bottom nav */}
       <footer className="h-14 md:h-16 border-t border-border bg-card flex items-center justify-between px-4 md:px-6 shrink-0">
         <button
-          onClick={onPrev}
-          disabled={isFirst}
+          onClick={handlePrev}
+          disabled={isFirst && isFirstTab}
           className={cn(
             "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all",
-            isFirst
+            isFirst && isFirstTab
               ? "text-muted-foreground/40 cursor-not-allowed"
               : "text-foreground hover:bg-muted"
           )}
