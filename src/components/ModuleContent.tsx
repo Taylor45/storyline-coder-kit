@@ -99,13 +99,6 @@ const ModuleContent = ({
           {tabs
             .filter((t) => t.show)
             .map((tab) => (
-
-      {/* Tabs */}
-      <div className="border-b border-border bg-card px-4 md:px-6">
-        <div className="flex gap-0">
-          {tabs
-            .filter((t) => t.show)
-            .map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
@@ -121,6 +114,11 @@ const ModuleContent = ({
                 <span className="sm:hidden">{tab.shortLabel}</span>
               </button>
             ))}
+          {isCompleted && (
+            <span className="ml-auto text-xs bg-success/10 text-success px-3 py-1 rounded-full font-medium shrink-0">
+              Completed
+            </span>
+          )}
         </div>
       </div>
 
