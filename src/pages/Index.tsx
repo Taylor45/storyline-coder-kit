@@ -129,9 +129,9 @@ const Index = () => {
         {showCompletion && allCompleted ? (
           <CompletionPage userName={userName} />
         ) : showWelcome ? (
-          <WelcomePage onGetStarted={handleSelectIntro} />
+          <WelcomePage onGetStarted={handleSelectIntro} userName={userName} />
         ) : showIntro ? (
-          <IntroductionPage onBack={handleSelectWelcome} onNext={() => handleSelectModule(1)} />
+          <IntroductionPage onBack={handleSelectWelcome} onNext={() => handleSelectModule(1)} userName={userName} />
         ) : (
           <ModuleContent
             key={currentModule}
