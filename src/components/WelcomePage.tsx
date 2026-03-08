@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Clock, Layers, Award, Rocket, CheckCircle, Sparkles, UserCircle } from "lucide-react";
-import courseIllustration from "@/assets/course-illustration.png";
+import courseIllustration from "@/assets/microsites-amico.png";
 
 interface WelcomePageProps {
   onGetStarted: () => void;
@@ -33,7 +33,7 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[hsl(210,60%,90%)] rounded-full opacity-30 -translate-y-1/2 translate-x-1/3 blur-3xl" />
         <div className="absolute top-20 left-0 w-[300px] h-[300px] bg-[hsl(210,50%,92%)] rounded-full opacity-20 -translate-x-1/2 blur-2xl" />
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 py-4 md:py-6">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 py-10 md:py-20">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -56,7 +56,7 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.15 }}
               onClick={onGetStarted}
-              className="mb-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[hsl(210,100%,42%)] text-white font-semibold text-sm shadow-[0_4px_16px_rgba(0,100,255,0.35)] hover:shadow-[0_6px_24px_rgba(0,100,255,0.45)] hover:bg-[hsl(210,100%,38%)] transition-all active:scale-[0.98]"
+              className="mb-16 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[hsl(210,100%,42%)] text-white font-semibold text-sm shadow-[0_4px_16px_rgba(0,100,255,0.35)] hover:shadow-[0_6px_24px_rgba(0,100,255,0.45)] hover:bg-[hsl(210,100%,38%)] transition-all active:scale-[0.98]"
             >
               <Rocket className="w-4 h-4" />
               Start Course
@@ -93,11 +93,11 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
                   </div>
                 </div>
                 <div className="rounded-xl border border-[hsl(210,30%,88%)] bg-white/70 backdrop-blur-sm px-4 py-2.5 flex items-center gap-3 shadow-[0_2px_12px_rgba(0,80,200,0.06)]">
-                  <div className="w-9 h-9 rounded-full bg-[hsl(40,70%,92%)] flex items-center justify-center shrink-0">
-                    <Award className="w-4 h-4 text-[hsl(35,80%,45%)]" />
+                  <div className="w-9 h-9 rounded-full bg-[hsl(210,60%,94%)] flex items-center justify-center shrink-0">
+                    <Award className="w-4 h-4 text-[hsl(210,100%,42%)]" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-[hsl(215,30%,15%)]">Certificate</h3>
+                    <h3 className="text-sm font-bold text-[hsl(210,100%,42%)]">Certificate</h3>
                     <p className="text-[11px] text-[hsl(215,15%,50%)]">Earn on completion</p>
                   </div>
                 </div>
@@ -109,7 +109,7 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="rounded-xl border border-[hsl(210,30%,88%)] bg-white/60 backdrop-blur-sm overflow-hidden mb-3 shadow-[0_2px_12px_rgba(0,80,200,0.06)]"
+              className="rounded-xl border border-[hsl(210,30%,88%)] bg-white/60 backdrop-blur-sm overflow-hidden mb-8 shadow-[0_2px_12px_rgba(0,80,200,0.06)]"
             >
               <div className="flex flex-col md:flex-row">
                 <div className="md:w-[35%] bg-gradient-to-br from-[hsl(210,40%,94%)] to-[hsl(210,50%,90%)] p-4 flex items-center justify-center">
