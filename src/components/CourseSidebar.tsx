@@ -173,8 +173,8 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-sidebar-border text-center">
-        <p className="text-[10px] text-sidebar-foreground/40">
+      <div className="p-4 border-t border-sidebar-border text-center bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(0,0%,5%)]">
+        <p className="text-[10px] text-white/70">
           Designed for Instructional Designers
         </p>
       </div>
