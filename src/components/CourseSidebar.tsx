@@ -21,10 +21,10 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
     <aside className="w-72 min-h-screen flex flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border shrink-0 max-h-screen overflow-hidden">
       {/* Header */}
       <div className="p-5 border-b border-sidebar-border">
-        <h1 className="text-base font-bold tracking-tight text-sidebar-primary-foreground">
+        <h1 className="text-base font-bold tracking-tight text-sidebar-primary-foreground text-center">
           JavaScript Coding Basics
         </h1>
-        <p className="text-xs text-sidebar-foreground/60 mt-1">For Instructional Design</p>
+        <p className="text-xs text-sidebar-foreground/60 mt-1 text-center">For Instructional Design</p>
       </div>
 
       {/* Progress */}
