@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
-import { ArrowRight, BookOpen, Clock, Code2, Layers, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Clock, Code2, Layers, Sparkles, UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface WelcomePageProps {
   onGetStarted: () => void;
+  userName?: string;
 }
 
 const WelcomePage = ({ onGetStarted }: WelcomePageProps) => {
