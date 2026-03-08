@@ -1,5 +1,5 @@
 import { courseModules } from "@/data/courseData";
-import { Check, Award, Lock, Target } from "lucide-react";
+import { Check, Award, Lock, Target, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface CourseSidebarProps {
@@ -9,11 +9,13 @@ interface CourseSidebarProps {
   allCompleted: boolean;
   isCompletionView?: boolean;
   isIntroView?: boolean;
+  isWelcomeView?: boolean;
   onSelectCompletion?: () => void;
   onSelectIntro?: () => void;
+  onSelectWelcome?: () => void;
 }
 
-const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCompleted, isCompletionView, isIntroView, onSelectCompletion, onSelectIntro }: CourseSidebarProps) => {
+const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCompleted, isCompletionView, isIntroView, isWelcomeView, onSelectCompletion, onSelectIntro, onSelectWelcome }: CourseSidebarProps) => {
   const totalModules = courseModules.length;
   const progress = Math.round((completedModules.length / totalModules) * 100);
 
@@ -46,11 +48,37 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
 
       {/* Module List */}
       <nav className="flex-1 py-3">
+        {/* Welcome item */}
+        <button
+          onClick={() => onSelectWelcome?.()}
+          className={cn(
+            "w-full flex items-start gap-3 px-5 py-2.5 text-left transition-colors",
+            isWelcomeView
+              ? "bg-sidebar-accent text-sidebar-accent-foreground"
+              : "hover:bg-sidebar-accent/50 text-sidebar-foreground/80"
+          )}
+        >
+          <div className={cn(
+            "mt-0.5 flex items-center justify-center w-7 h-7 rounded-md shrink-0",
+            isWelcomeView ? "bg-sidebar-primary text-sidebar-primary-foreground" : "bg-sidebar-accent text-sidebar-foreground/50"
+          )}>
+            <Sparkles className="w-3.5 h-3.5" />
+          </div>
+          <div className="min-w-0">
+            <p className={cn("text-sm font-medium truncate", isWelcomeView && "text-sidebar-primary-foreground")}>
+              Welcome
+            </p>
+            <p className="text-[11px] text-sidebar-foreground/50 truncate">
+              Course Overview
+            </p>
+          </div>
+        </button>
+
         {/* Introduction item */}
         <button
           onClick={() => onSelectIntro?.()}
           className={cn(
-            "w-full flex items-start gap-3 px-5 py-3 text-left transition-colors mb-1 border-b border-sidebar-border pb-4",
+            "w-full flex items-start gap-3 px-5 py-2.5 text-left transition-colors mb-1 border-b border-sidebar-border pb-3",
             isIntroView
               ? "bg-sidebar-accent text-sidebar-accent-foreground"
               : "hover:bg-sidebar-accent/50 text-sidebar-foreground/80"
