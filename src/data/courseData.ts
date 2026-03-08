@@ -744,6 +744,9 @@ if (scormAPI) {
         title: "How It Works",
         content: "Use the **Code Lab** tab to access the interactive editor. For each challenge:\n\n• Read the prompt carefully — each describes a realistic Storyline scenario\n• Write your solution in the dark-themed editor\n• Click **Run** to test your code and see console output\n• Click **Submit** to check if your output matches the expected result\n• Click **View Solution** to reveal the answer with a detailed explanation of how the code works in a Storyline context",
       },
+    flashCards: [
+      { icon: "🧪", title: "Hands-On", description: "Write real JavaScript for Storyline scenarios" },
+      { icon: "✅", title: "Test & Submit", description: "Run code, check output, and verify solutions" },
     ],
     quiz: [
       {
