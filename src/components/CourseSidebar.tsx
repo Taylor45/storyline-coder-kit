@@ -103,14 +103,13 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
           const isCurrent = currentModule === mod.id && !isCompletionView && !isIntroView;
 
           return (
-            <button
+            <div
               key={mod.id}
-              onClick={() => onSelectModule(mod.id)}
               className={cn(
                 "w-full flex items-start gap-3 px-5 py-3 text-left transition-colors",
                 isCurrent
                   ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                  : "hover:bg-sidebar-accent/50 text-sidebar-foreground/80"
+                  : "text-sidebar-foreground/80"
               )}
             >
               <div
@@ -138,7 +137,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
                   {mod.subtitle}
                 </p>
               </div>
-            </button>
+            </div>
           );
         })}
 
