@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { ArrowRight, BookOpen, Clock, Code2, Layers, Sparkles, UserCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowRight, Clock, Layers, Award, Rocket, CheckCircle, Sparkles, UserCircle } from "lucide-react";
+import courseIllustration from "@/assets/course-illustration.png";
 
 interface WelcomePageProps {
   onGetStarted: () => void;
@@ -10,6 +10,7 @@ interface WelcomePageProps {
 const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
   return (
     <div className="flex-1 flex flex-col min-h-0">
+      {/* Header */}
       <header className="h-14 border-b border-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(0,0%,5%)] flex items-center justify-between px-4 md:px-6 shrink-0 shadow-[0_4px_15px_rgba(0,100,255,0.3)]">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-md bg-white/20 flex items-center justify-center shrink-0">
@@ -27,115 +28,155 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
         )}
       </header>
 
-      <main className="flex-1 overflow-y-auto">
-        <div className="max-w-3xl mx-auto px-4 md:px-6 py-8 md:py-12">
+      <main className="flex-1 overflow-y-auto bg-gradient-to-br from-[hsl(210,40%,96%)] via-[hsl(210,30%,98%)] to-[hsl(220,40%,95%)]">
+        {/* Subtle geometric background shapes */}
+        <div className="relative">
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[hsl(210,60%,90%)] rounded-full opacity-30 -translate-y-1/2 translate-x-1/3 blur-3xl" />
+          <div className="absolute top-20 left-0 w-[300px] h-[300px] bg-[hsl(210,50%,92%)] rounded-full opacity-20 -translate-x-1/2 blur-2xl" />
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 py-8 md:py-14">
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.4 }}
           >
-            {/* Hero Section */}
-            <div className="relative rounded-2xl border border-border bg-gradient-to-br from-primary/5 via-card to-accent/10 p-6 md:p-10 mb-8 overflow-hidden">
-              {/* Decorative elements */}
-              <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-primary/5 -translate-y-12 translate-x-12" />
-              <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-accent/10 translate-y-8 -translate-x-8" />
-              <div className="absolute top-1/2 right-8 w-16 h-16 rounded-full bg-primary/3 hidden md:block" />
+            {/* Hero Title */}
+            <div className="mb-8">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[hsl(215,30%,15%)] leading-tight mb-3">
+                JavaScript for{" "}
+                <span className="text-[hsl(210,100%,40%)]">Instructional Design</span>
+              </h1>
+              <p className="text-base md:text-lg text-[hsl(215,15%,45%)] font-medium">
+                Add custom interactivity without becoming a developer
+              </p>
+            </div>
 
-              <div className="relative z-10">
-                <div className="flex items-center gap-2 mb-4">
-                  <Code2 className="w-5 h-5 text-primary" />
-                  <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-                    Interactive Course
-                  </span>
+            {/* Start Course Button */}
+            <motion.button
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 }}
+              onClick={onGetStarted}
+              className="mb-10 inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-[hsl(210,100%,42%)] text-white font-semibold text-base shadow-[0_4px_16px_rgba(0,100,255,0.35)] hover:shadow-[0_6px_24px_rgba(0,100,255,0.45)] hover:bg-[hsl(210,100%,38%)] transition-all active:scale-[0.98]"
+            >
+              <Rocket className="w-5 h-5" />
+              Start Course
+              <ArrowRight className="w-4 h-4" />
+            </motion.button>
+
+            {/* Course Highlights */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="mb-8"
+            >
+              <h2 className="text-sm font-bold text-[hsl(215,30%,15%)] uppercase tracking-wider mb-4">
+                Course Highlights
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {/* 30 Minutes */}
+                <div className="rounded-2xl border border-[hsl(210,30%,88%)] bg-white/70 backdrop-blur-sm p-5 flex items-center gap-4 shadow-[0_2px_12px_rgba(0,80,200,0.06)]">
+                  <div className="w-12 h-12 rounded-full bg-[hsl(210,60%,94%)] flex items-center justify-center shrink-0">
+                    <Clock className="w-6 h-6 text-[hsl(210,100%,42%)]" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-[hsl(210,100%,42%)]">30 Minutes</h3>
+                    <p className="text-xs text-[hsl(215,15%,50%)]">Learn quickly with bite-sized lessons</p>
+                  </div>
                 </div>
 
-                <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground leading-tight mb-3">
-                  JavaScript for{" "}
-                  <span className="text-primary">Instructional Design</span>
-                </h1>
+                {/* 7 Modules */}
+                <div className="rounded-2xl border border-[hsl(210,30%,88%)] bg-white/70 backdrop-blur-sm p-5 flex items-center gap-4 shadow-[0_2px_12px_rgba(0,80,200,0.06)]">
+                  <div className="w-12 h-12 rounded-full bg-[hsl(210,60%,94%)] flex items-center justify-center shrink-0">
+                    <Layers className="w-6 h-6 text-[hsl(210,100%,42%)]" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-[hsl(210,100%,42%)]">7 Modules</h3>
+                    <p className="text-xs text-[hsl(215,15%,50%)]">Hands-on interactive content</p>
+                  </div>
+                </div>
 
-                <p className="text-base md:text-lg text-muted-foreground font-medium italic mb-6">
-                  Add custom interactivity without becoming a developer
-                </p>
-
-                <div className="h-px bg-border mb-6" />
-
-                <p className="text-sm md:text-base text-foreground/80 leading-relaxed">
-                  Welcome! In this <strong className="text-foreground">30-minute course</strong>, you'll learn practical JavaScript skills specifically designed for instructional designers working with{" "}
-                  <strong className="text-foreground">Articulate Storyline</strong>.
-                </p>
+                {/* Certificate */}
+                <div className="rounded-2xl border border-[hsl(210,30%,88%)] bg-white/70 backdrop-blur-sm p-5 flex items-center gap-4 shadow-[0_2px_12px_rgba(0,80,200,0.06)]">
+                  <div className="w-12 h-12 rounded-full bg-[hsl(40,70%,92%)] flex items-center justify-center shrink-0">
+                    <Award className="w-6 h-6 text-[hsl(35,80%,45%)]" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-[hsl(215,30%,15%)]">Certificate</h3>
+                    <p className="text-xs text-[hsl(215,15%,50%)]">Earn a completion certificate</p>
+                  </div>
+                </div>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Info Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="rounded-xl border border-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(220,100%,60%)] p-5 flex flex-col items-center text-center"
-              >
-                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-3">
-                  <Clock className="w-5 h-5 text-white" />
+            {/* Illustration + What You'll Learn */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="rounded-2xl border border-[hsl(210,30%,88%)] bg-white/60 backdrop-blur-sm overflow-hidden mb-6 shadow-[0_2px_12px_rgba(0,80,200,0.06)]"
+            >
+              <div className="flex flex-col md:flex-row">
+                {/* Illustration */}
+                <div className="md:w-[45%] bg-gradient-to-br from-[hsl(210,40%,94%)] to-[hsl(210,50%,90%)] p-6 flex items-center justify-center">
+                  <img
+                    src={courseIllustration}
+                    alt="Instructional designer working on an e-learning course"
+                    className="w-full max-w-[280px] h-auto object-contain"
+                  />
                 </div>
-                <h3 className="text-sm font-semibold text-white mb-1">Duration</h3>
-                <p className="text-xs text-white/80">~30 minutes</p>
-              </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="rounded-xl border border-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(220,100%,60%)] p-5 flex flex-col items-center text-center"
-              >
-                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-3">
-                  <Layers className="w-5 h-5 text-white" />
+                {/* What You'll Learn */}
+                <div className="md:w-[55%] p-6 md:p-8 flex flex-col justify-center">
+                  <div className="flex items-center gap-2 mb-5">
+                    <Sparkles className="w-5 h-5 text-[hsl(210,100%,42%)]" />
+                    <h3 className="text-lg font-bold text-[hsl(215,30%,15%)]">What You'll Learn</h3>
+                  </div>
+                  <ul className="space-y-4">
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-[hsl(155,60%,40%)] shrink-0 mt-0.5" />
+                      <span className="text-sm text-[hsl(215,15%,30%)]">
+                        Add Storyline triggers with <strong className="font-semibold">JavaScript</strong>
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-[hsl(155,60%,40%)] shrink-0 mt-0.5" />
+                      <span className="text-sm text-[hsl(215,15%,30%)]">
+                        Create <strong className="font-semibold">dynamic</strong> variables in your projects
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-[hsl(155,60%,40%)] shrink-0 mt-0.5" />
+                      <span className="text-sm text-[hsl(215,15%,30%)]">
+                        Build interactive components for <strong className="font-semibold">e-learning</strong>
+                      </span>
+                    </li>
+                  </ul>
                 </div>
-                <h3 className="text-sm font-semibold text-white mb-1">Modules</h3>
-                <p className="text-xs text-white/80">7 interactive modules</p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="rounded-xl border border-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(220,100%,60%)] p-5 flex flex-col items-center text-center"
-              >
-                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mb-3">
-                  <BookOpen className="w-5 h-5 text-white" />
-                </div>
-                <h3 className="text-sm font-semibold text-white mb-1">Certificate</h3>
-                <p className="text-xs text-white/80">Upon completion</p>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
 
             {/* Prerequisites */}
             <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35 }}
-              className="rounded-xl border border-border bg-muted/30 p-5 md:p-6"
-            >
-              <h3 className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
-                Prerequisites
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Basic understanding of <strong className="text-foreground">Articulate Storyline</strong> and familiarity with <strong className="text-foreground">HTML/CSS</strong> and <strong className="text-foreground">JavaScript</strong>.
-              </p>
-            </motion.div>
-
-            {/* Get Started Button */}
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="flex justify-center mt-8"
+              className="rounded-2xl border border-[hsl(210,30%,88%)] bg-white/60 backdrop-blur-sm p-6 shadow-[0_2px_12px_rgba(0,80,200,0.06)]"
             >
-              <Button size="lg" onClick={onGetStarted} className="gap-2 px-8 text-base">
-                Get Started
-                <ArrowRight className="w-4 h-4" />
-              </Button>
+              <div className="flex items-center gap-2 mb-3">
+                <Sparkles className="w-5 h-5 text-[hsl(210,100%,42%)]" />
+                <h3 className="text-lg font-bold text-[hsl(215,30%,15%)]">Prerequisites</h3>
+              </div>
+              <p className="text-sm text-[hsl(215,15%,35%)] leading-relaxed">
+                Basic understanding of{" "}
+                <strong className="font-semibold text-[hsl(215,30%,15%)]">Articulate Storyline</strong>{" "}
+                and familiarity with{" "}
+                <strong className="font-semibold text-[hsl(215,30%,15%)]">HTML/CSS</strong>{" "}
+                and{" "}
+                <strong className="font-semibold text-[hsl(215,30%,15%)]">JavaScript</strong>.
+              </p>
             </motion.div>
           </motion.div>
         </div>
