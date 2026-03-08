@@ -33,7 +33,7 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[hsl(210,60%,90%)] rounded-full opacity-30 -translate-y-1/2 translate-x-1/3 blur-3xl" />
         <div className="absolute top-20 left-0 w-[300px] h-[300px] bg-[hsl(210,50%,92%)] rounded-full opacity-20 -translate-x-1/2 blur-2xl" />
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 py-6 md:py-10">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 py-10 md:py-20">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
