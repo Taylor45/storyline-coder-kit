@@ -1,6 +1,7 @@
 import { courseModules } from "@/data/courseData";
 import { Check, Award, Lock, Target, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 interface CourseSidebarProps {
   currentModule: number;
