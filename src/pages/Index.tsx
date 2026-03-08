@@ -3,6 +3,7 @@ import CourseSidebar from "@/components/CourseSidebar";
 import ModuleContent from "@/components/ModuleContent";
 import WelcomeScreen from "@/components/WelcomeScreen";
 import CompletionPage from "@/components/CompletionPage";
+import IntroductionPage from "@/components/IntroductionPage";
 import { courseModules } from "@/data/courseData";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Menu } from "lucide-react";
@@ -13,6 +14,7 @@ const Index = () => {
   const [currentModule, setCurrentModule] = useState(1);
   const [completedModules, setCompletedModules] = useState<number[]>([]);
   const [showCompletion, setShowCompletion] = useState(false);
+  const [showIntro, setShowIntro] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const isMobile = useIsMobile();
 
@@ -44,12 +46,20 @@ const Index = () => {
 
   const handleSelectModule = (id: number) => {
     setShowCompletion(false);
+    setShowIntro(false);
     setCurrentModule(id);
     setSidebarOpen(false);
   };
 
   const handleSelectCompletion = () => {
     setShowCompletion(true);
+    setShowIntro(false);
+    setSidebarOpen(false);
+  };
+
+  const handleSelectIntro = () => {
+    setShowIntro(true);
+    setShowCompletion(false);
     setSidebarOpen(false);
   };
 
@@ -66,7 +76,9 @@ const Index = () => {
       onSelectModule={handleSelectModule}
       allCompleted={allCompleted}
       isCompletionView={showCompletion}
+      isIntroView={showIntro}
       onSelectCompletion={handleSelectCompletion}
+      onSelectIntro={handleSelectIntro}
     />
   );
 
@@ -102,6 +114,8 @@ const Index = () => {
 
         {showCompletion && allCompleted ? (
           <CompletionPage userName={userName} />
+        ) : showIntro ? (
+          <IntroductionPage />
         ) : (
           <ModuleContent
             key={currentModule}

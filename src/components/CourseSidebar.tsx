@@ -1,5 +1,5 @@
 import { courseModules } from "@/data/courseData";
-import { Check, Award, Lock } from "lucide-react";
+import { Check, Award, Lock, Target } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface CourseSidebarProps {
@@ -8,10 +8,12 @@ interface CourseSidebarProps {
   onSelectModule: (id: number) => void;
   allCompleted: boolean;
   isCompletionView?: boolean;
+  isIntroView?: boolean;
   onSelectCompletion?: () => void;
+  onSelectIntro?: () => void;
 }
 
-const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCompleted, isCompletionView, onSelectCompletion }: CourseSidebarProps) => {
+const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCompleted, isCompletionView, isIntroView, onSelectCompletion, onSelectIntro }: CourseSidebarProps) => {
   const totalModules = courseModules.length;
   const progress = Math.round((completedModules.length / totalModules) * 100);
 
@@ -19,10 +21,10 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
     <aside className="w-72 min-h-screen flex flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border shrink-0 max-h-screen overflow-hidden">
       {/* Header */}
       <div className="p-5 border-b border-sidebar-border">
-        <h1 className="text-base font-bold tracking-tight text-sidebar-primary-foreground">
+        <h1 className="text-base font-bold tracking-tight text-sidebar-primary-foreground text-center">
           JavaScript Coding Basics
         </h1>
-        <p className="text-xs text-sidebar-foreground/60 mt-1">For Instructional Design</p>
+        <p className="text-xs text-sidebar-foreground/60 mt-1 text-center">For Instructional Design</p>
       </div>
 
       {/* Progress */}
@@ -44,9 +46,35 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
 
       {/* Module List */}
       <nav className="flex-1 overflow-y-auto py-3">
+        {/* Introduction item */}
+        <button
+          onClick={() => onSelectIntro?.()}
+          className={cn(
+            "w-full flex items-start gap-3 px-5 py-3 text-left transition-colors mb-1 border-b border-sidebar-border pb-4",
+            isIntroView
+              ? "bg-sidebar-accent text-sidebar-accent-foreground"
+              : "hover:bg-sidebar-accent/50 text-sidebar-foreground/80"
+          )}
+        >
+          <div className={cn(
+            "mt-0.5 flex items-center justify-center w-7 h-7 rounded-md shrink-0",
+            isIntroView ? "bg-sidebar-primary text-sidebar-primary-foreground" : "bg-sidebar-accent text-sidebar-foreground/50"
+          )}>
+            <Target className="w-3.5 h-3.5" />
+          </div>
+          <div className="min-w-0">
+            <p className={cn("text-sm font-medium truncate", isIntroView && "text-sidebar-primary-foreground")}>
+              Introduction
+            </p>
+            <p className="text-[11px] text-sidebar-foreground/50 truncate">
+              Learning Objectives
+            </p>
+          </div>
+        </button>
+
         {courseModules.map((mod) => {
           const isCompleted = completedModules.includes(mod.id);
-          const isCurrent = currentModule === mod.id && !isCompletionView;
+          const isCurrent = currentModule === mod.id && !isCompletionView && !isIntroView;
 
           return (
             <button
