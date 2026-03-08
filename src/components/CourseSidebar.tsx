@@ -48,7 +48,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.55, ease: "easeOut" }}
-            className="text-[10px] font-semibold tracking-[0.25em] uppercase text-white/50 text-center mt-0.5"
+            className="text-xs font-semibold tracking-[0.25em] uppercase text-white/50 text-center mt-0.5"
           >
             Coding Basics
           </motion.p>
