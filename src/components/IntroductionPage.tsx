@@ -1,10 +1,11 @@
-import { Target, ChevronLeft, ChevronRight } from "lucide-react";
+import { Target, ChevronLeft, ChevronRight, UserCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 interface IntroductionPageProps {
   onBack?: () => void;
   onNext?: () => void;
+  userName?: string;
 }
 
 const learningObjectives = [
@@ -16,16 +17,24 @@ const learningObjectives = [
   "Deploy and host your learning content on the web",
 ];
 
-const IntroductionPage = ({ onBack, onNext }: IntroductionPageProps) => {
+const IntroductionPage = ({ onBack, onNext, userName }: IntroductionPageProps) => {
   return (
     <div className="flex-1 flex flex-col min-h-0">
-      <header className="h-14 border-b border-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(0,0%,5%)] flex items-center px-4 md:px-6 shrink-0 shadow-[0_4px_15px_rgba(0,100,255,0.3)]">
+      <header className="h-14 border-b border-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(0,0%,5%)] flex items-center justify-between px-4 md:px-6 shrink-0 shadow-[0_4px_15px_rgba(0,100,255,0.3)]">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-md bg-white/20 flex items-center justify-center shrink-0">
             <Target className="w-4 h-4 text-white" />
           </div>
           <h2 className="text-sm font-semibold text-white">Introduction</h2>
         </div>
+        {userName && (
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-white/80 hidden sm:inline">{userName}</span>
+            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+              <UserCircle className="w-5 h-5 text-white" />
+            </div>
+          </div>
+        )}
       </header>
 
       <main className="flex-1 overflow-y-auto">
