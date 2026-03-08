@@ -131,7 +131,7 @@ const Index = () => {
         ) : showWelcome ? (
           <WelcomePage onGetStarted={handleSelectIntro} />
         ) : showIntro ? (
-          <IntroductionPage />
+          <IntroductionPage onBack={handleSelectWelcome} onNext={() => handleSelectModule(1)} />
         ) : (
           <ModuleContent
             key={currentModule}
