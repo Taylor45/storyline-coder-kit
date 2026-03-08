@@ -1,5 +1,5 @@
 import { courseModules } from "@/data/courseData";
-import { Check, Award, Lock, Target, Sparkles, Home } from "lucide-react";
+import { Check, Award, Lock, Target, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
@@ -12,17 +12,14 @@ interface CourseSidebarProps {
   isIntroView?: boolean;
   onSelectCompletion?: () => void;
   onSelectIntro?: () => void;
-  onHome?: () => void;
 }
 
-const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCompleted, isCompletionView, isIntroView, onSelectCompletion, onSelectIntro, onHome }: CourseSidebarProps) => {
+const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCompleted, isCompletionView, isIntroView, onSelectCompletion, onSelectIntro }: CourseSidebarProps) => {
   const totalModules = courseModules.length;
   const progress = Math.round(completedModules.length / totalModules * 100);
 
   return (
     <aside className="w-72 min-h-screen flex flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border shrink-0">
-      {/* Spacer */}
-      <div className="h-4 bg-sidebar shrink-0" />
       {/* Header */}
       <div className="p-6 border-b border-sidebar-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(220,80%,15%)] relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.08)_0%,_transparent_60%)]" />
@@ -193,19 +190,10 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-sidebar-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(0,0%,5%)] flex items-center justify-between">
+      <div className="p-4 border-t border-sidebar-border text-center bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(0,0%,5%)]">
         <p className="text-[10px] text-white/70">
           Designed for Instructional Designers
         </p>
-        {onHome && (
-          <button
-            onClick={onHome}
-            className="w-8 h-8 rounded-md bg-white/15 hover:bg-white/25 flex items-center justify-center transition-colors"
-            title="Back to Login"
-          >
-            <Home className="w-4 h-4 text-white" />
-          </button>
-        )}
       </div>
     </aside>);
 

@@ -6,7 +6,7 @@ import CompletionPage from "@/components/CompletionPage";
 import WelcomePage from "@/components/WelcomePage";
 import { courseModules } from "@/data/courseData";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Menu, ChevronLeft, ChevronRight } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Index = () => {
@@ -16,7 +16,6 @@ const Index = () => {
   const [showCompletion, setShowCompletion] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [desktopSidebarOpen, setDesktopSidebarOpen] = useState(true);
   const isMobile = useIsMobile();
 
   const module = courseModules.find((m) => m.id === currentModule)!;
@@ -32,9 +31,7 @@ const Index = () => {
   }, [currentModule]);
 
   const handlePrev = () => {
-    if (currentModule === 1) {
-      handleSelectIntro();
-    } else if (currentModule > 1) {
+    if (currentModule > 1) {
       setShowCompletion(false);
       setCurrentModule(currentModule - 1);
     }
@@ -82,41 +79,13 @@ const Index = () => {
       isIntroView={showIntro}
       onSelectCompletion={handleSelectCompletion}
       onSelectIntro={handleSelectIntro}
-      onHome={() => setUserName(null)}
     />
   );
 
   return (
     <div className="flex min-h-screen w-full bg-background">
-      {/* Desktop sidebar */}
-      {!isMobile && (
-        <div className="shrink-0 flex">
-          <div
-            className={`transition-all duration-300 ease-in-out overflow-hidden ${
-              desktopSidebarOpen ? "w-72" : "w-0"
-            }`}
-          >
-            <div className="w-72 min-h-screen">
-              {sidebarContent}
-            </div>
-          </div>
-          <div className="flex items-center">
-            <button
-              onClick={() => setDesktopSidebarOpen(!desktopSidebarOpen)}
-              className="w-5 h-10 rounded-r-md bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(220,80%,15%)] border border-l-0 border-white/10 flex items-center justify-center shadow-sm transition-all duration-200 hover:w-7"
-              title={desktopSidebarOpen ? "Close sidebar" : "Open sidebar"}
-            >
-              {desktopSidebarOpen ? (
-                <ChevronLeft className="w-3.5 h-3.5 text-white/80" />
-              ) : (
-                <ChevronRight className="w-3.5 h-3.5 text-white/80" />
-              )}
-            </button>
-          </div>
-        </div>
-      )}
+      {!isMobile && sidebarContent}
 
-      {/* Mobile sidebar via Sheet */}
       {isMobile && (
         <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
           <SheetContent side="left" className="p-0 w-72">
@@ -126,7 +95,6 @@ const Index = () => {
       )}
 
       <div className="flex-1 flex flex-col min-h-screen">
-        {/* Top bar with sidebar toggle */}
         {isMobile && (
           <div className="h-12 border-b border-border bg-card flex items-center px-4 shrink-0">
             <button
@@ -153,7 +121,7 @@ const Index = () => {
             onPrev={handlePrev}
             onNext={handleNext}
             onFinish={handleSelectCompletion}
-            isFirst={false}
+            isFirst={currentModule === 1}
             isLast={currentModule === courseModules.length}
             isCompleted={completedModules.includes(currentModule)}
             allCompleted={allCompleted}
