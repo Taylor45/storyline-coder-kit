@@ -31,7 +31,9 @@ const Index = () => {
   }, [currentModule]);
 
   const handlePrev = () => {
-    if (currentModule > 1) {
+    if (currentModule === 1) {
+      handleSelectIntro();
+    } else if (currentModule > 1) {
       setShowCompletion(false);
       setCurrentModule(currentModule - 1);
     }
@@ -121,7 +123,7 @@ const Index = () => {
             onPrev={handlePrev}
             onNext={handleNext}
             onFinish={handleSelectCompletion}
-            isFirst={currentModule === 1}
+            isFirst={false}
             isLast={currentModule === courseModules.length}
             isCompleted={completedModules.includes(currentModule)}
             allCompleted={allCompleted}
