@@ -218,222 +218,522 @@ export const courseModules: CourseModule[] = [
   },
   {
     id: 4,
-    title: "JavaScript for Interactivity",
-    subtitle: "Add dynamic behavior and logic to your learning experiences",
+    title: "JavaScript in Storyline: The Basics",
+    subtitle: "Use JavaScript to extend Storyline's built-in functionality",
     icon: Zap,
     color: "warning",
     sections: [
       {
-        title: "Variables & Data Types",
-        content: "JavaScript variables store data that your interactive elements need. Modern JavaScript uses `const` (for values that don't change) and `let` (for values that do).",
-        codeExample: `// Learner data
-const learnerName = "Alex";
-let currentScore = 0;
-let moduleComplete = false;
+        title: "Why Use JavaScript in Storyline?",
+        content: "Articulate Storyline is a powerful authoring tool, but there are things it simply can't do on its own — dynamic text replacement, real-time calculations, connecting to external APIs, or creating complex branching logic that goes beyond built-in triggers.\n\nJavaScript bridges that gap. By executing custom scripts through Storyline's **Execute JavaScript** trigger, you can manipulate slide content, read and write Storyline variables, and even interact with the browser environment. This module teaches you the foundational JavaScript concepts you'll use inside Storyline projects.",
+      },
+      {
+        title: "Storyline Variables & JavaScript Variables",
+        content: "Storyline has its own variable system (Text, Number, True/False). JavaScript can **read** and **write** those variables using the `GetPlayer()` API. This is the most critical concept for Storyline JavaScript development.\n\n• `GetPlayer().GetVar(\"variableName\")` — reads a Storyline variable\n• `GetPlayer().SetVar(\"variableName\", value)` — writes to a Storyline variable\n\nBelow is a realistic example: a Storyline slide asks the learner to enter their name into an input field stored in a Storyline text variable called `LearnerName`. A JavaScript trigger then personalizes a welcome message.",
+        codeExample: `// ── Storyline Execute JavaScript Trigger ──
+// This script runs when the learner clicks a "Continue" button.
+// It reads the learner's name from a Storyline text variable
+// and creates a personalized greeting stored back in Storyline.
 
-// Array of quiz answers
-const correctAnswers = ["b", "c", "a", "d"];
+// Step 1: Access the Storyline player object.
+// GetPlayer() is a global function Storyline injects into the page.
+var player = GetPlayer();
 
-// Object for tracking progress
-const progress = {
-  currentModule: 1,
-  totalModules: 6,
-  completedModules: [],
-  quizScores: {}
-};`,
+// Step 2: Read the LearnerName variable set by a text-entry field.
+var name = player.GetVar("LearnerName");
+
+// Step 3: Build a personalized greeting string.
+// If the learner left the field blank, use a fallback name.
+var greeting;
+if (name && name.trim() !== "") {
+  greeting = "Welcome, " + name + "! Let's begin the training.";
+} else {
+  greeting = "Welcome! Let's begin the training.";
+}
+
+// Step 4: Write the greeting back to a Storyline variable
+// called "WelcomeMessage" which is displayed in a text box
+// with the reference %WelcomeMessage%.
+player.SetVar("WelcomeMessage", greeting);`,
         codeLanguage: "javascript",
       },
       {
-        title: "DOM Manipulation",
-        content: "JavaScript interacts with HTML through the DOM. You can select elements, change their content, modify styles, and respond to user actions — just like triggers in Storyline.",
-        codeExample: `// Select elements
-const feedbackBox = document.querySelector('.feedback');
-const scoreDisplay = document.getElementById('score');
+        title: "Event Timing: When Does Your Code Run?",
+        content: "In Storyline, you attach an **Execute JavaScript** trigger to a specific event — a button click, a timeline start, a slide load, or a variable change. The JavaScript runs at that exact moment, not before.\n\nThis is important because the DOM (the webpage elements) may not be fully ready when the timeline starts. Best practices:\n\n• **On button click** — safest, the page is always fully loaded.\n• **When timeline starts** — good for initialization, but some slide elements may still be rendering.\n• **When variable changes** — great for reactive logic (e.g., recalculating a score whenever `QuizAnswer` changes).\n\nBelow is an example that runs when the timeline starts on a slide. It calculates a percentage score from two Storyline number variables and conditionally shows a pass/fail message.",
+        codeExample: `// ── Runs on Timeline Start of the "Results" slide ──
+// Calculates percentage score and sets a result message.
 
-// Change content dynamically
-feedbackBox.textContent = "Correct! Great job!";
-feedbackBox.classList.add('correct');
+var player = GetPlayer();
 
-// Update score
-currentScore += 10;
-scoreDisplay.textContent = \`Score: \${currentScore}\`;
+// Read the score variables set by previous quiz slides.
+// "CorrectCount" increments each time the learner answers correctly.
+// "TotalQuestions" holds the total number of questions (e.g., 10).
+var correct = player.GetVar("CorrectCount");
+var total   = player.GetVar("TotalQuestions");
 
-// Show/hide elements (like Storyline layers)
-document.querySelector('.hint-panel').style.display = 'block';`,
-        codeLanguage: "javascript",
-      },
-      {
-        title: "Event Listeners",
-        content: "Event listeners are the JavaScript equivalent of Storyline triggers. They wait for user actions (clicks, key presses, form submissions) and execute code in response.",
-        codeExample: `// Click handler for a quiz button
-document.querySelector('#submit-btn').addEventListener('click', () => {
-  const selected = document.querySelector('input[name="q1"]:checked');
-  
-  if (!selected) {
-    alert('Please select an answer.');
-    return;
-  }
-  
-  if (selected.value === correctAnswers[0]) {
-    showFeedback('correct', 'Well done!');
-    currentScore += 10;
-  } else {
-    showFeedback('incorrect', 'Try again!');
-  }
-});`,
+// Calculate percentage — guard against division by zero.
+var percentage = 0;
+if (total > 0) {
+  percentage = Math.round((correct / total) * 100);
+}
+
+// Write the percentage to a Storyline Number variable
+// displayed on the results slide as "You scored %ScorePercent%%".
+player.SetVar("ScorePercent", percentage);
+
+// Determine pass/fail (passing threshold: 80%).
+var resultMessage;
+if (percentage >= 80) {
+  resultMessage = "Congratulations! You passed with " + percentage + "%.";
+  player.SetVar("CoursePassed", true);
+} else {
+  resultMessage = "You scored " + percentage + "%. You need 80% to pass. Please review and try again.";
+  player.SetVar("CoursePassed", false);
+}
+
+// Write the message to a text variable shown on screen.
+player.SetVar("ResultMessage", resultMessage);`,
         codeLanguage: "javascript",
       },
     ],
     quiz: [
       {
-        question: "What is the JavaScript equivalent of a Storyline trigger?",
-        options: ["A variable", "An event listener", "A CSS selector", "An HTML attribute"],
+        question: "How do you read a Storyline variable called 'Score' from JavaScript?",
+        options: [
+          "document.getElementById('Score')",
+          "GetPlayer().GetVar(\"Score\")",
+          "Storyline.get('Score')",
+          "player.readVariable('Score')",
+        ],
         correctIndex: 1,
-        explanation: "Event listeners in JavaScript respond to user actions (clicks, key presses, etc.) just like triggers respond to interactions in Storyline.",
+        explanation: "GetPlayer().GetVar(\"Score\") is the correct Storyline JavaScript API call. GetPlayer() returns the player object, and GetVar() reads any Storyline variable by name.",
+      },
+      {
+        question: "When is the safest time to run JavaScript that reads a text-entry field value?",
+        options: [
+          "When the timeline starts",
+          "When the slide loads for the first time",
+          "When the learner clicks a button after entering text",
+          "Immediately when the browser opens",
+        ],
+        correctIndex: 2,
+        explanation: "Running JavaScript on a button click ensures the learner has already typed their response and the page is fully rendered, making it the safest trigger point.",
+      },
+      {
+        question: "What does player.SetVar('CoursePassed', true) do in Storyline?",
+        options: [
+          "Creates a new HTML element on the page",
+          "Sends data to an external server",
+          "Writes the value 'true' to a Storyline True/False variable",
+          "Displays an alert box to the learner",
+        ],
+        correctIndex: 2,
+        explanation: "SetVar writes a value back to a Storyline variable. Here it sets the True/False variable 'CoursePassed' to true, which can then control layer visibility or slide navigation via Storyline triggers.",
       },
     ],
   },
   {
     id: 5,
-    title: "Building Interactive Learning Experiences",
-    subtitle: "Combine HTML, CSS & JS to create engaging e-learning activities",
+    title: "Advanced Storyline JavaScript Techniques",
+    subtitle: "Dynamic content, branching scenarios, and DOM manipulation in Storyline",
     icon: Layers,
     color: "success",
     sections: [
       {
-        title: "Drag-and-Drop Activities",
-        content: "Drag-and-drop is one of the most engaging interaction types in e-learning. The HTML Drag and Drop API provides native browser support, while libraries like SortableJS make implementation easier.\n\nThink about matching exercises, ordering activities, or categorization tasks — all achievable with drag-and-drop.",
-      },
-      {
-        title: "Building a Quiz Engine",
-        content: "A reusable quiz engine is incredibly valuable. By separating your quiz data (questions, options, correct answers) from your quiz logic (checking answers, showing feedback, tracking scores), you can create unlimited assessments from a single codebase.",
-        codeExample: `// Quiz data structure
-const quizData = [
-  {
-    question: "What does HTML stand for?",
-    options: [
-      "Hyper Text Markup Language",
-      "High Tech Modern Language",
-      "Hyper Transfer Markup Language"
-    ],
-    correct: 0,
-    feedback: {
-      correct: "That's right! HTML = HyperText Markup Language.",
-      incorrect: "Not quite. HTML stands for HyperText Markup Language."
-    }
-  }
-];
+        title: "Dynamic Content Injection",
+        content: "Sometimes you need to display content that Storyline can't generate natively — like a formatted summary of results, a dynamically generated list, or content pulled from an external source.\n\nThe most common approach is to build a string in JavaScript and store it in a Storyline text variable that a text box references via `%VariableName%`.\n\nBelow is a realistic example: a results summary slide that reads individual module scores and generates a formatted performance report.",
+        codeExample: `// ── Runs on Timeline Start of the "Summary" slide ──
+// Builds a dynamic performance summary based on quiz results
+// stored across multiple Storyline variables.
 
-// Reusable quiz renderer
-function renderQuiz(container, questions) {
-  questions.forEach((q, index) => {
-    const questionEl = document.createElement('div');
-    questionEl.className = 'quiz-question';
-    questionEl.innerHTML = \`
-      <h3>Question \${index + 1}</h3>
-      <p>\${q.question}</p>
-      \${q.options.map((opt, i) => \`
-        <label class="quiz-option">
-          <input type="radio" name="q\${index}" value="\${i}" />
-          \${opt}
-        </label>
-      \`).join('')}
-    \`;
-    container.appendChild(questionEl);
-  });
-}`,
+var player = GetPlayer();
+
+// Read individual module scores (set during each module's quiz).
+var mod1 = player.GetVar("Module1Score");  // e.g., 3 out of 5
+var mod2 = player.GetVar("Module2Score");  // e.g., 4 out of 5
+var mod3 = player.GetVar("Module3Score");  // e.g., 2 out of 5
+var totalPossible = 15; // 5 questions per module
+
+// Build a structured summary string.
+// Storyline text variables support plain text,
+// so we format with line breaks and symbols.
+var summary = "";
+summary += "YOUR PERFORMANCE SUMMARY\\n";
+summary += "━━━━━━━━━━━━━━━━━━━━━━━━━━━\\n\\n";
+summary += "Module 1 — Web Basics: " + mod1 + "/5 ";
+summary += (mod1 >= 4 ? "✅ Passed" : "❌ Needs Review") + "\\n";
+summary += "Module 2 — HTML: " + mod2 + "/5 ";
+summary += (mod2 >= 4 ? "✅ Passed" : "❌ Needs Review") + "\\n";
+summary += "Module 3 — CSS: " + mod3 + "/5 ";
+summary += (mod3 >= 4 ? "✅ Passed" : "❌ Needs Review") + "\\n\\n";
+
+var overallScore = mod1 + mod2 + mod3;
+var overallPercent = Math.round((overallScore / totalPossible) * 100);
+
+summary += "━━━━━━━━━━━━━━━━━━━━━━━━━━━\\n";
+summary += "Overall: " + overallScore + "/" + totalPossible;
+summary += " (" + overallPercent + "%)\\n\\n";
+
+if (overallPercent >= 80) {
+  summary += "Excellent work! You've demonstrated strong mastery.";
+} else if (overallPercent >= 60) {
+  summary += "Good effort! Review the flagged modules.";
+} else {
+  summary += "Please revisit the modules marked for review.";
+}
+
+// Store in a Storyline text variable shown via %SummaryText%.
+player.SetVar("SummaryText", summary);`,
         codeLanguage: "javascript",
       },
       {
-        title: "Progress Tracking & Completion",
-        content: "Tracking learner progress is essential. You can use localStorage to persist progress across sessions, or send data to a Learning Record Store (LRS) using the xAPI standard.\n\nKey metrics to track: module completion, quiz scores, time spent, and interaction attempts.",
+        title: "Branching Scenarios with JavaScript Logic",
+        content: "Storyline supports basic branching through slide triggers, but complex multi-variable branching — where the outcome depends on a **combination** of previous choices — is much easier to manage in JavaScript.\n\nImagine a compliance training scenario where the learner makes three decisions across three slides. Each decision is stored in a Storyline text variable (`Decision1`, `Decision2`, `Decision3`). On the outcome slide, JavaScript evaluates all three together to determine which ending to show.",
+        codeExample: `// ── Runs on Timeline Start of the "Outcome" slide ──
+// Evaluates a combination of learner decisions to determine
+// which Storyline layer to show as the scenario ending.
+
+var player = GetPlayer();
+
+// Read the three decision variables.
+// Each was set by a button trigger on its respective slide:
+// "report" or "ignore" for Decision1
+// "confront" or "escalate" for Decision2  
+// "document" or "skip" for Decision3
+var d1 = player.GetVar("Decision1");
+var d2 = player.GetVar("Decision2");
+var d3 = player.GetVar("Decision3");
+
+// Count how many "correct" decisions the learner made.
+// Correct path: report → escalate → document
+var correctChoices = 0;
+if (d1 === "report")   correctChoices++;
+if (d2 === "escalate") correctChoices++;
+if (d3 === "document") correctChoices++;
+
+// Determine the outcome tier.
+// Storyline triggers show layers based on OutcomeTier value:
+// "Show layer [Exemplary] when OutcomeTier == exemplary"
+var tier;
+if (correctChoices === 3) {
+  tier = "exemplary";
+} else if (correctChoices === 2) {
+  tier = "acceptable";
+} else {
+  tier = "needsWork";
+}
+
+player.SetVar("OutcomeTier", tier);
+
+// Build a detailed explanation for the results text box.
+var explanation = "Your decisions: ";
+explanation += d1 + " → " + d2 + " → " + d3 + ". ";
+explanation += "You made " + correctChoices + "/3 correct choices. ";
+
+if (tier === "exemplary") {
+  explanation += "Outstanding — you followed the ideal protocol at every step.";
+} else if (tier === "acceptable") {
+  explanation += "Good instincts, but one choice could be improved.";
+} else {
+  explanation += "Several decisions need reconsideration. Please review the policy.";
+}
+
+player.SetVar("OutcomeExplanation", explanation);`,
+        codeLanguage: "javascript",
+      },
+      {
+        title: "Manipulating Storyline's DOM for Visual Effects",
+        content: "While `GetPlayer()` is the official API, you can also directly manipulate the HTML elements Storyline generates. This is an advanced technique — Storyline doesn't guarantee stable element IDs across publishes, so use it carefully.\n\nA common use case: highlighting a key term with a glowing animation, or changing the styling of an element to draw attention after a delay.\n\n⚠️ **Warning**: Direct DOM manipulation can break if Storyline updates its HTML structure. Always test after republishing.",
+        codeExample: `// ── Advanced: Highlighting a Storyline element via DOM ──
+// Finds a text element by its accessibility name and applies
+// a pulsing highlight animation after a short delay.
+
+// From an Execute JavaScript trigger, 'document' refers to
+// the slide's DOM inside Storyline's iframe.
+
+// Find all elements with accessibility text attributes.
+var allText = document.querySelectorAll('[data-acc-text]');
+
+for (var i = 0; i < allText.length; i++) {
+  var el = allText[i];
+  // Look for the element whose accessibility name is "KeyTerm"
+  // (set in Storyline's accessibility panel for the object).
+  if (el.getAttribute('data-acc-text') === 'KeyTerm') {
+    // Apply a glowing highlight after a 2-second delay.
+    setTimeout(function() {
+      el.style.transition = 'all 0.5s ease';
+      el.style.boxShadow = '0 0 20px rgba(255, 200, 0, 0.8)';
+      el.style.borderRadius = '4px';
+
+      // Remove the highlight after 3 seconds.
+      setTimeout(function() {
+        el.style.boxShadow = 'none';
+      }, 3000);
+    }, 2000);
+    break; // Stop after finding the target element.
+  }
+}`,
+        codeLanguage: "javascript",
+      },
+    ],
+    quiz: [
+      {
+        question: "In a branching scenario, why would you use JavaScript instead of Storyline triggers alone?",
+        options: [
+          "JavaScript runs faster than Storyline triggers",
+          "JavaScript can evaluate multiple variables together for complex branching logic",
+          "Storyline triggers cannot navigate between slides",
+          "JavaScript is required for any kind of branching",
+        ],
+        correctIndex: 1,
+        explanation: "While Storyline triggers handle simple branching well, JavaScript excels when you need to evaluate combinations of multiple variables to determine an outcome — such as scoring three decisions together to pick one of several endings.",
+      },
+      {
+        question: "What is the risk of directly manipulating Storyline's DOM with JavaScript?",
+        options: [
+          "It makes the course file too large",
+          "It could break if Storyline changes its HTML structure in a future version",
+          "DOM manipulation is not allowed in web browsers",
+          "It prevents the course from being published",
+        ],
+        correctIndex: 1,
+        explanation: "Storyline doesn't guarantee stable HTML element IDs or structure across versions, so direct DOM manipulation may break when you update Storyline or republish. Always test thoroughly.",
+      },
+      {
+        question: "How can you display a dynamically generated multi-line summary in Storyline?",
+        options: [
+          "Use document.write() to inject HTML into the slide",
+          "Build a string with \\n line breaks and store it in a Storyline text variable",
+          "Storyline cannot display dynamic text at all",
+          "Use CSS to generate text content automatically",
+        ],
+        correctIndex: 1,
+        explanation: "By building a string in JavaScript with \\n for line breaks and writing it to a Storyline text variable with SetVar(), you can display dynamic multi-line content in any text box that references %VariableName%.",
       },
     ],
     miniProject: {
-      title: "Build a Flashcard Activity",
-      description: "Create an interactive flashcard set that lets learners flip cards to reveal answers, mark cards as mastered, and track their progress through the deck.",
+      title: "Build a Branching Scenario Score Calculator",
+      description: "Create a JavaScript snippet for Storyline that reads three decision variables, calculates a weighted score, and sets the appropriate outcome layer and feedback message.",
       steps: [
-        "Create an array of flashcard objects with 'front' and 'back' properties",
-        "Build the HTML structure for a card with a flip animation",
-        "Add CSS for the 3D card flip effect using transform and perspective",
-        "Implement JavaScript to handle card flipping, navigation, and mastery tracking",
-        "Add a progress indicator showing cards mastered vs. remaining",
+        "Define three Storyline text variables (Decision1, Decision2, Decision3) and a scoring rubric",
+        "Write JavaScript to read all three variables using GetPlayer().GetVar()",
+        "Implement weighted scoring logic (some decisions worth more than others)",
+        "Set an OutcomeTier variable that Storyline triggers use to show the correct ending layer",
+        "Generate a personalized feedback string and store it in a Storyline text variable",
       ],
     },
   },
   {
     id: 6,
-    title: "Hosting & Deployment",
-    subtitle: "Share your learning content with the world",
+    title: "Storyline + External Integrations",
+    subtitle: "Connect Storyline courses to external tools, APIs, and data sources",
     icon: Rocket,
     color: "destructive",
     sections: [
       {
-        title: "Static Hosting Options",
-        content: "For learning content built with HTML, CSS, and JavaScript, static hosting is the simplest and most cost-effective option:\n\n• **GitHub Pages** — Free, integrates with version control. Great for portfolios and simple courses.\n• **Netlify** — Free tier, automatic deploys from Git, custom domains, and form handling.\n• **Vercel** — Excellent performance, serverless functions, and preview deployments.\n• **Amazon S3** — Enterprise-grade, pay-as-you-go, integrates with CloudFront CDN.",
+        title: "Sending Data from Storyline to External Services",
+        content: "One of JavaScript's most powerful capabilities in Storyline is connecting to external services. You can send learner data to Google Sheets, a webhook, an analytics platform, or a custom API — all from an Execute JavaScript trigger.\n\nThis is useful for:\n• **Custom analytics** — Track detailed interaction data beyond what SCORM provides.\n• **Certificate generation** — Send the learner's name and score to an API that generates a PDF.\n• **Leaderboards** — Post scores to a shared database for competitive learning.\n\nBelow is a realistic example: sending quiz results to a Google Sheets spreadsheet via a Google Apps Script web app.",
+        codeExample: `// ── Runs when the learner clicks "Submit Results" ──
+// Sends course completion data to a Google Sheets spreadsheet
+// via a Google Apps Script web app URL.
+
+var player = GetPlayer();
+
+// Gather all the data we want to record.
+var learnerName = player.GetVar("LearnerName");
+var score       = player.GetVar("ScorePercent");
+var passed      = player.GetVar("CoursePassed");
+var courseName  = "JavaScript Basics for ID";
+
+// Build the data payload.
+var payload = {
+  name: learnerName,
+  course: courseName,
+  score: score,
+  passed: passed,
+  completedAt: new Date().toISOString()
+};
+
+// Send the data using the Fetch API.
+// Replace the URL with your Google Apps Script deployment URL.
+var webhookURL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+
+fetch(webhookURL, {
+  method: "POST",
+  mode: "no-cors",  // Required for cross-origin requests
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(payload)
+})
+.then(function() {
+  // Confirm submission to the learner.
+  player.SetVar("SubmissionStatus", "✅ Results submitted successfully!");
+})
+.catch(function(error) {
+  // Graceful fallback if the request fails.
+  player.SetVar("SubmissionStatus", "⚠️ Submission failed. Check your connection.");
+  console.error("Submission error:", error);
+});`,
+        codeLanguage: "javascript",
       },
       {
-        title: "Deploying to GitHub Pages",
-        content: "GitHub Pages is the easiest way to get started. Push your HTML, CSS, and JS files to a GitHub repository, enable Pages in settings, and your content is live.",
-        codeExample: `# Initialize a git repository
-git init
+        title: "Loading External Content into Storyline",
+        content: "You can also pull data **into** Storyline from external sources — loading a daily tip from a JSON file, fetching localized content based on browser language, or pulling updated policy text from a CMS.\n\nThis keeps course content fresh without republishing the Storyline file. The external data source can be updated independently.",
+        codeExample: `// ── Runs on Timeline Start of the "Daily Tip" slide ──
+// Fetches a random tip from an external JSON file hosted
+// alongside the published Storyline output.
 
-# Add your files
-git add index.html style.css script.js
+var player = GetPlayer();
 
-# Commit
-git commit -m "Initial course deployment"
+// The tips.json file is placed in the published output folder.
+// Format: [{ "title": "Tip Title", "body": "Tip content..." }, ...]
+fetch("tips.json")
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(tips) {
+    // Select a random tip from the array.
+    var randomIndex = Math.floor(Math.random() * tips.length);
+    var tip = tips[randomIndex];
 
-# Add remote and push
-git remote add origin https://github.com/you/my-course.git
-git push -u origin main
-
-# Enable GitHub Pages in repository Settings > Pages
-# Your course will be live at: https://you.github.io/my-course/`,
-        codeLanguage: "bash",
+    // Write tip data to Storyline variables.
+    // Text boxes on the slide reference %TipTitle% and %TipBody%.
+    player.SetVar("TipTitle", tip.title);
+    player.SetVar("TipBody", tip.body);
+    player.SetVar("TipNumber", randomIndex + 1);
+    player.SetVar("TotalTips", tips.length);
+  })
+  .catch(function(error) {
+    // Fallback for offline learners.
+    player.SetVar("TipTitle", "Did You Know?");
+    player.SetVar("TipBody", "JavaScript can make your Storyline courses smarter and more dynamic!");
+    console.error("Failed to load tips:", error);
+  });`,
+        codeLanguage: "javascript",
       },
       {
-        title: "SCORM & LMS Integration",
-        content: "If you need to deploy to a Learning Management System (LMS), you'll need to package your content as a SCORM package. SCORM wraps your HTML/CSS/JS content with an API that communicates with the LMS — reporting completion, scores, and time spent.\n\nTools like SCORM Cloud or pipwerks SCORM wrapper library can help bridge your custom web content with LMS platforms like Moodle, Canvas, or Blackboard.",
+        title: "SCORM & xAPI: Reporting Custom Data to Your LMS",
+        content: "Storyline handles basic SCORM reporting automatically (completion, score, pass/fail). But what if you want to report **custom data** — like which questions were missed, how long a learner spent on a scenario, or which path they chose in a branching exercise?\n\nFor SCORM, you can write to the `cmi.suspend_data` field to store custom JSON that persists between sessions. For xAPI (Tin Can), you can send rich **statements** describing exactly what the learner did.\n\n⚠️ **Note**: Direct SCORM API calls are advanced. Always test in your specific LMS.",
+        codeExample: `// ── Advanced: Writing custom data to SCORM suspend_data ──
+// Persists custom JSON data between course sessions in the LMS.
+
+var player = GetPlayer();
+
+// Build a custom data object with detailed tracking info.
+var customData = {
+  scenarioPath: player.GetVar("Decision1") + " > "
+    + player.GetVar("Decision2") + " > "
+    + player.GetVar("Decision3"),
+  attemptsCount: player.GetVar("AttemptNumber"),
+  moduleScores: {
+    mod1: player.GetVar("Module1Score"),
+    mod2: player.GetVar("Module2Score"),
+    mod3: player.GetVar("Module3Score")
+  },
+  lastAccessed: new Date().toISOString()
+};
+
+// Convert to JSON string for SCORM storage.
+var jsonString = JSON.stringify(customData);
+
+// Find the SCORM API in the parent window chain.
+// The LMS provides this API; Storyline connects to it automatically,
+// but for custom data we need direct access.
+function findSCORMAPI(win) {
+  var attempts = 0;
+  while (win && !win.API_1484_11 && !win.API && attempts < 10) {
+    win = win.parent;
+    attempts++;
+  }
+  return win.API_1484_11 || win.API || null;
+}
+
+var scormAPI = findSCORMAPI(window);
+
+if (scormAPI) {
+  // SCORM 2004 uses cmi.suspend_data to store custom strings.
+  scormAPI.SetValue("cmi.suspend_data", jsonString);
+  scormAPI.Commit("");  // Save immediately.
+  console.log("Custom data saved to SCORM:", jsonString);
+} else {
+  console.warn("SCORM API not found — running outside an LMS.");
+}`,
+        codeLanguage: "javascript",
       },
     ],
     quiz: [
       {
-        question: "Which hosting platform offers free hosting with Git integration?",
-        options: ["AWS Lambda", "GitHub Pages", "Docker Hub", "MongoDB Atlas"],
+        question: "Why would you use fetch() inside a Storyline JavaScript trigger?",
+        options: [
+          "To style elements with CSS animations",
+          "To send learner data to external services or load dynamic content",
+          "To create new Storyline slides programmatically",
+          "To replace the SCORM API entirely",
+        ],
         correctIndex: 1,
-        explanation: "GitHub Pages offers free static hosting that integrates directly with your Git repository — perfect for simple learning content.",
+        explanation: "The fetch() API lets you make HTTP requests from JavaScript. In Storyline, this enables sending data to external services (Google Sheets, analytics, APIs) or pulling in dynamic content without republishing.",
+      },
+      {
+        question: "What happens if a fetch() call fails inside Storyline (e.g., learner is offline)?",
+        options: [
+          "Storyline automatically retries the request",
+          "The course crashes and must be restarted",
+          "The .catch() handler runs, letting you show a fallback message",
+          "The browser displays a system error dialog",
+        ],
+        correctIndex: 2,
+        explanation: "When fetch() fails, the .catch() callback executes. Best practice is to always include a .catch() that sets a Storyline variable with a graceful error message so the learner isn't left confused.",
+      },
+      {
+        question: "What is SCORM suspend_data used for?",
+        options: [
+          "Displaying the learner's name on screen",
+          "Persisting custom JSON data between course sessions in the LMS",
+          "Suspending the course timeline temporarily",
+          "Storing CSS styles for the course player",
+        ],
+        correctIndex: 1,
+        explanation: "SCORM's cmi.suspend_data field stores a string (typically JSON) that persists between sessions. This lets you save custom tracking data like scenario paths, attempt counts, or module scores so learners can resume where they left off.",
       },
     ],
   },
   {
     id: 7,
     title: "Live Code Lab",
-    subtitle: "Practice JavaScript with hands-on coding challenges",
+    subtitle: "Practice writing Storyline JavaScript with hands-on challenges",
     icon: FlaskConical,
     color: "info",
     sections: [
       {
         title: "Hands-On Practice",
-        content: "This module is your coding playground. Instead of reading lessons, you'll write real JavaScript to solve three progressive challenges inspired by instructional design scenarios.\n\nEach challenge builds on the previous one — starting with simple string output, moving to arithmetic logic, and finishing with conditional branching and objects.",
+        content: "This module is your coding playground. Instead of reading lessons, you'll write real JavaScript to solve three progressive challenges that simulate common Storyline scripting scenarios.\n\nEach challenge mirrors a real task you'd perform as an instructional designer using JavaScript in Articulate Storyline — from personalizing content to calculating scores and implementing conditional branching logic.",
       },
       {
         title: "How It Works",
-        content: "Use the **Code Lab** tab to access the interactive editor. For each challenge:\n\n• Read the prompt carefully\n• Write your solution in the dark-themed editor\n• Click **Run** to test your code and see console output\n• Click **Submit** to check if your output matches the expected result\n• Click **View Solution** to reveal the answer and a detailed explanation",
+        content: "Use the **Code Lab** tab to access the interactive editor. For each challenge:\n\n• Read the prompt carefully — each describes a realistic Storyline scenario\n• Write your solution in the dark-themed editor\n• Click **Run** to test your code and see console output\n• Click **Submit** to check if your output matches the expected result\n• Click **View Solution** to reveal the answer with a detailed explanation of how the code works in a Storyline context",
       },
     ],
     quiz: [
       {
-        question: "What does Math.round(7/10 * 100) return?",
-        options: ["7", "70", "0.7", "71"],
+        question: "In a Storyline Execute JavaScript trigger, what does GetPlayer().SetVar('Score', 85) do?",
+        options: [
+          "Creates a new JavaScript variable called Score with value 85",
+          "Writes the value 85 to a Storyline variable named 'Score'",
+          "Displays the number 85 on screen",
+          "Sends the score to the LMS",
+        ],
         correctIndex: 1,
-        explanation: "7 divided by 10 is 0.7, multiplied by 100 is 70, and Math.round(70) is 70.",
+        explanation: "SetVar writes a value to a Storyline variable. Here it sets the 'Score' variable to 85, which can then be displayed on-screen using %Score% or used in Storyline triggers.",
       },
       {
-        question: "Which keyword is used to return a value from a function?",
-        options: ["output", "return", "send", "give"],
+        question: "What does Math.round((7/10) * 100) return, and why is this useful in Storyline?",
+        options: [
+          "7 — useful for counting correct answers",
+          "70 — useful for calculating and displaying a percentage score",
+          "0.7 — useful for setting opacity values",
+          "100 — useful for setting the maximum score",
+        ],
         correctIndex: 1,
-        explanation: "The `return` keyword exits a function and sends a value back to the caller.",
+        explanation: "7/10 = 0.7, multiplied by 100 = 70, and Math.round(70) = 70. This pattern is essential in Storyline for converting a fraction (correct/total) into a clean percentage to display on a results slide.",
       },
     ],
   },
