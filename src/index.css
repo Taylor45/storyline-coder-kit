@@ -129,3 +129,56 @@
     box-shadow: 0 4px 12px hsl(var(--primary) / 0.1);
   }
 }
+
+/* Prism.js Dark Theme for Code Lab */
+.language-javascript .token.comment,
+.language-javascript .token.prolog,
+.language-javascript .token.doctype,
+.language-javascript .token.cdata {
+  color: hsl(220, 10%, 45%);
+  font-style: italic;
+}
+
+.language-javascript .token.punctuation {
+  color: hsl(210, 15%, 65%);
+}
+
+.language-javascript .token.property,
+.language-javascript .token.tag,
+.language-javascript .token.boolean,
+.language-javascript .token.number,
+.language-javascript .token.constant,
+.language-javascript .token.symbol {
+  color: hsl(30, 90%, 65%);
+}
+
+.language-javascript .token.selector,
+.language-javascript .token.attr-name,
+.language-javascript .token.string,
+.language-javascript .token.char,
+.language-javascript .token.builtin {
+  color: hsl(95, 50%, 60%);
+}
+
+.language-javascript .token.operator,
+.language-javascript .token.entity,
+.language-javascript .token.url {
+  color: hsl(190, 60%, 60%);
+}
+
+.language-javascript .token.atrule,
+.language-javascript .token.attr-value,
+.language-javascript .token.keyword {
+  color: hsl(280, 60%, 70%);
+}
+
+.language-javascript .token.function,
+.language-javascript .token.class-name {
+  color: hsl(200, 80%, 70%);
+}
+
+.language-javascript .token.regex,
+.language-javascript .token.important,
+.language-javascript .token.variable {
+  color: hsl(45, 80%, 65%);
+}
