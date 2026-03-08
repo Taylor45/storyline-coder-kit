@@ -15,7 +15,8 @@ const Index = () => {
   const [currentModule, setCurrentModule] = useState(1);
   const [completedModules, setCompletedModules] = useState<number[]>([]);
   const [showCompletion, setShowCompletion] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
+  const [showIntro, setShowIntro] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const isMobile = useIsMobile();
 
