@@ -10,13 +10,11 @@ interface CourseSidebarProps {
   allCompleted: boolean;
   isCompletionView?: boolean;
   isIntroView?: boolean;
-  isWelcomeView?: boolean;
   onSelectCompletion?: () => void;
   onSelectIntro?: () => void;
-  onSelectWelcome?: () => void;
 }
 
-const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCompleted, isCompletionView, isIntroView, isWelcomeView, onSelectCompletion, onSelectIntro, onSelectWelcome }: CourseSidebarProps) => {
+const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCompleted, isCompletionView, isIntroView, onSelectCompletion, onSelectIntro }: CourseSidebarProps) => {
   const totalModules = courseModules.length;
   const progress = Math.round(completedModules.length / totalModules * 100);
 
@@ -92,31 +90,6 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
 
       {/* Module List */}
       <nav className="flex-1 py-3">
-        {/* Welcome item */}
-        <div
-          className={cn(
-            "w-full flex items-start gap-3 px-5 py-2.5 text-left transition-colors",
-            isWelcomeView ?
-            "bg-sidebar-accent text-sidebar-accent-foreground" :
-            "text-sidebar-foreground/80"
-          )}>
-          
-          <div className={cn(
-            "mt-0.5 flex items-center justify-center w-7 h-7 rounded-md shrink-0",
-            isWelcomeView ? "bg-sidebar-primary text-sidebar-primary-foreground" : "bg-sidebar-accent text-sidebar-foreground/50"
-          )}>
-            <Sparkles className="w-3.5 h-3.5" />
-          </div>
-          <div className="min-w-0">
-            <p className={cn("text-sm font-medium truncate", isWelcomeView && "text-sidebar-primary-foreground")}>
-              Welcome
-            </p>
-            <p className="text-[11px] text-sidebar-foreground/50 truncate">
-              Course Overview
-            </p>
-          </div>
-        </div>
-
         {/* Introduction item */}
         <div
           className={cn(
@@ -137,14 +110,14 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
               Introduction
             </p>
             <p className="text-[11px] text-sidebar-foreground/50 truncate">
-              Learning Objectives
+              Course Overview
             </p>
           </div>
         </div>
 
         {courseModules.map((mod) => {
           const isCompleted = completedModules.includes(mod.id);
-          const isCurrent = currentModule === mod.id && !isCompletionView && !isIntroView && !isWelcomeView;
+          const isCurrent = currentModule === mod.id && !isCompletionView && !isIntroView;
           const isLocked = !isCompleted && !isCurrent;
 
           return (
