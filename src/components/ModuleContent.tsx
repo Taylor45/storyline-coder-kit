@@ -91,12 +91,14 @@ const ModuleContent = ({
             <h2 className="text-sm font-semibold leading-tight truncate text-white">{module.title}</h2>
           </div>
         </div>
-        {isCompleted && (
-          <span className="ml-auto text-xs bg-success/10 text-success px-3 py-1 rounded-full font-medium shrink-0">
-            Completed
-          </span>
-        )}
       </header>
+
+      {/* Tabs */}
+      <div className="border-b border-border bg-card px-4 md:px-6">
+        <div className="flex gap-0 items-center">
+          {tabs
+            .filter((t) => t.show)
+            .map((tab) => (
 
       {/* Tabs */}
       <div className="border-b border-border bg-card px-4 md:px-6">
