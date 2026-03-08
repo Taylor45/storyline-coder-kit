@@ -35,10 +35,10 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
           <span className="text-sidebar-foreground/70">Progress</span>
           <span className="font-semibold text-sidebar-primary">{progress}%</span>
         </div>
-        <div className="h-2 rounded-full bg-white/30 overflow-hidden">
+        <div className="h-2 rounded-full bg-white/20 overflow-hidden">
           <div
-            className="h-full rounded-full bg-white progress-bar-fill"
-            style={{ width: `${progress}%` }}
+            className="h-full rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.6),0_0_16px_rgba(100,180,255,0.4)] animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]"
+            style={{ width: `${progress}%`, transition: 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }}
           />
         </div>
         <p className="text-[11px] text-sidebar-foreground/50 mt-2">
