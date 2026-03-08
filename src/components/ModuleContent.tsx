@@ -178,6 +178,18 @@ const ModuleContent = ({
               </motion.div>
             )}
 
+            {activeTab === "codelab" && module.id === 7 && (
+              <motion.div
+                key="codelab"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
+                <LiveCodeLab />
+              </motion.div>
+            )}
+
             {activeTab === "project" && module.miniProject && (
               <motion.div
                 key="project"
