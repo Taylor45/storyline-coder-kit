@@ -7,7 +7,7 @@ interface WelcomePageProps {
   userName?: string;
 }
 
-const WelcomePage = ({ onGetStarted }: WelcomePageProps) => {
+const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
   return (
     <div className="flex-1 flex flex-col min-h-0">
       <header className="h-14 border-b border-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(0,0%,5%)] flex items-center px-4 md:px-6 shrink-0 shadow-[0_4px_15px_rgba(0,100,255,0.3)]">
