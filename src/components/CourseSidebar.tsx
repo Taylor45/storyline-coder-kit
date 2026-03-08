@@ -13,7 +13,7 @@ interface CourseSidebarProps {
   onSelectIntro?: () => void;
 }
 
-const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCompleted, isCompletionView, onSelectCompletion }: CourseSidebarProps) => {
+const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCompleted, isCompletionView, isIntroView, onSelectCompletion, onSelectIntro }: CourseSidebarProps) => {
   const totalModules = courseModules.length;
   const progress = Math.round((completedModules.length / totalModules) * 100);
 
