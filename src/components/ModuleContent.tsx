@@ -1,5 +1,5 @@
 import { CourseModule } from "@/data/courseData";
-import { ChevronLeft, ChevronRight, BookOpen, Code, Wrench, FlaskConical } from "lucide-react";
+import { ChevronLeft, ChevronRight, BookOpen, Code, Wrench, FlaskConical, UserCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import KnowledgeCheck from "./KnowledgeCheck";
