@@ -275,14 +275,6 @@ const ModuleContent = ({
           <span className="sm:hidden">Prev</span>
         </button>
 
-        {!isCompleted && (
-          <button
-            onClick={onComplete}
-            className="px-3 md:px-5 py-2 rounded-lg bg-success text-success-foreground text-xs md:text-sm font-medium hover:opacity-90 transition-opacity"
-          >
-            Mark Complete
-          </button>
-        )}
 
         <button
           onClick={handleNext}
