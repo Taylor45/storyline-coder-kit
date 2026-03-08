@@ -49,13 +49,12 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
       {/* Module List */}
       <nav className="flex-1 py-3">
         {/* Welcome item */}
-        <button
-          onClick={() => onSelectWelcome?.()}
+        <div
           className={cn(
             "w-full flex items-start gap-3 px-5 py-2.5 text-left transition-colors",
             isWelcomeView
               ? "bg-sidebar-accent text-sidebar-accent-foreground"
-              : "hover:bg-sidebar-accent/50 text-sidebar-foreground/80"
+              : "text-sidebar-foreground/80"
           )}
         >
           <div className={cn(
@@ -72,7 +71,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
               Course Overview
             </p>
           </div>
-        </button>
+        </div>
 
         {/* Introduction item */}
         <button
