@@ -58,10 +58,6 @@ export const courseModules: CourseModule[] = [
       },
     ],
     flashCards: [
-      { icon: "🏷️", title: "Semantic HTML", description: "Use meaningful tags like <header>, <main>, <article>" },
-      { icon: "📝", title: "Forms", description: "Radio buttons, checkboxes & inputs for assessments" },
-      { icon: "♿", title: "Accessibility", description: "Alt text & proper structure for screen readers" },
-    ],
       { icon: "🌐", title: "Client-Server", description: "Browser requests → Server responds with HTML/CSS/JS" },
       { icon: "🏗️", title: "The Big Three", description: "HTML = structure, CSS = style, JS = interactivity" },
       { icon: "🌳", title: "The DOM", description: "Tree-like model browsers build from your HTML" },
