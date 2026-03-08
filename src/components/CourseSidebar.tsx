@@ -40,7 +40,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
-            className="text-[15px] font-extrabold tracking-wide uppercase text-white text-center drop-shadow-[0_0_10px_rgba(100,180,255,0.4)]"
+            className="text-xl font-extrabold tracking-wide uppercase text-white text-center drop-shadow-[0_0_10px_rgba(100,180,255,0.4)]"
           >
             JavaScript
           </motion.h1>
