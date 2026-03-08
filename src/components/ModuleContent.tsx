@@ -4,15 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import KnowledgeCheck from "./KnowledgeCheck";
 import LiveCodeLab from "./LiveCodeLab";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogAction,
-} from "./ui/alert-dialog";
 
 import { cn } from "@/lib/utils";
 
@@ -44,7 +35,6 @@ const ModuleContent = ({
   userName,
 }: ModuleContentProps) => {
   const [activeTab, setActiveTab] = useState<Tab>("lesson");
-  const [showQuizAlert, setShowQuizAlert] = useState(false);
   const Icon = module.icon;
 
   const tabs: { id: Tab; label: string; shortLabel: string; icon: typeof BookOpen; show: boolean }[] = [
@@ -255,7 +245,7 @@ const ModuleContent = ({
           <span className="sm:hidden">Prev</span>
         </button>
 
-        {!isCompleted && !module.quiz && (
+        {!isCompleted && (
           <button
             onClick={onComplete}
             className="px-3 md:px-5 py-2 rounded-lg bg-success text-success-foreground text-xs md:text-sm font-medium hover:opacity-90 transition-opacity"
@@ -265,55 +255,13 @@ const ModuleContent = ({
         )}
 
         <button
-          onClick={() => {
-            if (module.quiz && !isCompleted) {
-              setShowQuizAlert(true);
-            } else if (isLast) {
-              onFinish?.();
-            } else {
-              onNext();
-            }
-          }}
+          onClick={isLast ? onFinish : onNext}
           className="flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all bg-primary text-primary-foreground hover:opacity-90"
         >
           {isLast ? "Finish" : "Next"}
           <ChevronRight className="w-4 h-4" />
         </button>
       </footer>
-
-      <AlertDialog open={showQuizAlert} onOpenChange={setShowQuizAlert}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Knowledge Check Not Completed</AlertDialogTitle>
-            <AlertDialogDescription>
-              You haven't completed the Knowledge Check yet. Would you like to attempt it first or continue to the next module?
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogAction
-              onClick={() => {
-                setShowQuizAlert(false);
-                setActiveTab("quiz");
-              }}
-              className="bg-transparent border border-border text-foreground hover:bg-muted"
-            >
-              Go to Knowledge Check
-            </AlertDialogAction>
-            <AlertDialogAction
-              onClick={() => {
-                setShowQuizAlert(false);
-                if (isLast) {
-                  onFinish?.();
-                } else {
-                  onNext();
-                }
-              }}
-            >
-              Continue Anyway
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </div>
   );
 };
