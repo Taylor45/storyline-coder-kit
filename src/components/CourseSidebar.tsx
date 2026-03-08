@@ -74,13 +74,12 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
         </div>
 
         {/* Introduction item */}
-        <button
-          onClick={() => onSelectIntro?.()}
+        <div
           className={cn(
             "w-full flex items-start gap-3 px-5 py-2.5 text-left transition-colors mb-1 border-b border-sidebar-border pb-3",
             isIntroView
               ? "bg-sidebar-accent text-sidebar-accent-foreground"
-              : "hover:bg-sidebar-accent/50 text-sidebar-foreground/80"
+              : "text-sidebar-foreground/80"
           )}
         >
           <div className={cn(
@@ -97,7 +96,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
               Learning Objectives
             </p>
           </div>
-        </button>
+        </div>
 
         {courseModules.map((mod) => {
           const isCompleted = completedModules.includes(mod.id);
