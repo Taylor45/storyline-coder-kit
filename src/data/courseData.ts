@@ -14,6 +14,12 @@ export interface ModuleSection {
   codeLanguage?: string;
 }
 
+export interface FlashCard {
+  icon: string;
+  title: string;
+  description: string;
+}
+
 export interface CourseModule {
   id: number;
   title: string;
@@ -21,6 +27,7 @@ export interface CourseModule {
   icon: typeof Globe;
   color: string;
   sections: ModuleSection[];
+  flashCards?: FlashCard[];
   quiz?: QuizQuestion[];
   miniProject?: {
     title: string;
