@@ -125,7 +125,7 @@ const Index = () => {
 
       <div className="flex-1 flex flex-col min-h-screen">
         {/* Top bar with sidebar toggle */}
-        {isMobile ? (
+        {isMobile && (
           <div className="h-12 border-b border-border bg-card flex items-center px-4 shrink-0">
             <button
               onClick={() => setSidebarOpen(true)}
@@ -136,20 +136,6 @@ const Index = () => {
             <span className="ml-3 text-sm font-semibold truncate">
               JS Coding Basics for ID
             </span>
-          </div>
-        ) : (
-          <div className="h-10 border-b border-border bg-card flex items-center px-3 shrink-0">
-            <button
-              onClick={() => setDesktopSidebarOpen(!desktopSidebarOpen)}
-              className="p-1.5 rounded-md hover:bg-muted transition-colors"
-              title={desktopSidebarOpen ? "Close sidebar" : "Open sidebar"}
-            >
-              {desktopSidebarOpen ? (
-                <PanelLeftClose className="w-4 h-4 text-foreground" />
-              ) : (
-                <PanelLeft className="w-4 h-4 text-foreground" />
-              )}
-            </button>
           </div>
         )}
 
