@@ -1,5 +1,11 @@
-import { Target } from "lucide-react";
+import { Target, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+
+interface IntroductionPageProps {
+  onBack?: () => void;
+  onNext?: () => void;
+}
 
 const learningObjectives = [
   "Understand how the web works and the client-server model",
@@ -10,7 +16,7 @@ const learningObjectives = [
   "Deploy and host your learning content on the web",
 ];
 
-const IntroductionPage = () => {
+const IntroductionPage = ({ onBack, onNext }: IntroductionPageProps) => {
   return (
     <div className="flex-1 flex flex-col min-h-0">
       <header className="h-14 border-b border-border bg-card flex items-center px-4 md:px-6 shrink-0">
@@ -53,6 +59,22 @@ const IntroductionPage = () => {
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="flex items-center justify-between mt-8">
+              {onBack && (
+                <Button variant="outline" onClick={onBack} className="gap-2">
+                  <ChevronLeft className="w-4 h-4" />
+                  Back
+                </Button>
+              )}
+              {onNext && (
+                <Button onClick={onNext} className="gap-2 ml-auto">
+                  Next
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
+              )}
             </div>
           </motion.div>
         </div>
