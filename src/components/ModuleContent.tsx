@@ -255,7 +255,7 @@ const ModuleContent = ({
           <span className="sm:hidden">Prev</span>
         </button>
 
-        {!isCompleted && (
+        {!isCompleted && !module.quiz && (
           <button
             onClick={onComplete}
             className="px-3 md:px-5 py-2 rounded-lg bg-success text-success-foreground text-xs md:text-sm font-medium hover:opacity-90 transition-opacity"
@@ -265,13 +265,42 @@ const ModuleContent = ({
         )}
 
         <button
-          onClick={isLast ? onFinish : onNext}
+          onClick={() => {
+            if (module.quiz && !isCompleted) {
+              setShowQuizAlert(true);
+            } else if (isLast) {
+              onFinish?.();
+            } else {
+              onNext();
+            }
+          }}
           className="flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all bg-primary text-primary-foreground hover:opacity-90"
         >
           {isLast ? "Finish" : "Next"}
           <ChevronRight className="w-4 h-4" />
         </button>
       </footer>
+
+      <AlertDialog open={showQuizAlert} onOpenChange={setShowQuizAlert}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Knowledge Check Required</AlertDialogTitle>
+            <AlertDialogDescription>
+              Please complete the Knowledge Check before moving to the next module. Switch to the Knowledge Check tab to get started.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction
+              onClick={() => {
+                setShowQuizAlert(false);
+                setActiveTab("quiz");
+              }}
+            >
+              Go to Knowledge Check
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
