@@ -48,7 +48,10 @@ const ModuleContent = ({
   const currentTabIndex = visibleTabs.indexOf(activeTab);
   const isLastTab = currentTabIndex >= visibleTabs.length - 1;
 
+  const nextDisabled = activeTab === "quiz" && !quizCompleted;
+
   const handleNext = () => {
+    if (nextDisabled) return;
     if (!isLastTab) {
       setActiveTab(visibleTabs[currentTabIndex + 1]);
     } else if (isLast) {
