@@ -12,6 +12,7 @@ interface ModuleContentProps {
   onComplete: () => void;
   onPrev: () => void;
   onNext: () => void;
+  onFinish?: () => void;
   isFirst: boolean;
   isLast: boolean;
   isCompleted: boolean;
