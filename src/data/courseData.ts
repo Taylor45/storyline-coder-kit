@@ -218,6 +218,10 @@ export const courseModules: CourseModule[] = [
 }`,
         codeLanguage: "css",
       },
+    flashCards: [
+      { icon: "📦", title: "Box Model", description: "Content → Padding → Border → Margin" },
+      { icon: "📐", title: "Flexbox & Grid", description: "Modern layout systems for rows, columns & dashboards" },
+      { icon: "📱", title: "Responsive", description: "Media queries adapt layouts for any screen size" },
     ],
     quiz: [
       {
