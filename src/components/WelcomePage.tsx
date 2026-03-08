@@ -9,7 +9,7 @@ interface WelcomePageProps {
 const WelcomePage = ({ onGetStarted }: WelcomePageProps) => {
   return (
     <div className="flex-1 flex flex-col min-h-0">
-      <header className="h-14 border-b border-border bg-card flex items-center px-4 md:px-6 shrink-0">
+      <header className="h-14 border-b border-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(0,0%,5%)] flex items-center px-4 md:px-6 shrink-0 shadow-[0_4px_15px_rgba(0,100,255,0.3)]">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
             <Sparkles className="w-4 h-4 text-primary" />
