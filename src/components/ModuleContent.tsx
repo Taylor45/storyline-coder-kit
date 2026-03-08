@@ -35,6 +35,7 @@ const ModuleContent = ({
   userName,
 }: ModuleContentProps) => {
   const [activeTab, setActiveTab] = useState<Tab>("lesson");
+  const [quizCompleted, setQuizCompleted] = useState(false);
   const Icon = module.icon;
 
   const visibleTabs = [
