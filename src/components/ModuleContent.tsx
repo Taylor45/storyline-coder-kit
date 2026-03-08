@@ -284,9 +284,9 @@ const ModuleContent = ({
       <AlertDialog open={showQuizAlert} onOpenChange={setShowQuizAlert}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Knowledge Check Required</AlertDialogTitle>
+            <AlertDialogTitle>Knowledge Check Not Completed</AlertDialogTitle>
             <AlertDialogDescription>
-              Please complete the Knowledge Check before moving to the next module. Switch to the Knowledge Check tab to get started.
+              You haven't completed the Knowledge Check yet. Would you like to attempt it first or continue to the next module?
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -295,8 +295,21 @@ const ModuleContent = ({
                 setShowQuizAlert(false);
                 setActiveTab("quiz");
               }}
+              className="bg-transparent border border-border text-foreground hover:bg-muted"
             >
               Go to Knowledge Check
+            </AlertDialogAction>
+            <AlertDialogAction
+              onClick={() => {
+                setShowQuizAlert(false);
+                if (isLast) {
+                  onFinish?.();
+                } else {
+                  onNext();
+                }
+              }}
+            >
+              Continue Anyway
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
