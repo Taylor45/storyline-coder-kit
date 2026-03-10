@@ -87,7 +87,7 @@ const Index = () => {
   );
 
   return (
-    <div className="flex min-h-screen w-full bg-background">
+    <div className="flex h-screen w-full bg-background overflow-hidden">
       {/* Desktop sidebar */}
       {!isMobile && (
         <div
@@ -95,7 +95,7 @@ const Index = () => {
             desktopSidebarOpen ? "w-72" : "w-0"
           }`}
         >
-          <div className="w-72 min-h-screen">
+          <div className="w-72 h-full">
             {sidebarContent}
           </div>
         </div>
@@ -110,7 +110,7 @@ const Index = () => {
         </Sheet>
       )}
 
-      <div className="flex-1 flex flex-col min-h-screen">
+      <div className="flex-1 flex flex-col h-full min-w-0 overflow-hidden">
         {/* Top bar with sidebar toggle */}
         {isMobile && (
           <div className="h-12 border-b border-border bg-card flex items-center px-4 shrink-0">
