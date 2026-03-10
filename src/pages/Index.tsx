@@ -95,7 +95,7 @@ const Index = () => {
             desktopSidebarOpen ? "w-72" : "w-0"
           }`}
         >
-          <div className="w-72 min-h-screen">
+          <div className="w-72 h-full">
             {sidebarContent}
           </div>
         </div>
