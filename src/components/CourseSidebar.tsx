@@ -90,7 +90,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
       </div>
 
       {/* Module List */}
-      <nav className="flex-1 py-3">
+      <nav className="flex-1 py-3 overflow-y-auto">
         {/* Introduction item */}
         <div
           className={cn(
