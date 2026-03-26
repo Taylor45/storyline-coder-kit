@@ -29,14 +29,14 @@ const WelcomeScreen = ({ onStart }: WelcomeScreenProps) => {
           <div className="absolute bottom-0 left-0 w-16 h-16 rounded-full bg-[hsl(var(--primary)/0.3)] -translate-x-4 translate-y-4" />
 
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 relative z-10 italic text-primary-foreground">
-            JavaScript Coding Basics for Instructional Design
+
           </h2>
 
           <img
             src={welcomeIllustration}
             alt="Developer working on code"
-            className="w-64 h-64 object-contain my-6 relative z-10"
-          />
+            className="w-64 h-64 object-contain my-6 relative z-10" />
+          
 
           <p className="text-sm text-center opacity-80 relative z-10">
             Add custom interactivity without becoming a developer
@@ -64,8 +64,8 @@ const WelcomeScreen = ({ onStart }: WelcomeScreenProps) => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                maxLength={100}
-              />
+                maxLength={100} />
+              
             </div>
 
             <div className="space-y-1.5">
@@ -78,23 +78,23 @@ const WelcomeScreen = ({ onStart }: WelcomeScreenProps) => {
                 value={surname}
                 onChange={(e) => setSurname(e.target.value)}
                 required
-                maxLength={100}
-              />
+                maxLength={100} />
+              
             </div>
 
             <Button
               type="submit"
               className="w-full mt-4"
               size="lg"
-              disabled={!name.trim() || !surname.trim()}
-            >
+              disabled={!name.trim() || !surname.trim()}>
+              
               Start Course
             </Button>
           </form>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default WelcomeScreen;
