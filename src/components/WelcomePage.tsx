@@ -133,7 +133,7 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="rounded-xl border border-[hsl(210,30%,88%)] bg-white/60 backdrop-blur-sm p-4 shadow-[0_2px_12px_rgba(0,80,200,0.06)]"
+              className="rounded-xl border border-[hsl(210,20%,90%)] bg-[hsl(210,20%,96%)] p-4"
             >
               <div className="flex items-center gap-2 mb-1.5">
                 <Sparkles className="w-4 h-4 text-[hsl(210,100%,42%)]" />
