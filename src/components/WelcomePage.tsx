@@ -119,7 +119,7 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
                       "Deploy and host your learning content on the web",
                     ].map((objective, i) => (
                       <li key={i} className="flex items-start gap-2">
-                        <ShieldCheck className="w-4 h-4 text-[hsl(210,100%,42%)] shrink-0 mt-0.5" />
+                        <CircleCheckBig className="w-5 h-5 text-[hsl(160,50%,45%)] shrink-0 mt-0" />
                         <span className="text-xs text-[hsl(215,15%,30%)] leading-snug">{objective}</span>
                       </li>
                     ))}
