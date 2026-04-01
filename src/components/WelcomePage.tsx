@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Clock, Layers, Award, Rocket, CheckCircle, Sparkles, UserCircle } from "lucide-react";
+import { ArrowRight, Clock, Layers, Award, Rocket, CheckCheck, Sparkles, UserCircle, ShieldCheck } from "lucide-react";
 import courseIllustration from "@/assets/microsites-amico.png";
 
 interface WelcomePageProps {
@@ -42,8 +42,8 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
             {/* Hero Title */}
             <div className="mb-4">
               <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[hsl(215,30%,15%)] leading-tight mb-1">
-                JavaScript for{" "}
-                <span className="text-[hsl(210,100%,40%)]">Instructional Design</span>
+                Coding Basics for{" "}
+                <span className="text-[hsl(210,100%,40%)]">Instructional Designers</span>
               </h1>
               <p className="text-sm md:text-base text-[hsl(215,15%,45%)] font-medium">
                 Add custom interactivity without becoming a developer
@@ -74,33 +74,19 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
                 Course Highlights
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div className="rounded-xl border border-[hsl(210,30%,88%)] bg-white/70 backdrop-blur-sm px-4 py-2.5 flex items-center gap-3 shadow-[0_2px_12px_rgba(0,80,200,0.06)]">
-                  <div className="w-9 h-9 rounded-full bg-[hsl(210,60%,94%)] flex items-center justify-center shrink-0">
-                    <Clock className="w-4 h-4 text-[hsl(210,100%,42%)]" />
+                {[
+                  { icon: Clock, title: "30 Minutes", sub: "Bite-sized lessons" },
+                  { icon: Layers, title: "7 Modules", sub: "Interactive content" },
+                  { icon: Award, title: "Certificate", sub: "Earn on completion" },
+                ].map((item, i) => (
+                  <div key={i} className="rounded-full bg-gradient-to-r from-[hsl(210,100%,42%)] to-[hsl(220,80%,30%)] px-5 py-3 flex items-center gap-3 shadow-[0_4px_16px_rgba(0,80,200,0.25)]">
+                    <item.icon className="w-5 h-5 text-white/80 shrink-0" />
+                    <div>
+                      <h3 className="text-sm font-bold text-white">{item.title}</h3>
+                      <p className="text-[11px] text-white/60">{item.sub}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-[hsl(210,100%,42%)]">30 Minutes</h3>
-                    <p className="text-[11px] text-[hsl(215,15%,50%)]">Bite-sized lessons</p>
-                  </div>
-                </div>
-                <div className="rounded-xl border border-[hsl(210,30%,88%)] bg-white/70 backdrop-blur-sm px-4 py-2.5 flex items-center gap-3 shadow-[0_2px_12px_rgba(0,80,200,0.06)]">
-                  <div className="w-9 h-9 rounded-full bg-[hsl(210,60%,94%)] flex items-center justify-center shrink-0">
-                    <Layers className="w-4 h-4 text-[hsl(210,100%,42%)]" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-[hsl(210,100%,42%)]">7 Modules</h3>
-                    <p className="text-[11px] text-[hsl(215,15%,50%)]">Interactive content</p>
-                  </div>
-                </div>
-                <div className="rounded-xl border border-[hsl(210,30%,88%)] bg-white/70 backdrop-blur-sm px-4 py-2.5 flex items-center gap-3 shadow-[0_2px_12px_rgba(0,80,200,0.06)]">
-                  <div className="w-9 h-9 rounded-full bg-[hsl(210,60%,94%)] flex items-center justify-center shrink-0">
-                    <Award className="w-4 h-4 text-[hsl(210,100%,42%)]" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-[hsl(210,100%,42%)]">Certificate</h3>
-                    <p className="text-[11px] text-[hsl(215,15%,50%)]">Earn on completion</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </motion.div>
 
@@ -120,10 +106,9 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
                   />
                 </div>
                 <div className="md:w-[65%] p-4 md:p-5 flex flex-col justify-center">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Sparkles className="w-4 h-4 text-[hsl(210,100%,42%)]" />
-                    <h3 className="text-sm font-bold text-[hsl(215,30%,15%)]">What You'll Learn</h3>
-                  </div>
+                  <h3 className="text-sm font-bold text-[hsl(215,30%,15%)] mb-3">
+                    By the end of this course you should be able to:
+                  </h3>
                   <ul className="space-y-1.5">
                     {[
                       "Understand how the web works and the client-server model",
@@ -134,7 +119,7 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
                       "Deploy and host your learning content on the web",
                     ].map((objective, i) => (
                       <li key={i} className="flex items-start gap-2">
-                        <CheckCircle className="w-4 h-4 text-[hsl(155,60%,40%)] shrink-0 mt-0.5" />
+                        <ShieldCheck className="w-4 h-4 text-[hsl(210,100%,42%)] shrink-0 mt-0.5" />
                         <span className="text-xs text-[hsl(215,15%,30%)] leading-snug">{objective}</span>
                       </li>
                     ))}
@@ -148,7 +133,7 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="rounded-xl border border-[hsl(210,30%,88%)] bg-white/60 backdrop-blur-sm p-4 shadow-[0_2px_12px_rgba(0,80,200,0.06)]"
+              className="rounded-xl border border-[hsl(210,20%,90%)] bg-[hsl(210,20%,96%)] p-4"
             >
               <div className="flex items-center gap-2 mb-1.5">
                 <Sparkles className="w-4 h-4 text-[hsl(210,100%,42%)]" />
