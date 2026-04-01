@@ -106,10 +106,9 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
                   />
                 </div>
                 <div className="md:w-[65%] p-4 md:p-5 flex flex-col justify-center">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Sparkles className="w-4 h-4 text-[hsl(210,100%,42%)]" />
-                    <h3 className="text-sm font-bold text-[hsl(215,30%,15%)]">What You'll Learn</h3>
-                  </div>
+                  <h3 className="text-sm font-bold text-[hsl(215,30%,15%)] mb-3">
+                    By the end of this course you should be able to:
+                  </h3>
                   <ul className="space-y-1.5">
                     {[
                       "Understand how the web works and the client-server model",
