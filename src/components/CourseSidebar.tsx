@@ -24,50 +24,38 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
       {/* Header */}
       <div className="p-6 border-b border-sidebar-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(220,80%,15%)] relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.08)_0%,_transparent_60%)]" />
-        <div className="relative z-10">
+        <div className="relative z-10 flex flex-col items-center">
           <motion.div
-            initial={{ scaleX: 0, opacity: 0 }}
-            animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            className="flex items-center justify-center gap-2 mb-2">
-            
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/30" />
-            <Sparkles className="w-3.5 h-3.5 text-white/60" />
-            <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/30" />
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+            className="w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center mb-3"
+          >
+            <span className="text-white font-mono font-bold text-lg">&lt;/&gt;</span>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
-            className="text-xl font-extrabold tracking-wide uppercase text-white text-center drop-shadow-[0_0_10px_rgba(100,180,255,0.4)]">
-            
-            JavaScript
+            className="text-lg font-extrabold tracking-wide uppercase text-white text-center drop-shadow-[0_0_10px_rgba(100,180,255,0.4)]"
+          >
+            Coding Basics
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.55, ease: "easeOut" }}
-            className="text-xs font-semibold tracking-[0.25em] uppercase text-white/50 text-center mt-0.5">
-            
-            Coding Basics
+            className="text-[10px] font-medium tracking-[0.2em] uppercase text-white/50 text-center mt-0.5"
+          >
+            For
           </motion.p>
-          <motion.div
-            initial={{ scaleX: 0, opacity: 0 }}
-            animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.7, ease: "easeOut" }}
-            className="flex items-center justify-center gap-2 mt-2">
-            
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent to-white/30" />
-            <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
-            <div className="h-px flex-1 bg-gradient-to-l from-transparent to-white/30" />
-          </motion.div>
           <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.85, ease: "easeOut" }}
-            className="text-[9px] tracking-[0.2em] uppercase text-white/40 mt-2 text-center">
-            
-            For Instructional Design
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7, ease: "easeOut" }}
+            className="text-xs font-bold tracking-[0.15em] uppercase text-white/80 text-center mt-0.5"
+          >
+            Instructional Designers
           </motion.p>
         </div>
       </div>
