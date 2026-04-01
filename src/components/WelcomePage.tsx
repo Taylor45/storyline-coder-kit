@@ -79,7 +79,7 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
                   { icon: Layers, title: "7 Modules", sub: "Interactive content" },
                   { icon: Award, title: "Certificate", sub: "Earn on completion" },
                 ].map((item, i) => (
-                  <div key={i} className="rounded-full bg-gradient-to-r from-[hsl(210,100%,42%)] to-[hsl(220,80%,30%)] px-5 py-3 flex items-center gap-3 shadow-[0_4px_16px_rgba(0,80,200,0.25)]">
+                  <div key={i} className="rounded-[15px] bg-gradient-to-r from-[#00BBFF] to-[#1B68B1] px-5 py-3 flex items-center gap-3 shadow-[0_4px_16px_rgba(0,80,200,0.25)]">
                     <item.icon className="w-5 h-5 text-white/80 shrink-0" />
                     <div>
                       <h3 className="text-sm font-bold text-white">{item.title}</h3>
