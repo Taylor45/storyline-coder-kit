@@ -24,20 +24,23 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
       {/* Header */}
       <div className="p-6 border-b border-sidebar-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(220,80%,15%)] relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.08)_0%,_transparent_60%)]" />
-        <div className="relative z-10 flex flex-col items-center">
+        <div className="relative z-10 flex flex-col items-center w-full">
+          {/* Logo with horizontal lines */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-            className="w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center mb-3"
+            className="flex items-center gap-3 w-full mb-4"
           >
-            <span className="text-white font-mono font-bold text-lg">&lt;/&gt;</span>
+            <div className="flex-1 h-[1px] bg-white/40" />
+            <span className="text-white font-mono font-bold text-xl">&lt;/&gt;</span>
+            <div className="flex-1 h-[1px] bg-white/40" />
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
-            className="text-lg font-extrabold tracking-wide uppercase text-white text-center drop-shadow-[0_0_10px_rgba(100,180,255,0.4)]"
+            className="text-lg font-extrabold tracking-wide uppercase text-white text-center"
           >
             Coding Basics
           </motion.h1>
@@ -45,7 +48,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.55, ease: "easeOut" }}
-            className="text-[10px] font-medium tracking-[0.2em] uppercase text-white/50 text-center mt-0.5"
+            className="text-xs font-medium tracking-[0.2em] uppercase text-white/70 text-center mt-1"
           >
             For
           </motion.p>
@@ -53,7 +56,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.7, ease: "easeOut" }}
-            className="text-xs font-bold tracking-[0.15em] uppercase text-white/80 text-center mt-0.5"
+            className="text-sm font-bold tracking-[0.15em] uppercase text-white/90 text-center mt-0.5"
           >
             Instructional Designers
           </motion.p>
