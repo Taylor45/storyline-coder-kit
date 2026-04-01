@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Clock, Layers, Award, Rocket, CheckCircle, Sparkles, UserCircle } from "lucide-react";
+import { ArrowRight, Clock, Layers, Award, Rocket, CheckCheck, Sparkles, UserCircle, ShieldCheck } from "lucide-react";
 import courseIllustration from "@/assets/microsites-amico.png";
 
 interface WelcomePageProps {
