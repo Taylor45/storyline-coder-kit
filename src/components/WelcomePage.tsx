@@ -74,33 +74,19 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
                 Course Highlights
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div className="rounded-xl border border-[hsl(210,30%,88%)] bg-white/70 backdrop-blur-sm px-4 py-2.5 flex items-center gap-3 shadow-[0_2px_12px_rgba(0,80,200,0.06)]">
-                  <div className="w-9 h-9 rounded-full bg-[hsl(210,60%,94%)] flex items-center justify-center shrink-0">
-                    <Clock className="w-4 h-4 text-[hsl(210,100%,42%)]" />
+                {[
+                  { icon: Clock, title: "30 Minutes", sub: "Bite-sized lessons" },
+                  { icon: Layers, title: "7 Modules", sub: "Interactive content" },
+                  { icon: Award, title: "Certificate", sub: "Earn on completion" },
+                ].map((item, i) => (
+                  <div key={i} className="rounded-full bg-gradient-to-r from-[hsl(210,100%,42%)] to-[hsl(220,80%,30%)] px-5 py-3 flex items-center gap-3 shadow-[0_4px_16px_rgba(0,80,200,0.25)]">
+                    <item.icon className="w-5 h-5 text-white/80 shrink-0" />
+                    <div>
+                      <h3 className="text-sm font-bold text-white">{item.title}</h3>
+                      <p className="text-[11px] text-white/60">{item.sub}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-[hsl(210,100%,42%)]">30 Minutes</h3>
-                    <p className="text-[11px] text-[hsl(215,15%,50%)]">Bite-sized lessons</p>
-                  </div>
-                </div>
-                <div className="rounded-xl border border-[hsl(210,30%,88%)] bg-white/70 backdrop-blur-sm px-4 py-2.5 flex items-center gap-3 shadow-[0_2px_12px_rgba(0,80,200,0.06)]">
-                  <div className="w-9 h-9 rounded-full bg-[hsl(210,60%,94%)] flex items-center justify-center shrink-0">
-                    <Layers className="w-4 h-4 text-[hsl(210,100%,42%)]" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-[hsl(210,100%,42%)]">7 Modules</h3>
-                    <p className="text-[11px] text-[hsl(215,15%,50%)]">Interactive content</p>
-                  </div>
-                </div>
-                <div className="rounded-xl border border-[hsl(210,30%,88%)] bg-white/70 backdrop-blur-sm px-4 py-2.5 flex items-center gap-3 shadow-[0_2px_12px_rgba(0,80,200,0.06)]">
-                  <div className="w-9 h-9 rounded-full bg-[hsl(210,60%,94%)] flex items-center justify-center shrink-0">
-                    <Award className="w-4 h-4 text-[hsl(210,100%,42%)]" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-bold text-[hsl(210,100%,42%)]">Certificate</h3>
-                    <p className="text-[11px] text-[hsl(215,15%,50%)]">Earn on completion</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </motion.div>
 
