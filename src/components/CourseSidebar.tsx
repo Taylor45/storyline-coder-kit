@@ -1,5 +1,5 @@
 import { courseModules } from "@/data/courseData";
-import { Check, Award, Lock, Target, Sparkles, Home } from "lucide-react";
+import { Check, Award, Lock, Target, Home } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
