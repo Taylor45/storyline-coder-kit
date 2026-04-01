@@ -42,8 +42,8 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
             {/* Hero Title */}
             <div className="mb-4">
               <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[hsl(215,30%,15%)] leading-tight mb-1">
-                JavaScript for{" "}
-                <span className="text-[hsl(210,100%,40%)]">Instructional Design</span>
+                Coding Basics for{" "}
+                <span className="text-[hsl(210,100%,40%)]">Instructional Designers</span>
               </h1>
               <p className="text-sm md:text-base text-[hsl(215,15%,45%)] font-medium">
                 Add custom interactivity without becoming a developer
