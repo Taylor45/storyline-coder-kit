@@ -73,7 +73,7 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
               <h2 className="text-xs font-bold text-[hsl(215,30%,15%)] uppercase tracking-wider mb-2">
                 Course Highlights
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
                 {[
                   { icon: Clock, title: "30 Minutes", sub: "Bite-sized lessons" },
                   { icon: Layers, title: "7 Modules", sub: "Interactive content" },
