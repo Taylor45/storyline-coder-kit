@@ -131,7 +131,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
                   "bg-success text-success-foreground" :
                   isCurrent ?
                   "bg-sidebar-primary text-sidebar-primary-foreground" :
-                  "bg-sidebar-accent text-sidebar-foreground/50"
+                  "bg-sidebar-primary text-sidebar-foreground/50"
                 )}>
                 
                 {isCompleted ? <Check className="w-3.5 h-3.5" /> : isLocked ? <Lock className="w-3.5 h-3.5" /> : mod.id}
