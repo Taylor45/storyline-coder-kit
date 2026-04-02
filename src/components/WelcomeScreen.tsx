@@ -26,8 +26,8 @@ const WelcomeScreen = ({ onStart }: WelcomeScreenProps) => {
         <div className="md:w-1/2 bg-[hsl(var(--sidebar-background))] text-sidebar-foreground p-8 md:p-12 flex flex-col items-center justify-center relative overflow-hidden">
           {/* Decorative circles */}
 
-          <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 relative z-10 italic text-primary-foreground">
-            JavaScript Coding Basics for Instructional Design
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 relative z-10 italic text-primary-foreground font-serif">
+            Coding Basics for Instructional Design
           </h2>
 
           <img
