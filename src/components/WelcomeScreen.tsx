@@ -25,8 +25,6 @@ const WelcomeScreen = ({ onStart }: WelcomeScreenProps) => {
         {/* Left Panel */}
         <div className="md:w-1/2 bg-[hsl(var(--sidebar-background))] text-sidebar-foreground p-8 md:p-12 flex flex-col items-center justify-center relative overflow-hidden">
           {/* Decorative circles */}
-          <div className="absolute top-0 right-0 w-24 h-24 rounded-full bg-[hsl(var(--accent)/0.3)] translate-x-8 -translate-y-8" />
-          <div className="absolute bottom-0 left-0 w-16 h-16 rounded-full bg-[hsl(var(--primary)/0.3)] -translate-x-4 translate-y-4" />
 
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-2 relative z-10 italic text-primary-foreground">
             JavaScript Coding Basics for Instructional Design
