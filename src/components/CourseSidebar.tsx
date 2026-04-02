@@ -166,7 +166,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
           
           <div className={cn(
             "mt-0.5 flex items-center justify-center w-7 h-7 rounded-md shrink-0",
-            allCompleted ? "bg-success text-success-foreground" : "bg-sidebar-accent text-sidebar-foreground/50"
+            allCompleted ? "bg-success text-success-foreground" : "bg-sidebar-primary text-sidebar-foreground/50"
           )}>
             {allCompleted ? <Award className="w-3.5 h-3.5" /> : <Lock className="w-3.5 h-3.5" />}
           </div>
