@@ -93,7 +93,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
           
           <div className={cn(
             "mt-0.5 flex items-center justify-center w-7 h-7 rounded-md shrink-0",
-            isIntroView ? "bg-sidebar-primary text-sidebar-primary-foreground" : "bg-sidebar-primary text-sidebar-foreground/50"
+            isIntroView ? "bg-gradient-to-br from-[#00BBFF] to-[#1B68B1] text-white" : "bg-sidebar-primary text-sidebar-foreground/50"
           )}>
             <Target className="w-3.5 h-3.5" />
           </div>
