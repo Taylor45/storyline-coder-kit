@@ -294,40 +294,41 @@ const ModuleContent = ({
               </motion.div>
             )}
           </AnimatePresence>
-
-          {/* Bottom nav - inside scrollable content */}
-          <div className="mt-8 border-t border-border pt-4 flex items-center justify-between">
-            <button
-              onClick={handlePrev}
-              disabled={isFirst && isFirstTab}
-              className={cn(
-                "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all",
-                isFirst && isFirstTab
-                  ? "text-muted-foreground/40 cursor-not-allowed"
-                  : "text-foreground hover:bg-muted"
-              )}
-            >
-              <ChevronLeft className="w-4 h-4" />
-              <span className="hidden sm:inline">Previous</span>
-              <span className="sm:hidden">Prev</span>
-            </button>
-
-            <button
-              onClick={handleNext}
-              disabled={nextDisabled}
-              className={cn(
-                "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all",
-                nextDisabled
-                  ? "bg-muted text-muted-foreground cursor-not-allowed"
-                  : "bg-primary text-primary-foreground hover:opacity-90"
-              )}
-            >
-              {isLast && isLastTab ? "Finish" : "Next"}
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
         </div>
       </main>
+
+      {/* Bottom nav */}
+      <footer className="h-14 md:h-16 border-t border-border bg-card flex items-center justify-between px-4 md:px-6 shrink-0">
+        <button
+          onClick={handlePrev}
+          disabled={isFirst && isFirstTab}
+          className={cn(
+            "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all",
+            isFirst && isFirstTab
+              ? "text-muted-foreground/40 cursor-not-allowed"
+              : "text-foreground hover:bg-muted"
+          )}
+        >
+          <ChevronLeft className="w-4 h-4" />
+          <span className="hidden sm:inline">Previous</span>
+          <span className="sm:hidden">Prev</span>
+        </button>
+
+
+        <button
+          onClick={handleNext}
+          disabled={nextDisabled}
+          className={cn(
+            "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all",
+            nextDisabled
+              ? "bg-muted text-muted-foreground cursor-not-allowed"
+              : "bg-primary text-primary-foreground hover:opacity-90"
+          )}
+        >
+          {isLast && isLastTab ? "Finish" : "Next"}
+          <ChevronRight className="w-4 h-4" />
+        </button>
+      </footer>
     </div>
   );
 };
