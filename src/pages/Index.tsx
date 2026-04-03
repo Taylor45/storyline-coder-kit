@@ -104,7 +104,7 @@ const Index = () => {
       {/* Mobile sidebar via Sheet */}
       {isMobile && (
         <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
-          <SheetContent side="left" className="p-0 w-72">
+          <SheetContent side="left" className="p-0 w-[237px]">
             {sidebarContent}
           </SheetContent>
         </Sheet>
