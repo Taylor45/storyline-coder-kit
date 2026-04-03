@@ -145,9 +145,6 @@ const Index = () => {
             userName={userName}
           />
         )}
-        <footer className="h-10 border-t border-border bg-card flex items-center justify-center shrink-0">
-          <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Bruce Mabasa. All rights reserved.</p>
-        </footer>
       </div>
     </div>
   );
