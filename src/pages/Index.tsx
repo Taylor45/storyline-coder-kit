@@ -92,10 +92,10 @@ const Index = () => {
       {!isMobile && (
         <div
           className={`shrink-0 transition-all duration-300 ease-in-out overflow-hidden ${
-            desktopSidebarOpen ? "w-72" : "w-0"
+            desktopSidebarOpen ? "w-[237px]" : "w-0"
           }`}
         >
-          <div className="w-72 min-h-screen">
+          <div className="w-[237px] min-h-screen">
             {sidebarContent}
           </div>
         </div>
