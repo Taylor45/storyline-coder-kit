@@ -298,7 +298,7 @@ const ModuleContent = ({
       </main>
 
       {/* Bottom nav */}
-      <footer className="h-14 md:h-16 border-t border-border bg-card flex items-center justify-between px-4 md:px-6 shrink-0">
+      <footer className="border-t border-border bg-card flex items-center justify-between px-4 md:px-6 py-3 shrink-0">
         <button
           onClick={handlePrev}
           disabled={isFirst && isFirstTab}
@@ -314,6 +314,7 @@ const ModuleContent = ({
           <span className="sm:hidden">Prev</span>
         </button>
 
+        <p className="text-[10px] text-muted-foreground hidden md:block">© {new Date().getFullYear()} Bruce Mabasa</p>
 
         <button
           onClick={handleNext}
@@ -329,9 +330,6 @@ const ModuleContent = ({
           <ChevronRight className="w-4 h-4" />
         </button>
       </footer>
-      <div className="h-10 border-t border-border bg-card flex items-center justify-center shrink-0">
-        <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} Bruce Mabasa. All rights reserved.</p>
-      </div>
     </div>
   );
 };
