@@ -110,7 +110,7 @@ const Index = () => {
         </Sheet>
       )}
 
-      <div className="flex-1 flex flex-col h-screen overflow-hidden">
+      <div className="flex-1 flex flex-col h-full overflow-hidden">
         {/* Top bar with sidebar toggle */}
         {isMobile && (
           <div className="h-12 border-b border-border bg-card flex items-center px-4 shrink-0">
