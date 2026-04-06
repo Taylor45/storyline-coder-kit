@@ -7,6 +7,69 @@ import LiveCodeLab from "./LiveCodeLab";
 
 import { cn } from "@/lib/utils";
 
+interface CollapsibleSectionProps {
+  section: { title: string; content: string; codeExample?: string; codeLanguage?: string };
+  defaultOpen: boolean;
+}
+
+const CollapsibleSection = ({ section, defaultOpen }: CollapsibleSectionProps) => {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+  return (
+    <section className="border border-border rounded-lg overflow-hidden">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full text-left text-base md:text-lg font-semibold flex items-center gap-2 px-4 py-3 bg-card hover:bg-muted/50 transition-colors"
+      >
+        <ChevronRight className={cn("w-5 h-5 text-foreground shrink-0 transition-transform duration-200", isOpen && "rotate-90")} />
+        {section.title}
+      </button>
+      {isOpen && (
+        <div className="px-4 pb-4 pt-2">
+          <div className="text-sm text-foreground/85 leading-relaxed space-y-3">
+            {section.content.split("\n\n").map((para, pi) => (
+              <p key={pi}>
+                {para.split(/(\*\*[^*]+\*\*)/g).map((part, parti) => {
+                  if (part.startsWith("**") && part.endsWith("**")) {
+                    return (
+                      <strong key={parti} className="font-semibold text-foreground">
+                        {part.slice(2, -2)}
+                      </strong>
+                    );
+                  }
+                  if (part.includes("`")) {
+                    return part.split(/(`[^`]+`)/g).map((seg, si) => {
+                      if (seg.startsWith("`") && seg.endsWith("`")) {
+                        return (
+                          <code key={si} className="px-1.5 py-0.5 rounded bg-muted font-mono text-xs text-primary">
+                            {seg.slice(1, -1)}
+                          </code>
+                        );
+                      }
+                      return seg;
+                    });
+                  }
+                  return part;
+                })}
+              </p>
+            ))}
+          </div>
+          {section.codeExample && (
+            <div className="mt-4">
+              <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
+                <Code className="w-3.5 h-3.5" />
+                {section.codeLanguage?.toUpperCase() || "CODE"}
+              </div>
+              <pre className="course-code-block text-xs leading-relaxed overflow-x-auto">
+                <code>{section.codeExample}</code>
+              </pre>
+            </div>
+          )}
+        </div>
+      )}
+    </section>
+  );
+};
+
 interface ModuleContentProps {
   module: CourseModule;
   onComplete: () => void;
@@ -171,58 +234,9 @@ const ModuleContent = ({
                   </div>
                 )}
 
-                <div className="space-y-8 md:space-y-10">
+                <div className="space-y-4 md:space-y-5">
                   {module.sections.map((section, i) => (
-                    <section key={i}>
-                      <h3 className="text-base md:text-lg font-semibold mb-3 flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center shrink-0">
-                          {i + 1}
-                        </span>
-                        {section.title}
-                      </h3>
-                      <div className="text-sm text-foreground/85 leading-relaxed space-y-3">
-                        {section.content.split("\n\n").map((para, pi) => (
-                          <p key={pi}>
-                            {para.split(/(\*\*[^*]+\*\*)/g).map((part, parti) => {
-                              if (part.startsWith("**") && part.endsWith("**")) {
-                                return (
-                                  <strong key={parti} className="font-semibold text-foreground">
-                                    {part.slice(2, -2)}
-                                  </strong>
-                                );
-                              }
-                              if (part.includes("`")) {
-                                return part.split(/(`[^`]+`)/g).map((seg, si) => {
-                                  if (seg.startsWith("`") && seg.endsWith("`")) {
-                                    return (
-                                      <code
-                                        key={si}
-                                        className="px-1.5 py-0.5 rounded bg-muted font-mono text-xs text-primary"
-                                      >
-                                        {seg.slice(1, -1)}
-                                      </code>
-                                    );
-                                  }
-                                  return seg;
-                                });
-                              }
-                              return part;
-                            })}
-                          </p>
-                        ))}
-                      </div>
-                      {section.codeExample && (
-                        <div className="mt-4">
-                          <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
-                            <Code className="w-3.5 h-3.5" />
-                            {section.codeLanguage?.toUpperCase() || "CODE"}
-                          </div>
-                          <pre className="course-code-block text-xs leading-relaxed overflow-x-auto">
-                            <code>{section.codeExample}</code>
-                          </pre>
-                        </div>
-                      )}
-                    </section>
+                    <CollapsibleSection key={i} section={section} defaultOpen={i === 0} />
                   ))}
                 </div>
               </motion.div>
