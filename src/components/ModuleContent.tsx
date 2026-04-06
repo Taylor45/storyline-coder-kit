@@ -171,16 +171,20 @@ const ModuleContent = ({
                   </div>
                 )}
 
-                <div className="space-y-8 md:space-y-10">
-                  {module.sections.map((section, i) => (
-                    <section key={i}>
-                      <h3 className="text-base md:text-lg font-semibold mb-3 flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold flex items-center justify-center shrink-0">
-                          {i + 1}
-                        </span>
+                <div className="space-y-4 md:space-y-5">
+                  {module.sections.map((section, i) => {
+                    const [isOpen, setIsOpen] = React.useState(i === 0);
+                    return (
+                    <section key={i} className="border border-border rounded-lg overflow-hidden">
+                      <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="w-full text-left text-base md:text-lg font-semibold flex items-center gap-2 px-4 py-3 bg-card hover:bg-muted/50 transition-colors"
+                      >
+                        <ChevronRight className={cn("w-5 h-5 text-foreground shrink-0 transition-transform duration-200", isOpen && "rotate-90")} />
                         {section.title}
-                      </h3>
-                      <div className="text-sm text-foreground/85 leading-relaxed space-y-3">
+                      </button>
+                      {isOpen && (
+                      <div className="px-4 pb-4 pt-2 text-sm text-foreground/85 leading-relaxed space-y-3">
                         {section.content.split("\n\n").map((para, pi) => (
                           <p key={pi}>
                             {para.split(/(\*\*[^*]+\*\*)/g).map((part, parti) => {
@@ -211,6 +215,7 @@ const ModuleContent = ({
                           </p>
                         ))}
                       </div>
+                      )}
                       {section.codeExample && (
                         <div className="mt-4">
                           <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
