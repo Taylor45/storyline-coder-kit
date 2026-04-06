@@ -1,13 +1,29 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import CourseSidebar from "@/components/CourseSidebar";
 import ModuleContent from "@/components/ModuleContent";
 import WelcomeScreen from "@/components/WelcomeScreen";
 import CompletionPage from "@/components/CompletionPage";
 import WelcomePage from "@/components/WelcomePage";
 import { courseModules } from "@/data/courseData";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { Menu, ChevronLeft, ChevronRight } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
+
+const DESKTOP_BREAKPOINT = 1024;
+
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState<boolean>(
+    typeof window !== "undefined" ? window.innerWidth >= DESKTOP_BREAKPOINT : true
+  );
+
+  useEffect(() => {
+    const mql = window.matchMedia(`(min-width: ${DESKTOP_BREAKPOINT}px)`);
+    const onChange = () => setIsDesktop(window.innerWidth >= DESKTOP_BREAKPOINT);
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+
+  return isDesktop;
+}
 
 const Index = () => {
   const [userName, setUserName] = useState<string | null>(null);
@@ -16,8 +32,7 @@ const Index = () => {
   const [showCompletion, setShowCompletion] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [desktopSidebarOpen, setDesktopSidebarOpen] = useState(true);
-  const isMobile = useIsMobile();
+  const isDesktop = useIsDesktop();
 
   const module = courseModules.find((m) => m.id === currentModule)!;
 
@@ -88,31 +103,27 @@ const Index = () => {
 
   return (
     <div className="flex h-screen w-full bg-background overflow-hidden">
-      {/* Desktop sidebar */}
-      {!isMobile && (
-        <div
-          className={`shrink-0 transition-all duration-300 ease-in-out overflow-hidden ${
-            desktopSidebarOpen ? "w-72" : "w-0"
-          }`}
-        >
-          <div className="w-72 min-h-screen">
+      {/* Desktop sidebar - visible at lg (1024px+) */}
+      {isDesktop && (
+        <div className="shrink-0 w-72 overflow-hidden">
+          <div className="w-72 h-screen sticky top-0">
             {sidebarContent}
           </div>
         </div>
       )}
 
-      {/* Mobile sidebar via Sheet */}
-      {isMobile && (
+      {/* Mobile/Tablet sidebar via Sheet - below lg */}
+      {!isDesktop && (
         <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
-          <SheetContent side="left" className="p-0 w-72">
+          <SheetContent side="left" className="p-0 w-72 sm:w-80">
             {sidebarContent}
           </SheetContent>
         </Sheet>
       )}
 
       <div className="flex-1 flex flex-col h-full overflow-hidden">
-        {/* Top bar with sidebar toggle */}
-        {isMobile && (
+        {/* Top bar with menu toggle for mobile/tablet */}
+        {!isDesktop && (
           <div className="h-12 border-b border-border bg-card flex items-center px-4 shrink-0">
             <button
               onClick={() => setSidebarOpen(true)}
@@ -121,7 +132,7 @@ const Index = () => {
               <Menu className="w-5 h-5 text-foreground" />
             </button>
             <span className="ml-3 text-sm font-semibold truncate">
-              JS Coding Basics for ID
+              Coding Basics for ID
             </span>
           </div>
         )}
