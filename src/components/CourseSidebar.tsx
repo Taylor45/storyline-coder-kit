@@ -48,17 +48,9 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.55, ease: "easeOut" }}
-            className="text-xs font-medium tracking-[0.2em] uppercase text-white/70 text-center mt-1"
+            className="text-xs font-medium tracking-[0.15em] uppercase text-white/80 text-center mt-1"
           >
-            For
-          </motion.p>
-          <motion.p
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7, ease: "easeOut" }}
-            className="text-sm font-bold tracking-[0.15em] uppercase text-white/90 text-center mt-0.5"
-          >
-            Instructional Designers
+            For <span className="text-sm font-bold text-white/90">Instructional Designers</span>
           </motion.p>
         </div>
       </div>
