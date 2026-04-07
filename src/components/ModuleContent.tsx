@@ -328,10 +328,10 @@ const ModuleContent = ({
           onClick={handlePrev}
           disabled={isFirst && isFirstTab}
           className={cn(
-            "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-all",
+            "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all",
             isFirst && isFirstTab
-              ? "opacity-40 cursor-not-allowed bg-[#14204C] text-white"
-              : "bg-[#14204C] text-white hover:opacity-90"
+              ? "text-muted-foreground/40 cursor-not-allowed"
+              : "text-foreground hover:bg-muted"
           )}
         >
           <ChevronLeft className="w-4 h-4" />
@@ -344,10 +344,10 @@ const ModuleContent = ({
           onClick={handleNext}
           disabled={nextDisabled}
           className={cn(
-            "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-full text-xs md:text-sm font-medium transition-all",
+            "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all",
             nextDisabled
-              ? "opacity-40 cursor-not-allowed bg-[#00BBFF] text-white"
-              : "bg-[#00BBFF] text-white hover:opacity-90"
+              ? "bg-muted text-muted-foreground cursor-not-allowed"
+              : "bg-primary text-primary-foreground hover:opacity-90"
           )}
         >
           {isLast && isLastTab ? "Finish" : "Next"}
