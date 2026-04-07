@@ -230,14 +230,14 @@ const ModuleContent = ({
                       {module.flashCards.map((card, i) => (
                         <div
                           key={i}
-                          className="rounded-xl border border-border bg-card/70 backdrop-blur-sm px-4 py-2.5 flex items-center gap-3 shadow-sm"
+                          className="rounded-xl border border-border backdrop-blur-sm px-4 py-2.5 flex items-center gap-3 shadow-md bg-sidebar-primary"
                         >
-                          <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center shrink-0 text-lg">
+                          <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 text-lg border-primary-foreground bg-secondary text-primary">
                             {card.icon}
                           </div>
                           <div>
-                            <h3 className="text-sm font-bold text-primary">{card.title}</h3>
-                            <p className="text-[11px] text-muted-foreground">{card.description}</p>
+                            <h3 className="text-sm font-bold text-destructive-foreground">{card.title}</h3>
+                            <p className="text-[11px] text-primary-foreground">{card.description}</p>
                           </div>
                         </div>
                       ))}
