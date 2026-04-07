@@ -220,9 +220,9 @@ export const courseModules: CourseModule[] = [
       },
     ],
     flashCards: [
-      { icon: "📦", title: "Box Model", description: "Content → Padding → Border → Margin" },
-      { icon: "📐", title: "Flexbox & Grid", description: "Modern layout systems for rows, columns & dashboards" },
-      { icon: "📱", title: "Responsive", description: "Media queries adapt layouts for any screen size" },
+      { icon: "1", title: "Box Model", description: "Content → Padding → Border → Margin" },
+      { icon: "2", title: "Flexbox & Grid", description: "Modern layout systems for rows, columns & dashboards" },
+      { icon: "3", title: "Responsive", description: "Media queries adapt layouts for any screen size" },
     ],
     quiz: [
       {
@@ -319,9 +319,9 @@ player.SetVar("ResultMessage", resultMessage);`,
       },
     ],
     flashCards: [
-      { icon: "🎮", title: "GetPlayer()", description: "The bridge between JavaScript and Storyline variables" },
-      { icon: "⏱️", title: "Event Timing", description: "Button clicks are the safest trigger for JS execution" },
-      { icon: "🔄", title: "Read & Write", description: "GetVar() reads, SetVar() writes Storyline variables" },
+      { icon: "1", title: "GetPlayer()", description: "The bridge between JavaScript and Storyline variables" },
+      { icon: "2", title: "Event Timing", description: "Button clicks are the safest trigger for JS execution" },
+      { icon: "3", title: "Read & Write", description: "GetVar() reads, SetVar() writes Storyline variables" },
     ],
     quiz: [
       {
@@ -504,9 +504,9 @@ for (var i = 0; i < allText.length; i++) {
       },
     ],
     flashCards: [
-      { icon: "💉", title: "Dynamic Content", description: "Build strings in JS and display via %VariableName%" },
-      { icon: "🌿", title: "Branching Logic", description: "Evaluate multiple variables for complex scenario outcomes" },
-      { icon: "⚠️", title: "DOM Caution", description: "Direct DOM manipulation may break across Storyline versions" },
+      { icon: "1", title: "Dynamic Content", description: "Build strings in JS and display via %VariableName%" },
+      { icon: "2", title: "Branching Logic", description: "Evaluate multiple variables for complex scenario outcomes" },
+      { icon: "3", title: "DOM Caution", description: "Direct DOM manipulation may break across Storyline versions" },
     ],
     quiz: [
       {
@@ -693,9 +693,9 @@ if (scormAPI) {
       },
     ],
     flashCards: [
-      { icon: "📡", title: "Fetch API", description: "Send data to Google Sheets, webhooks & external APIs" },
-      { icon: "📥", title: "Load Content", description: "Pull dynamic tips or updates from external JSON files" },
-      { icon: "📊", title: "SCORM/xAPI", description: "Report custom learner data beyond basic completion" },
+      { icon: "1", title: "Fetch API", description: "Send data to Google Sheets, webhooks & external APIs" },
+      { icon: "2", title: "Load Content", description: "Pull dynamic tips or updates from external JSON files" },
+      { icon: "3", title: "SCORM/xAPI", description: "Report custom learner data beyond basic completion" },
     ],
     quiz: [
       {
@@ -750,8 +750,8 @@ if (scormAPI) {
       },
     ],
     flashCards: [
-      { icon: "🧪", title: "Hands-On", description: "Write real JavaScript for Storyline scenarios" },
-      { icon: "✅", title: "Test & Submit", description: "Run code, check output, and verify solutions" },
+      { icon: "1", title: "Hands-On", description: "Write real JavaScript for Storyline scenarios" },
+      { icon: "2", title: "Test & Submit", description: "Run code, check output, and verify solutions" },
     ],
     quiz: [
       {
