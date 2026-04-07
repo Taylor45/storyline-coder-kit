@@ -58,9 +58,9 @@ export const courseModules: CourseModule[] = [
       },
     ],
     flashCards: [
-      { icon: "🌐", title: "Client-Server", description: "Browser requests → Server responds with HTML/CSS/JS" },
-      { icon: "🏗️", title: "The Big Three", description: "HTML = structure, CSS = style, JS = interactivity" },
-      { icon: "🌳", title: "The DOM", description: "Tree-like model browsers build from your HTML" },
+      { icon: "1", title: "Client-Server", description: "Browser requests → Server responds with HTML/CSS/JS" },
+      { icon: "2", title: "The Big Three", description: "HTML = structure, CSS = style, JS = interactivity" },
+      { icon: "3", title: "The DOM", description: "Tree-like model browsers build from your HTML" },
     ],
     quiz: [
       {
