@@ -148,9 +148,9 @@ export const courseModules: CourseModule[] = [
       },
     ],
     flashCards: [
-      { icon: "🏷️", title: "Semantic HTML", description: "Use meaningful tags like <header>, <main>, <article>" },
-      { icon: "📝", title: "Forms", description: "Radio buttons, checkboxes & inputs for assessments" },
-      { icon: "♿", title: "Accessibility", description: "Alt text & proper structure for screen readers" },
+      { icon: "1", title: "Semantic HTML", description: "Use meaningful tags like <header>, <main>, <article>" },
+      { icon: "2", title: "Forms", description: "Radio buttons, checkboxes & inputs for assessments" },
+      { icon: "3", title: "Accessibility", description: "Alt text & proper structure for screen readers" },
     ],
     quiz: [
       {
