@@ -23,7 +23,16 @@ const CollapsibleSection = ({ section, defaultOpen }: CollapsibleSectionProps) =
         <ChevronRight className={cn("w-5 h-5 text-foreground shrink-0 transition-transform duration-200", isOpen && "rotate-90")} />
         {section.title}
       </button>
+      <AnimatePresence initial={false}>
       {isOpen && (
+        <motion.div
+          key="content"
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ duration: 0.25, ease: "easeInOut" }}
+          className="overflow-hidden"
+        >
         <div className="px-4 pb-4 pt-2">
           <div className="text-sm text-foreground/85 leading-relaxed space-y-3">
             {section.content.split("\n\n").map((para, pi) => (
