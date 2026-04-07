@@ -331,7 +331,7 @@ const ModuleContent = ({
             "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all",
             isFirst && isFirstTab
               ? "text-muted-foreground/40 cursor-not-allowed"
-              : "text-foreground hover:bg-muted"
+              : "bg-[#14214d] text-primary-foreground"
           )}
         >
           <ChevronLeft className="w-4 h-4" />
@@ -347,7 +347,7 @@ const ModuleContent = ({
             "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all",
             nextDisabled
               ? "bg-muted text-muted-foreground cursor-not-allowed"
-              : "bg-primary text-primary-foreground hover:opacity-90"
+              : "text-primary-foreground hover:opacity-90 bg-blue-700"
           )}
         >
           {isLast && isLastTab ? "Finish" : "Next"}
