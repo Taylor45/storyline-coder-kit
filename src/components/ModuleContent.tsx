@@ -74,7 +74,9 @@ const CollapsibleSection = ({ section, defaultOpen }: CollapsibleSectionProps) =
             </div>
           )}
         </div>
+        </motion.div>
       )}
+      </AnimatePresence>
     </section>
   );
 };
