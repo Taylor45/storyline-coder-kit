@@ -109,7 +109,7 @@ const CompletionCertificate = ({ userName }: CompletionCertificateProps) => {
               <p className="text-gray-600 text-sm max-w-md mx-auto leading-relaxed">
                 has successfully completed the{" "}
                 <strong className="text-gray-900">
-                  JavaScript Coding Basics for Instructional Design
+                  Coding Basics for Instructional Designers
                 </strong>{" "}
                 course, demonstrating proficiency in HTML, CSS, JavaScript, and
                 building interactive learning experiences.
