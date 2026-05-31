@@ -83,9 +83,11 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
       {/* Module List */}
       <nav className="flex-1 py-3">
         {/* Introduction item */}
-        <div
+        <button
+          type="button"
+          onClick={() => onSelectIntro?.()}
           className={cn(
-            "w-full flex items-start gap-3 px-5 py-2.5 text-left transition-colors mb-1 border-b border-sidebar-border pb-3",
+            "w-full flex items-start gap-3 px-5 py-2.5 text-left transition-colors mb-1 border-b border-sidebar-border pb-3 hover:bg-sidebar-accent/60 cursor-pointer",
             isIntroView ?
             "bg-sidebar-accent text-sidebar-accent-foreground" :
             "text-sidebar-foreground/80"
@@ -105,23 +107,28 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
               Course Overview
             </p>
           </div>
-        </div>
+        </button>
 
         {courseModules.map((mod) => {
           const isCompleted = completedModules.includes(mod.id);
           const isCurrent = currentModule === mod.id && !isCompletionView && !isIntroView;
           const isLocked = !isCompleted && !isCurrent;
+          const isClickable = isCompleted || isCurrent;
 
           return (
-            <div
+            <button
+              type="button"
               key={mod.id}
+              onClick={() => isClickable && onSelectModule(mod.id)}
+              disabled={!isClickable}
+              aria-disabled={!isClickable}
               className={cn(
                 "w-full flex items-start gap-3 px-5 py-3 text-left transition-colors",
                 isCurrent ?
                 "bg-sidebar-accent text-sidebar-accent-foreground" :
                 isLocked ?
-                "opacity-60" :
-                "text-sidebar-foreground/80"
+                "opacity-60 cursor-not-allowed" :
+                "text-sidebar-foreground/80 hover:bg-sidebar-accent/60 cursor-pointer"
               )}>
               
               <div
@@ -149,19 +156,23 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
                   {mod.subtitle}
                 </p>
               </div>
-            </div>);
+            </button>);
 
         })}
 
         {/* Completion tab */}
-        <div
+        <button
+          type="button"
+          onClick={() => allCompleted && onSelectCompletion?.()}
+          disabled={!allCompleted}
+          aria-disabled={!allCompleted}
           className={cn(
             "w-full flex items-start gap-3 px-5 py-3 text-left transition-colors mt-2 border-t border-sidebar-border pt-4",
             !allCompleted ?
-            "opacity-50" :
+            "opacity-50 cursor-not-allowed" :
             isCompletionView ?
             "bg-sidebar-accent text-sidebar-accent-foreground" :
-            "text-sidebar-foreground/80"
+            "text-sidebar-foreground/80 hover:bg-sidebar-accent/60 cursor-pointer"
           )}>
           
           <div className={cn(
@@ -178,7 +189,7 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
               {allCompleted ? "Certificate & Results" : "Complete all modules to unlock"}
             </p>
           </div>
-        </div>
+        </button>
       </nav>
 
       {/* Footer */}
