@@ -113,7 +113,7 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
                   </h3>
                   <ul className="space-y-1.5">
                     {[
-                      "Understand how the web works and the client-server model",
+                      "Explain how the web works and the client-server model",
                       "Structure learning content using semantic HTML",
                       "Style and layout educational interfaces with CSS",
                       "Add interactivity to learning experiences using JavaScript",
