@@ -156,7 +156,6 @@ var mark_module_complete_default = defineTool4({
     quiz_total: z2.number().int().optional().describe("Total quiz questions.")
   },
   annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: true, openWorldHint: false },
-  needsApproval: true,
   handler: async ({ module_id, quiz_score, quiz_total }, ctx) => {
     if (!ctx.isAuthenticated()) {
       return { content: [{ type: "text", text: "Not authenticated" }], isError: true };

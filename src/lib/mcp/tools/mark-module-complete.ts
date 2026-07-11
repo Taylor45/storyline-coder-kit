@@ -14,7 +14,6 @@ export default defineTool({
     quiz_total: z.number().int().optional().describe("Total quiz questions."),
   },
   annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: true, openWorldHint: false },
-  needsApproval: true,
   handler: async ({ module_id, quiz_score, quiz_total }, ctx: ToolContext) => {
     if (!ctx.isAuthenticated()) {
       return { content: [{ type: "text", text: "Not authenticated" }], isError: true };
