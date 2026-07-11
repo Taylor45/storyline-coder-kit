@@ -1,52 +1,23 @@
 
-# Add OAuth-protected MCP server to the course app
 
-You picked "Protected with OAuth". This app doesn't have user accounts today, so we need to add auth before MCP. Here's the full sequence.
+## Plan: Update Sidebar and Introduction Page UX
 
-## 1. Enable Lovable Cloud + user accounts
+Based on the reference screenshot, here are the changes needed:
 
-- Enable Lovable Cloud (Supabase-backed) on the project.
-- Add email/password + Google sign-in (the standard defaults).
-- Add a `profiles` table linked to `auth.users` and a `course_progress` table (per-user: completed modules, quiz scores, certificate issued date). RLS scoped to `auth.uid()`.
-- Wire the existing course UI (Index page, sidebar, knowledge checks, certificate) to persist progress per user instead of local state.
-- Add a top-right sign-in/sign-out affordance in the existing layout.
+### 1. Sidebar Header Redesign
+- Replace the sparkles/decorative lines with a **code icon `</>`** centered at the top
+- Change text to **"CODING BASICS"** (large), **"FOR"** (small), **"INSTRUCTIONAL DESIGNERS"** (medium) — all centered, uppercase
+- Remove the "For Instructional Design" subtitle line and decorative dividers
 
-## 2. Managed OAuth authorization server
+### 2. Introduction Page Updates
+- Change title from "JavaScript for Instructional Design" to **"Coding Basics for Instructional Designers"**
+- Change "Course Highlights" label text to **"Course Highlights"** (already matches)
+- Restyle the 3 highlight cards: change from white/glass cards to **solid blue gradient rounded-pill cards** with white text (matching the reference's pill-shaped blue cards)
+- Update learning objectives header to **"By the end of this course you should be able to:"** (bold)
+- Swap the green `CheckCircle` icons to **blue/teal double-check shield icons** (matching the reference)
+- Restyle the Prerequisites card to a **light gray background** (subtle, flat) instead of the current white/glass style
 
-- Call `supabase--configure_oauth_server` to turn on OAuth 2.1 + dynamic client registration so ChatGPT / Claude / Cursor can self-register.
-- Add the consent route at `/.lovable/oauth/consent` using the app's Supabase client — approve/deny, redirect back to the OAuth client.
-- Make sure the login/signup and Google flows preserve the full consent URL so users return to the same authorization after signing in.
+### Files to Edit
+- **`src/components/CourseSidebar.tsx`** — Sidebar header redesign
+- **`src/components/WelcomePage.tsx`** — Introduction page content and card styling updates
 
-## 3. MCP server (this app as a resource server)
-
-Using `@lovable.dev/mcp-js` + the Supabase Vite plugin:
-
-- `src/lib/mcp/index.ts` — `defineMcp` with OAuth verifier bound to the direct `supabase.co` issuer.
-- `src/lib/mcp/tools/` — one file per tool, each forwarding the caller's bearer token so RLS runs as that user:
-  - `list_modules` — course outline (public content).
-  - `get_module` — full content of one module.
-  - `get_my_progress` — signed-in user's completed modules and quiz scores.
-  - `mark_module_complete` — mark a module done (destructive hint, needs approval).
-  - `submit_quiz_answer` — record a knowledge-check answer.
-  - `get_my_certificate` — return certificate metadata (name, date, status) once all modules are done.
-- Add `mcpPlugin()` to `vite.config.ts` — it generates `supabase/functions/mcp/index.ts` at build time.
-- Add a simple favicon so the connector shows a proper icon.
-
-## 4. Verify + deploy
-
-- Run the MCP manifest extractor after the entry is written.
-- Deploy the `mcp` edge function.
-- Confirm: signed-out users see a friendly login prompt on the consent route; signed-in users can approve; MCP clients can list and call tools.
-
-## Technical notes
-
-- Issuer: `https://${VITE_SUPABASE_PROJECT_ID}.supabase.co/auth/v1` (never the `.lovable.cloud` proxy).
-- Tools that read/write user data build a per-request Supabase client with `Authorization: Bearer ${ctx.getToken()}`; never service-role.
-- Course content (module titles, sections) stays hardcoded in `src/data/courseData.ts`; only progress is in the DB.
-- No changes to the visual design system, sidebar layout, or existing UI beyond the added auth entry point.
-
-## What you'll do after I ship it
-
-- Sign in once in the app.
-- In ChatGPT/Claude/Cursor, add the MCP server URL Lovable shows in More → Agent integrations.
-- Approve the consent screen — the assistant can then read your course progress and mark modules complete on your behalf.

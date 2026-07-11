@@ -1,15 +1,12 @@
 import { useState, useCallback, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import type { Session, User } from "@supabase/supabase-js";
 import CourseSidebar from "@/components/CourseSidebar";
 import ModuleContent from "@/components/ModuleContent";
+import WelcomeScreen from "@/components/WelcomeScreen";
 import CompletionPage from "@/components/CompletionPage";
 import WelcomePage from "@/components/WelcomePage";
 import { courseModules } from "@/data/courseData";
-import { Menu, LogOut } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { supabase } from "@/integrations/supabase/client";
 
 const DESKTOP_BREAKPOINT = 1024;
 
@@ -29,12 +26,7 @@ function useIsDesktop() {
 }
 
 const Index = () => {
-  const navigate = useNavigate();
-  const [session, setSession] = useState<Session | null>(null);
-  const [user, setUser] = useState<User | null>(null);
-  const [userName, setUserName] = useState<string>("Learner");
-  const [authChecked, setAuthChecked] = useState(false);
-
+  const [userName, setUserName] = useState<string | null>(null);
   const [currentModule, setCurrentModule] = useState(1);
   const [completedModules, setCompletedModules] = useState<number[]>([]);
   const [showCompletion, setShowCompletion] = useState(false);
@@ -44,75 +36,15 @@ const Index = () => {
 
   const module = courseModules.find((m) => m.id === currentModule)!;
 
-  // Watch auth state, redirect to /auth when signed out.
-  useEffect(() => {
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => {
-      setSession(s);
-      setUser(s?.user ?? null);
-    });
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session);
-      setUser(data.session?.user ?? null);
-      setAuthChecked(true);
-    });
-    return () => sub.subscription.unsubscribe();
-  }, []);
+  const handleStart = (name: string, surname: string) => {
+    setUserName(`${name} ${surname}`);
+  };
 
-  useEffect(() => {
-    if (authChecked && !session) {
-      navigate("/auth", { replace: true });
-    }
-  }, [authChecked, session, navigate]);
-
-  // Load profile + progress once signed in.
-  useEffect(() => {
-    if (!user) return;
-    let active = true;
-    (async () => {
-      const [{ data: profile }, { data: progress }] = await Promise.all([
-        supabase.from("profiles").select("display_name").eq("id", user.id).maybeSingle(),
-        supabase
-          .from("course_progress")
-          .select("module_id, completed")
-          .eq("user_id", user.id),
-      ]);
-      if (!active) return;
-      setUserName(profile?.display_name ?? user.email?.split("@")[0] ?? "Learner");
-      setCompletedModules(
-        (progress ?? []).filter((r) => r.completed).map((r) => r.module_id)
-      );
-    })();
-    return () => {
-      active = false;
-    };
-  }, [user]);
-
-  const handleComplete = useCallback(async () => {
-    if (!user) return;
+  const handleComplete = useCallback(() => {
     setCompletedModules((prev) =>
       prev.includes(currentModule) ? prev : [...prev, currentModule]
     );
-    await supabase.from("course_progress").upsert(
-      {
-        user_id: user.id,
-        module_id: currentModule,
-        completed: true,
-        completed_at: new Date().toISOString(),
-      },
-      { onConflict: "user_id,module_id" }
-    );
-  }, [currentModule, user]);
-
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    navigate("/auth", { replace: true });
-  };
-
-  const handleSelectIntro = () => {
-    setShowIntro(true);
-    setShowCompletion(false);
-    setSidebarOpen(false);
-  };
+  }, [currentModule]);
 
   const handlePrev = () => {
     if (currentModule === 1) {
@@ -143,12 +75,14 @@ const Index = () => {
     setSidebarOpen(false);
   };
 
-  if (!authChecked || !session) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-muted-foreground">
-        Loading…
-      </div>
-    );
+  const handleSelectIntro = () => {
+    setShowIntro(true);
+    setShowCompletion(false);
+    setSidebarOpen(false);
+  };
+
+  if (!userName) {
+    return <WelcomeScreen onStart={handleStart} />;
   }
 
   const allCompleted = completedModules.length === courseModules.length;
@@ -163,7 +97,7 @@ const Index = () => {
       isIntroView={showIntro}
       onSelectCompletion={handleSelectCompletion}
       onSelectIntro={handleSelectIntro}
-      onHome={handleSelectIntro}
+      onHome={() => setUserName(null)}
     />
   );
 
@@ -188,35 +122,20 @@ const Index = () => {
       )}
 
       <div className="flex-1 flex flex-col h-full overflow-hidden">
-        {/* Top bar */}
-        <div className="h-12 border-b border-border bg-card flex items-center px-4 shrink-0">
-          {!isDesktop && (
+        {/* Top bar with menu toggle for mobile/tablet */}
+        {!isDesktop && (
+          <div className="h-12 border-b border-border bg-card flex items-center px-4 shrink-0">
             <button
               onClick={() => setSidebarOpen(true)}
               className="p-2 rounded-md hover:bg-muted transition-colors"
             >
               <Menu className="w-5 h-5 text-foreground" />
             </button>
-          )}
-          {!isDesktop && (
             <span className="ml-3 text-sm font-semibold truncate">
               Coding Basics for ID
             </span>
-          )}
-          <div className="ml-auto flex items-center gap-2 text-sm">
-            <span className="text-muted-foreground hidden sm:inline">{userName}</span>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleSignOut}
-              className="gap-1"
-              title="Sign out"
-            >
-              <LogOut className="w-4 h-4" />
-              <span className="hidden sm:inline">Sign out</span>
-            </Button>
           </div>
-        </div>
+        )}
 
         {showCompletion && allCompleted ? (
           <CompletionPage userName={userName} />
