@@ -8,7 +8,7 @@ import { courseModules } from "@/data/courseData";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 
-const DESKTOP_BREAKPOINT = 1024;
+const DESKTOP_BREAKPOINT = 768;
 
 function useIsDesktop() {
   const [isDesktop, setIsDesktop] = useState<boolean>(
