@@ -8,7 +8,7 @@ import { courseModules } from "@/data/courseData";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 
-const DESKTOP_BREAKPOINT = 1024;
+const DESKTOP_BREAKPOINT = 768;
 
 function useIsDesktop() {
   const [isDesktop, setIsDesktop] = useState<boolean>(
@@ -105,8 +105,8 @@ const Index = () => {
     <div className="flex h-screen w-full bg-background overflow-hidden">
       {/* Desktop sidebar - visible at lg (1024px+) */}
       {isDesktop && (
-        <div className="shrink-0 w-72 overflow-hidden">
-          <div className="w-72 h-screen sticky top-0">
+        <div className="shrink-0 w-60 lg:w-72 overflow-hidden">
+          <div className="w-60 lg:w-72 h-screen sticky top-0">
             {sidebarContent}
           </div>
         </div>
