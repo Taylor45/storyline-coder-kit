@@ -217,6 +217,15 @@ const LiveCodeLab = () => {
   const [isCorrect, setIsCorrect] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
 
+  const preRef = useRef<HTMLPreElement>(null);
+
+  const handleScroll = (e: React.UIEvent<HTMLTextAreaElement>) => {
+    if (preRef.current) {
+      preRef.current.scrollTop = e.currentTarget.scrollTop;
+      preRef.current.scrollLeft = e.currentTarget.scrollLeft;
+    }
+  };
+
   const challenge = challenges[currentChallenge];
 
   const runCode = (code: string): string => {
@@ -354,13 +363,15 @@ const LiveCodeLab = () => {
             </div>
 
             {/* Syntax-highlighted editor with overlay */}
-            <div className="relative min-h-[240px]">
+            <div className="relative h-[280px] md:h-[360px] bg-[hsl(220,20%,14%)]">
               <pre
-                className="absolute inset-0 p-4 font-mono text-sm leading-relaxed bg-[hsl(220,20%,14%)] overflow-auto pointer-events-none m-0"
+                ref={preRef}
+                className="absolute inset-0 p-4 font-mono text-sm leading-relaxed bg-[hsl(220,20%,14%)] text-slate-100 overflow-auto pointer-events-none m-0 whitespace-pre"
                 aria-hidden="true"
+                style={{ tabSize: 2 }}
               >
                 <code
-                  className="language-javascript"
+                  className="language-javascript text-slate-100"
                   dangerouslySetInnerHTML={{
                     __html: Prism.highlight(
                       codes[currentChallenge] + "\n",
@@ -377,9 +388,15 @@ const LiveCodeLab = () => {
                   updated[currentChallenge] = e.target.value;
                   setCodes(updated);
                 }}
+                onScroll={handleScroll}
                 spellCheck={false}
-                className="relative w-full min-h-[240px] p-4 font-mono text-sm leading-relaxed resize-y bg-transparent text-transparent caret-[hsl(210,15%,85%)] focus:outline-none selection:bg-[hsl(210,60%,30%)]"
-                style={{ tabSize: 2, caretColor: "hsl(210,15%,85%)" }}
+                className="absolute inset-0 w-full h-full p-4 font-mono text-sm leading-relaxed resize-none bg-transparent text-slate-100 caret-white focus:outline-none selection:bg-blue-600/40 overflow-auto whitespace-pre placeholder:text-slate-400"
+                style={{
+                  tabSize: 2,
+                  caretColor: "#ffffff",
+                  WebkitTextFillColor: "transparent",
+                  color: "#f1f5f9",
+                }}
               />
             </div>
 
@@ -487,7 +504,7 @@ const LiveCodeLab = () => {
 
               <div className="rounded-xl border border-border bg-card p-4 md:p-5">
                 <h4 className="text-sm font-semibold mb-2 flex items-center gap-2">
-                  <span className="text-base">📖</span> Explanation
+                  Explanation
                 </h4>
                 <p className="text-sm text-foreground/80 leading-relaxed">
                   {challenge.explanation.split(/(\*\*[^*]+\*\*)/g).map((part, i) => {
@@ -502,35 +519,35 @@ const LiveCodeLab = () => {
           )}
 
           {/* Navigation between challenges */}
-          <div className="flex items-center justify-between mt-6">
+          <div className="flex items-center justify-between mt-6 pt-4 border-t border-border">
             <button
               onClick={() => switchChallenge(currentChallenge - 1)}
               disabled={currentChallenge === 0}
               className={cn(
-                "flex items-center gap-1 px-3 py-2 rounded-lg text-xs font-medium transition-all",
+                "group flex items-center gap-2 px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all select-none",
                 currentChallenge === 0
-                  ? "text-muted-foreground/40 cursor-not-allowed"
-                  : "text-foreground hover:bg-muted"
+                  ? "opacity-35 cursor-not-allowed border border-border/40 text-muted-foreground bg-transparent"
+                  : "border border-border/80 bg-card hover:bg-muted text-foreground hover:border-foreground/20 active:scale-[0.98] shadow-xs cursor-pointer"
               )}
             >
-              <ChevronLeft className="w-4 h-4" />
-              Previous Challenge
+              <ChevronLeft className="w-4 h-4 transition-transform group-hover:-translate-x-0.5" />
+              <span>Previous Challenge</span>
             </button>
-            <span className="text-xs text-muted-foreground">
-              {currentChallenge + 1} / {challenges.length}
+            <span className="text-xs text-muted-foreground font-medium px-2.5 py-1 rounded-full bg-muted/50 border border-border/40">
+              Challenge {currentChallenge + 1} of {challenges.length}
             </span>
             <button
               onClick={() => switchChallenge(currentChallenge + 1)}
               disabled={currentChallenge === challenges.length - 1}
               className={cn(
-                "flex items-center gap-1 px-3 py-2 rounded-lg text-xs font-medium transition-all",
+                "group flex items-center gap-2 px-4 py-2 rounded-xl text-xs md:text-sm font-semibold transition-all select-none",
                 currentChallenge === challenges.length - 1
-                  ? "text-muted-foreground/40 cursor-not-allowed"
-                  : "bg-primary text-primary-foreground hover:opacity-90"
+                  ? "opacity-35 cursor-not-allowed border border-border/40 text-muted-foreground bg-transparent"
+                  : "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm active:scale-[0.98] cursor-pointer"
               )}
             >
-              Next Challenge
-              <ChevronRight className="w-4 h-4" />
+              <span>Next Challenge</span>
+              <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
             </button>
           </div>
         </motion.div>

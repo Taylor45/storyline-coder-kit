@@ -1,0 +1,79 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Reusable, hardened global helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && 
+        (request.auth.token.email == "brucemabasa4@gmail.com" || request.auth.token.email == "brucemabasa4@gmail") &&
+        request.auth.token.email_verified == true;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Entity validation helpers
+    function isValidProfile(data) {
+      return data.id is string && data.id.size() <= 128
+        && data.display_name is string && data.display_name.size() <= 100
+        && data.email is string && data.email.size() <= 100;
+    }
+
+    function isValidCourseProgress(data) {
+      return data.user_id is string && data.user_id.size() <= 128
+        && data.module_id is int && data.module_id >= 1 && data.module_id <= 10
+        && data.completed is bool;
+    }
+
+    // Profiles collection rules
+    match /profiles/{userId} {
+      allow get: if isOwner(userId) || isAdmin();
+      allow list: if isAdmin();
+      
+      allow create: if isOwner(userId) && isValidProfile(incoming());
+      
+      allow update: if isOwner(userId) && isValidProfile(incoming()) 
+        && incoming().id == existing().id 
+        && incoming().email == existing().email;
+        
+      allow delete: if isAdmin();
+    }
+
+    // Course Progress collection rules
+    match /course_progress/{progressId} {
+      allow get: if isSignedIn() && (existing().user_id == request.auth.uid || isAdmin());
+      allow list: if isSignedIn() && (resource.data.user_id == request.auth.uid || isAdmin());
+      
+      allow create: if isSignedIn() && incoming().user_id == request.auth.uid 
+        && isValidCourseProgress(incoming());
+        
+      allow update: if isSignedIn() && incoming().user_id == request.auth.uid 
+        && isValidCourseProgress(incoming())
+        && incoming().user_id == existing().user_id
+        && incoming().module_id == existing().module_id;
+        
+      allow delete: if isAdmin();
+    }
+  }
+}

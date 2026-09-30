@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Dancing+Script:wght@600;700&family=Great+Vibes&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -130,17 +130,21 @@
   }
 }
 
-/* Prism.js Dark Theme for Code Lab */
+/* Prism.js Dark Theme for Code Lab with High Contrast */
+.language-javascript {
+  color: #f1f5f9;
+}
+
 .language-javascript .token.comment,
 .language-javascript .token.prolog,
 .language-javascript .token.doctype,
 .language-javascript .token.cdata {
-  color: hsl(220, 10%, 45%);
+  color: hsl(220, 15%, 72%);
   font-style: italic;
 }
 
 .language-javascript .token.punctuation {
-  color: hsl(210, 15%, 65%);
+  color: hsl(210, 20%, 85%);
 }
 
 .language-javascript .token.property,
@@ -149,7 +153,7 @@
 .language-javascript .token.number,
 .language-javascript .token.constant,
 .language-javascript .token.symbol {
-  color: hsl(30, 90%, 65%);
+  color: hsl(35, 100%, 72%);
 }
 
 .language-javascript .token.selector,
@@ -157,28 +161,28 @@
 .language-javascript .token.string,
 .language-javascript .token.char,
 .language-javascript .token.builtin {
-  color: hsl(95, 50%, 60%);
+  color: hsl(140, 70%, 68%);
 }
 
 .language-javascript .token.operator,
 .language-javascript .token.entity,
 .language-javascript .token.url {
-  color: hsl(190, 60%, 60%);
+  color: hsl(190, 85%, 72%);
 }
 
 .language-javascript .token.atrule,
 .language-javascript .token.attr-value,
 .language-javascript .token.keyword {
-  color: hsl(280, 60%, 70%);
+  color: hsl(275, 85%, 78%);
 }
 
 .language-javascript .token.function,
 .language-javascript .token.class-name {
-  color: hsl(200, 80%, 70%);
+  color: hsl(205, 95%, 75%);
 }
 
 .language-javascript .token.regex,
 .language-javascript .token.important,
 .language-javascript .token.variable {
-  color: hsl(45, 80%, 65%);
+  color: hsl(45, 95%, 72%);
 }

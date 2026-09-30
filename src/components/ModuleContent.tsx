@@ -1,7 +1,7 @@
 import { CourseModule } from "@/data/courseData";
-import { ChevronLeft, ChevronRight, BookOpen, Code, Wrench, FlaskConical, UserCircle } from "lucide-react";
+import { ChevronLeft, ChevronRight, BookOpen, Code, Wrench, FlaskConical, UserCircle, Menu } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import KnowledgeCheck from "./KnowledgeCheck";
 import LiveCodeLab from "./LiveCodeLab";
 
@@ -83,7 +83,7 @@ const CollapsibleSection = ({ section, defaultOpen }: CollapsibleSectionProps) =
 
 interface ModuleContentProps {
   module: CourseModule;
-  onComplete: () => void;
+  onComplete: (score?: number, total?: number) => void;
   onPrev: () => void;
   onNext: () => void;
   onFinish?: () => void;
@@ -92,6 +92,7 @@ interface ModuleContentProps {
   isCompleted: boolean;
   allCompleted?: boolean;
   userName?: string;
+  onMenuOpen?: () => void;
 }
 
 type Tab = "lesson" | "quiz" | "project" | "codelab";
@@ -107,10 +108,26 @@ const ModuleContent = ({
   isCompleted,
   allCompleted,
   userName,
+  onMenuOpen,
 }: ModuleContentProps) => {
   const [activeTab, setActiveTab] = useState<Tab>("lesson");
   const [quizCompleted, setQuizCompleted] = useState(false);
+  const mainRef = useRef<HTMLElement>(null);
   const Icon = module.icon;
+
+  useEffect(() => {
+    setActiveTab("lesson");
+    setQuizCompleted(false);
+    if (mainRef.current) {
+      mainRef.current.scrollTop = 0;
+    }
+  }, [module.id]);
+
+  useEffect(() => {
+    if (mainRef.current) {
+      mainRef.current.scrollTop = 0;
+    }
+  }, [activeTab]);
 
   const visibleTabs = [
     { id: "lesson" as Tab, show: true },
@@ -129,8 +146,10 @@ const ModuleContent = ({
     if (!isLastTab) {
       setActiveTab(visibleTabs[currentTabIndex + 1]);
     } else if (isLast) {
+      onComplete();
       onFinish?.();
     } else {
+      onComplete();
       onNext();
     }
   };
@@ -155,19 +174,30 @@ const ModuleContent = ({
   return (
     <div className="flex-1 flex flex-col min-h-0">
       {/* Top bar */}
-      <header className="h-14 border-b border-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(0,0%,5%)] flex items-center justify-between px-4 md:px-6 shrink-0 shadow-[0_4px_15px_rgba(0,100,255,0.3)]">
-        <div className="flex items-center gap-3 min-w-0">
-          <div className="w-8 h-8 rounded-md bg-white/20 flex items-center justify-center shrink-0">
+      <header className="h-14 border-b border-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(0,0%,5%)] flex items-center justify-between px-3 sm:px-4 md:px-6 shrink-0 shadow-[0_4px_15px_rgba(0,100,255,0.3)]">
+        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+          {onMenuOpen && (
+            <button
+              onClick={onMenuOpen}
+              className="lg:hidden flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/20 hover:bg-white/30 active:bg-white/40 text-white shrink-0 transition-colors focus:outline-none focus:ring-2 focus:ring-white/40 min-h-[38px]"
+              aria-label="Open course navigation menu"
+              id="mobile-nav-hamburger"
+            >
+              <Menu className="w-5 h-5 text-white" />
+              <span className="text-[11px] font-bold tracking-wide uppercase sm:hidden">Menu</span>
+            </button>
+          )}
+          <div className="hidden lg:flex w-8 h-8 rounded-md bg-white/20 items-center justify-center shrink-0">
             <Icon className="w-4 h-4 text-white" />
           </div>
-          <div className="min-w-0">
-            <p className="text-xs text-white/70">Module {module.id}</p>
-            <h2 className="text-sm font-semibold leading-tight truncate text-white">{module.title}</h2>
+          <div className="min-w-0 flex-1">
+            <p className="text-[11px] sm:text-xs text-white/75 font-medium leading-none mb-0.5">Module {module.id}</p>
+            <h2 className="text-xs sm:text-sm font-semibold leading-tight truncate text-white">{module.title}</h2>
           </div>
         </div>
         {userName && (
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="text-xs text-white/80 hidden sm:inline">{userName}</span>
+          <div className="flex items-center gap-2 shrink-0 ml-2">
+            <span className="text-xs text-white/80 hidden md:inline max-w-[140px] truncate">{userName}</span>
             <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
               <UserCircle className="w-5 h-5 text-white" />
             </div>
@@ -176,28 +206,30 @@ const ModuleContent = ({
       </header>
 
       {/* Tabs */}
-      <div className="border-b border-border bg-card px-4 md:px-6">
-        <div className="flex gap-0 items-center">
-          {tabs
-            .filter((t) => t.show)
-            .map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={cn(
-                  "px-3 md:px-4 py-3 text-xs md:text-sm font-medium border-b-2 transition-colors flex items-center gap-1.5 md:gap-2",
-                  activeTab === tab.id
-                    ? "border-primary text-primary"
-                    : "border-transparent text-muted-foreground hover:text-foreground"
-                )}
-              >
-                <tab.icon className="w-4 h-4" />
-                <span className="hidden sm:inline">{tab.label}</span>
-                <span className="sm:hidden">{tab.shortLabel}</span>
-              </button>
-            ))}
+      <div className="border-b border-border bg-card px-2 sm:px-4 md:px-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex items-center min-w-full sm:min-w-0 gap-1 sm:gap-2 py-0">
+          <div className="flex items-center gap-0.5 sm:gap-1 flex-1 sm:flex-initial">
+            {tabs
+              .filter((t) => t.show)
+              .map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={cn(
+                    "flex-1 sm:flex-initial px-2 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold border-b-2 transition-colors flex items-center justify-center sm:justify-start gap-1 sm:gap-1.5 shrink-0 whitespace-nowrap",
+                    activeTab === tab.id
+                      ? "border-primary text-primary"
+                      : "border-transparent text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  <tab.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                  <span className="hidden sm:inline">{tab.label}</span>
+                  <span className="sm:hidden">{tab.shortLabel}</span>
+                </button>
+              ))}
+          </div>
           {isCompleted && (
-            <span className="ml-auto text-xs bg-success/10 text-success px-3 py-1 rounded-full font-medium shrink-0">
+            <span className="ml-auto text-[10px] sm:text-xs bg-success/15 text-success dark:text-emerald-400 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full font-semibold shrink-0 whitespace-nowrap">
               Completed
             </span>
           )}
@@ -205,8 +237,8 @@ const ModuleContent = ({
       </div>
 
       {/* Content */}
-      <main className="flex-1 overflow-y-auto">
-        <div className="max-w-3xl mx-auto px-4 md:px-6 py-6 md:py-8">
+      <main ref={mainRef} className="flex-1 overflow-y-auto overflow-x-hidden">
+        <div className="max-w-4xl mx-auto w-full px-4 md:px-6 py-6 md:py-8">
           <AnimatePresence mode="wait">
             {activeTab === "lesson" && (
               <motion.div
@@ -266,9 +298,9 @@ const ModuleContent = ({
                   onPass={() => {
                     setActiveTab("lesson");
                   }}
-                  onAttempt={() => {
+                  onAttempt={(score, total) => {
                     setQuizCompleted(true);
-                    onComplete();
+                    onComplete(score, total);
                   }}
                 />
               </motion.div>
@@ -323,35 +355,46 @@ const ModuleContent = ({
       </main>
 
       {/* Bottom nav */}
-      <footer className="h-14 md:h-16 border-t border-border bg-card flex items-center justify-between px-4 md:px-6 shrink-0">
+      <footer className="h-16 md:h-18 border-t border-border bg-card/95 backdrop-blur-sm flex items-center justify-between px-4 sm:px-6 md:px-8 shrink-0 shadow-xs">
         <button
           onClick={handlePrev}
           disabled={isFirst && isFirstTab}
           className={cn(
-            "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all",
+            "group flex items-center gap-2 px-4 md:px-5 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all select-none",
             isFirst && isFirstTab
-              ? "text-muted-foreground/40 cursor-not-allowed"
-              : "bg-[#14214d] text-primary-foreground"
+              ? "opacity-35 cursor-not-allowed border border-border/40 text-muted-foreground bg-transparent"
+              : "border border-border/80 dark:border-border/70 bg-card hover:bg-muted/80 text-foreground hover:border-foreground/20 active:scale-[0.98] shadow-xs cursor-pointer"
           )}
         >
-          <ChevronLeft className="w-4 h-4" />
-          <span className="hidden sm:inline">Previous</span>
-          <span className="sm:hidden">Prev</span>
+          <ChevronLeft
+            className={cn(
+              "w-4 h-4 transition-transform",
+              !(isFirst && isFirstTab) && "group-hover:-translate-x-0.5"
+            )}
+          />
+          <span>Previous</span>
         </button>
-
 
         <button
           onClick={handleNext}
           disabled={nextDisabled}
+          title={nextDisabled ? "Pass the Knowledge Check to unlock Next" : undefined}
           className={cn(
-            "flex items-center gap-1 md:gap-2 px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm font-medium transition-all",
+            "group flex items-center gap-2 px-5 md:px-6 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all select-none",
             nextDisabled
-              ? "bg-muted text-muted-foreground cursor-not-allowed"
-              : "text-primary-foreground hover:opacity-90 bg-blue-700"
+              ? "bg-muted text-muted-foreground/60 border border-border/50 cursor-not-allowed opacity-60"
+              : isLast && isLastTab
+              ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm shadow-emerald-600/20 active:scale-[0.98] cursor-pointer"
+              : "bg-primary hover:bg-primary/90 text-primary-foreground shadow-sm hover:shadow-md active:scale-[0.98] cursor-pointer"
           )}
         >
-          {isLast && isLastTab ? "Finish" : "Next"}
-          <ChevronRight className="w-4 h-4" />
+          <span>{isLast && isLastTab ? "Complete Course" : "Next"}</span>
+          <ChevronRight
+            className={cn(
+              "w-4 h-4 transition-transform",
+              !nextDisabled && "group-hover:translate-x-0.5"
+            )}
+          />
         </button>
       </footer>
       <div className="h-10 border-t border-border bg-card flex items-center justify-center shrink-0">

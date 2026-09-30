@@ -1,0 +1,77 @@
+{
+  "entities": {
+    "Profile": {
+      "title": "Profile",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The user's UID"
+        },
+        "display_name": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Display name"
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Email address"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "display_name", "email"]
+    },
+    "CourseProgress": {
+      "title": "CourseProgress",
+      "description": "User progress on a module",
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "description": "The user's UID"
+        },
+        "module_id": {
+          "type": "integer",
+          "description": "The module ID (1-7)"
+        },
+        "completed": {
+          "type": "boolean"
+        },
+        "completed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "quiz_score": {
+          "type": "integer"
+        },
+        "quiz_total": {
+          "type": "integer"
+        }
+      },
+      "required": ["user_id", "module_id", "completed"]
+    }
+  },
+  "firestore": {
+    "profiles/{userId}": {
+      "schema": "Profile",
+      "description": "Users public/private profiles"
+    },
+    "course_progress/{progressId}": {
+      "schema": "CourseProgress",
+      "description": "Records of module completion and scores"
+    }
+  }
+}

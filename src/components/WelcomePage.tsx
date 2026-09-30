@@ -1,26 +1,38 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Clock, Layers, Award, Rocket, CheckCheck, Sparkles, UserCircle, CircleCheckBig } from "lucide-react";
+import { ArrowRight, Clock, Layers, Award, Rocket, CheckCheck, Sparkles, UserCircle, CircleCheckBig, Menu, BookOpen } from "lucide-react";
 import courseIllustration from "@/assets/microsites-amico.png";
 
 interface WelcomePageProps {
   onGetStarted: () => void;
   userName?: string;
+  onMenuOpen?: () => void;
 }
 
-const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
+const WelcomePage = ({ onGetStarted, userName, onMenuOpen }: WelcomePageProps) => {
   return (
     <div className="flex-1 flex flex-col min-h-0">
       {/* Header */}
-      <header className="h-14 border-b border-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(0,0%,5%)] flex items-center justify-between px-4 md:px-6 shrink-0 shadow-[0_4px_15px_rgba(0,100,255,0.3)]">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-md bg-white/20 flex items-center justify-center shrink-0">
-            <Sparkles className="w-4 h-4 text-white" />
+      <header className="h-14 border-b border-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(0,0%,5%)] flex items-center justify-between px-3 sm:px-4 md:px-6 shrink-0 shadow-[0_4px_15px_rgba(0,100,255,0.3)]">
+        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
+          {onMenuOpen && (
+            <button
+              onClick={onMenuOpen}
+              className="lg:hidden flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-white/20 hover:bg-white/30 active:bg-white/40 text-white shrink-0 transition-colors focus:outline-none focus:ring-2 focus:ring-white/40 min-h-[38px]"
+              aria-label="Open course navigation menu"
+              id="welcome-mobile-nav-hamburger"
+            >
+              <Menu className="w-5 h-5 text-white" />
+              <span className="text-[11px] font-bold tracking-wide uppercase sm:hidden">Menu</span>
+            </button>
+          )}
+          <div className="hidden lg:flex w-8 h-8 rounded-md bg-white/20 items-center justify-center shrink-0">
+            <BookOpen className="w-4 h-4 text-white" />
           </div>
           <h2 className="text-sm font-semibold text-white">Introduction</h2>
         </div>
         {userName && (
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-white/80 hidden sm:inline">{userName}</span>
+          <div className="flex items-center gap-2 shrink-0 ml-2">
+            <span className="text-xs text-white/80 hidden md:inline max-w-[140px] truncate">{userName}</span>
             <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
               <UserCircle className="w-5 h-5 text-white" />
             </div>
@@ -28,12 +40,14 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
         )}
       </header>
 
-      <main className="flex-1 overflow-hidden bg-gradient-to-br from-[hsl(210,40%,96%)] via-[hsl(210,30%,98%)] to-[hsl(220,40%,95%)] relative">
+      <main className="flex-1 overflow-y-auto overflow-x-hidden bg-gradient-to-br from-[hsl(210,40%,96%)] via-[hsl(210,30%,98%)] to-[hsl(220,40%,95%)] relative">
         {/* Background shapes */}
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[hsl(210,60%,90%)] rounded-full opacity-30 -translate-y-1/2 translate-x-1/3 blur-3xl" />
-        <div className="absolute top-20 left-0 w-[300px] h-[300px] bg-[hsl(210,50%,92%)] rounded-full opacity-20 -translate-x-1/2 blur-2xl" />
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[hsl(210,60%,90%)] rounded-full opacity-30 -translate-y-1/2 translate-x-1/3 blur-3xl" />
+          <div className="absolute top-20 left-0 w-[300px] h-[300px] bg-[hsl(210,50%,92%)] rounded-full opacity-20 -translate-x-1/2 blur-2xl" />
+        </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-4 md:px-8 py-10 md:py-20">
+        <div className="relative z-10 max-w-4xl mx-auto w-full px-4 md:px-8 py-6 sm:py-10 md:py-16">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -43,7 +57,7 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
             <div className="mb-4">
               <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[hsl(215,30%,15%)] leading-tight mb-1">
                 Coding Basics for{" "}
-                <span className="text-[hsl(210,100%,40%)]">Instructional Designers</span>
+                <span className="text-[hsl(210,100%,40%)]">Instructional Design</span>
               </h1>
               <p className="text-sm md:text-base text-[hsl(215,15%,45%)] font-medium">
                 Add custom interactivity without becoming a developer
@@ -75,7 +89,7 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
                 {[
-                  { icon: Clock, title: "30 Minutes", sub: "Bite-sized lessons" },
+                  { icon: Clock, title: "5 Hours", sub: "Self Paced - Learning" },
                   { icon: Layers, title: "7 Modules", sub: "Interactive content" },
                   { icon: Award, title: "Certificate", sub: "Earn on completion" },
                 ].map((item, i) => (
@@ -138,7 +152,6 @@ const WelcomePage = ({ onGetStarted, userName }: WelcomePageProps) => {
               className="rounded-xl border border-[hsl(210,20%,90%)] bg-[hsl(210,20%,96%)] p-4"
             >
               <div className="flex items-center gap-2 mb-1.5">
-                <Sparkles className="w-4 h-4 text-[hsl(210,100%,42%)]" />
                 <h3 className="text-sm font-bold text-[hsl(215,30%,15%)]">Prerequisites</h3>
               </div>
               <p className="text-xs text-[hsl(215,15%,35%)] leading-relaxed">

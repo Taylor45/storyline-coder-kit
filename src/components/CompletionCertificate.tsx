@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Award, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import html2canvas from "html2canvas";
@@ -10,6 +10,25 @@ interface CompletionCertificateProps {
 
 const CompletionCertificate = ({ userName }: CompletionCertificateProps) => {
   const certRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (entry) {
+        const width = entry.contentRect.width;
+        if (width < 800) {
+          setScale(width / 800);
+        } else {
+          setScale(1);
+        }
+      }
+    });
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const handleDownload = async () => {
     if (!certRef.current) return;
@@ -48,13 +67,18 @@ const CompletionCertificate = ({ userName }: CompletionCertificateProps) => {
         </Button>
       </div>
 
-      {/* Certificate Preview - scrollable on mobile */}
-      <div className="flex justify-center overflow-x-auto">
-        <div
-          ref={certRef}
-          className="w-[800px] min-w-[800px] bg-white text-gray-900 p-0 rounded-none"
-          style={{ fontFamily: "'Inter', sans-serif" }}
-        >
+      {/* Certificate Preview - responsively scaled on mobile */}
+      <div ref={containerRef} className="w-full overflow-hidden flex justify-start sm:justify-center">
+        <div style={{ width: '800px', height: `${540 * scale}px`, position: 'relative' }} className="shrink-0">
+          <div
+            ref={certRef}
+            className="w-[800px] min-w-[800px] bg-white text-gray-900 p-0 rounded-none absolute top-0 left-0"
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              transform: `scale(${scale})`,
+              transformOrigin: "top left",
+            }}
+          >
           <div
             className="relative border-[6px] m-4 p-12"
             style={{ borderColor: "hsl(213, 72%, 40%)" }}
@@ -109,7 +133,7 @@ const CompletionCertificate = ({ userName }: CompletionCertificateProps) => {
               <p className="text-gray-600 text-sm max-w-md mx-auto leading-relaxed">
                 has successfully completed the{" "}
                 <strong className="text-gray-900">
-                  Coding Basics for Instructional Designers
+                  Coding Basics for Instructional Design
                 </strong>{" "}
                 course, demonstrating proficiency in HTML, CSS, JavaScript, and
                 building interactive learning experiences.
@@ -124,22 +148,28 @@ const CompletionCertificate = ({ userName }: CompletionCertificateProps) => {
 
               <div className="flex justify-between items-end pt-6 max-w-lg mx-auto">
                 <div className="text-center">
+                  <p className="text-sm font-medium text-gray-700 mb-1">{today}</p>
                   <div
-                    className="w-32 border-t-2 mb-1"
+                    className="w-32 border-t-2 mb-1 mx-auto"
                     style={{ borderColor: "hsl(213, 72%, 40%)" }}
                   />
                   <p className="text-xs text-gray-500">Date</p>
-                  <p className="text-sm font-medium text-gray-700">{today}</p>
                 </div>
                 <div className="text-center">
+                  <p
+                    className="text-2xl md:text-3xl mb-1 -rotate-1 select-none font-semibold tracking-wide"
+                    style={{
+                      fontFamily: "'Dancing Script', 'Great Vibes', 'Caveat', 'Brush Script MT', cursive",
+                      color: "hsl(213, 72%, 30%)",
+                    }}
+                  >
+                    Mabasa eLearning
+                  </p>
                   <div
-                    className="w-32 border-t-2 mb-1"
+                    className="w-40 border-t-2 mb-1 mx-auto"
                     style={{ borderColor: "hsl(213, 72%, 40%)" }}
                   />
                   <p className="text-xs text-gray-500">Instructor</p>
-                  <p className="text-sm font-medium text-gray-700">
-                    Coding Basics Academy
-                  </p>
                 </div>
               </div>
             </div>
@@ -147,6 +177,7 @@ const CompletionCertificate = ({ userName }: CompletionCertificateProps) => {
         </div>
       </div>
     </div>
+  </div>
   );
 };
 

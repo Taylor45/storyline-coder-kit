@@ -1,7 +1,8 @@
 import { courseModules } from "@/data/courseData";
-import { Check, Award, Lock, Target, Home } from "lucide-react";
+import { Check, Award, Lock, LogOut, Database, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface CourseSidebarProps {
   currentModule: number;
@@ -13,82 +14,159 @@ interface CourseSidebarProps {
   onSelectCompletion?: () => void;
   onSelectIntro?: () => void;
   onHome?: () => void;
+  isAdmin?: boolean;
+  viewMode?: "student" | "admin";
+  onToggleViewMode?: () => void;
+  onClose?: () => void;
 }
 
-const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCompleted, isCompletionView, isIntroView, onSelectCompletion, onSelectIntro, onHome }: CourseSidebarProps) => {
+const getModuleSubtitle = (id: number, defaultSub: string) => {
+  switch (id) {
+    case 1:
+      return "Understand the foundations of the interactivity";
+    case 2:
+      return "Structure your educational content with HTML &...";
+    case 3:
+      return "Create beautiful, accessible learning";
+    case 4:
+      return "Extend Storyline's built-in functionality...";
+    case 5:
+      return "Dynamic content, branching scenario..";
+    case 6:
+      return "Connect Storyline courses to external";
+    case 7:
+      return "Practice with hands-on Storyline challenges";
+    default:
+      return defaultSub;
+  }
+};
+
+const CourseSidebar = ({
+  currentModule,
+  completedModules,
+  onSelectModule,
+  allCompleted,
+  isCompletionView,
+  isIntroView,
+  onSelectCompletion,
+  onSelectIntro,
+  onHome,
+  isAdmin,
+  viewMode,
+  onToggleViewMode,
+  onClose,
+}: CourseSidebarProps) => {
   const totalModules = courseModules.length;
-  const progress = Math.round(completedModules.length / totalModules * 100);
+  const progress = Math.round((completedModules.length / totalModules) * 100);
 
   return (
-    <aside className="w-full h-full flex flex-col bg-sidebar text-sidebar-foreground border-r border-sidebar-border shrink-0 overflow-hidden">
+    <aside className="w-full h-full flex flex-col bg-[#111827] text-white border-r border-sidebar-border shrink-0 overflow-hidden font-sans">
       {/* Header */}
-      <div className="px-4 py-3 border-b border-sidebar-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(220,80%,15%)] relative overflow-hidden shrink-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.08)_0%,_transparent_60%)]" />
-        <div className="relative z-10 flex flex-col items-center w-full">
+      <div className="px-4 py-3 xl:py-4 bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(0,0%,5%)] relative overflow-hidden shrink-0 border-b border-white/10">
+        <div className="relative z-10 flex flex-col items-center w-full pr-10 lg:pr-0">
+          {/* Top </ > divider */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+            transition={{ duration: 0.4 }}
             className="flex items-center gap-2 w-full mb-1.5"
           >
-            <div className="flex-1 h-[1px] bg-white/40" />
-            <span className="text-white font-mono font-bold text-base">&lt;/&gt;</span>
-            <div className="flex-1 h-[1px] bg-white/40" />
+            <div className="flex-1 h-[1.5px] bg-white/40" />
+            <span className="text-white font-mono font-bold text-xs tracking-widest px-1">&lt;/&gt;</span>
+            <div className="flex-1 h-[1.5px] bg-white/40" />
           </motion.div>
+
           <motion.h1
-            initial={{ opacity: 0, y: 8 }}
+            initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
-            className="text-sm font-extrabold tracking-wide uppercase text-white text-center leading-tight"
+            className="text-xs sm:text-sm xl:text-base font-black tracking-wide uppercase text-white text-center leading-none"
           >
             Coding Basics
           </motion.h1>
           <motion.p
-            initial={{ opacity: 0, y: 6 }}
+            initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7, ease: "easeOut" }}
-            className="text-[10px] font-bold tracking-[0.15em] uppercase text-white/80 text-center mt-0.5"
+            className="text-[9px] font-bold tracking-[0.2em] uppercase text-white/80 text-center my-0.5"
           >
-            For Instructional Designers
+            For
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-[11px] xl:text-xs font-black tracking-wider uppercase text-white text-center leading-tight"
+          >
+            Instructional Design
           </motion.p>
         </div>
       </div>
 
-      {/* Progress */}
-      <div className="px-4 py-2 border-b border-sidebar-border shrink-0">
-        <div className="flex items-center justify-between text-[11px] mb-1">
-          <span className="text-sidebar-foreground/70">Progress</span>
-          <span className="font-semibold text-primary-foreground">{progress}% · {completedModules.length}/{totalModules}</span>
+      {/* Progress Section */}
+      <div className="px-3.5 py-2 bg-[#18202c] border-b border-white/10 shrink-0">
+        <div className="flex items-center justify-between text-[11px] text-white/80 font-medium mb-1">
+          <span>Progress</span>
+          <span className="text-[10px] text-white/60">{completedModules.length} of {totalModules} complete</span>
         </div>
         <div className="h-1.5 rounded-full bg-white/20 overflow-hidden">
           <div
-            className="h-full rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.6),0_0_16px_rgba(100,180,255,0.4)]"
-            style={{ width: `${progress}%`, transition: 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)' }} />
+            className="h-full rounded-full bg-[#0070f3] transition-all duration-500 ease-out"
+            style={{ width: `${progress}%` }}
+          />
         </div>
       </div>
 
       {/* Module List */}
-      <nav className="flex-1 py-1 min-h-0 flex flex-col">
+      <nav className="flex-1 py-0.5 min-h-0 flex flex-col overflow-y-auto bg-[#131b2a] divide-y divide-white/5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {isAdmin && (
+          <button
+            type="button"
+            onClick={() => {
+              onToggleViewMode?.();
+              onClose?.();
+            }}
+            className="w-full flex items-center gap-2.5 px-3 py-1.5 xl:py-2 text-left bg-blue-500/15 text-blue-300 hover:bg-blue-500/25 transition-colors cursor-pointer shrink-0 font-bold"
+          >
+            <div className="flex items-center justify-center w-6 h-6 rounded bg-blue-600 text-white shrink-0">
+              <Database className="w-3 h-3" />
+            </div>
+            <p className="text-[11px] xl:text-[12px] truncate">
+              {viewMode === "admin" ? "Switch to Course View" : "Instructor Console"}
+            </p>
+          </button>
+        )}
+
+        {/* Introduction */}
         <button
           type="button"
-          onClick={() => onSelectIntro?.()}
+          onClick={() => {
+            onSelectIntro?.();
+            onClose?.();
+          }}
           className={cn(
-            "w-full flex items-center gap-2.5 px-4 py-1.5 text-left transition-colors border-b border-sidebar-border hover:bg-sidebar-accent/60 cursor-pointer shrink-0",
-            isIntroView ?
-            "bg-sidebar-accent text-sidebar-accent-foreground" :
-            "text-sidebar-foreground/80"
-          )}>
-          <div className={cn(
-            "flex items-center justify-center w-6 h-6 rounded-md shrink-0",
-            isIntroView ? "bg-gradient-to-br from-[#00BBFF] to-[#1B68B1] text-white" : "bg-sidebar-primary text-sidebar-foreground/50"
-          )}>
-            <Target className="w-3 h-3" />
+            "w-full flex items-center gap-2.5 px-3 py-1.5 xl:py-2 text-left transition-all cursor-pointer shrink-0",
+            isIntroView
+              ? "bg-[#1c2e4a] border-l-2 border-blue-500"
+              : "hover:bg-white/5"
+          )}
+        >
+          <div
+            className={cn(
+              "flex items-center justify-center w-6 h-6 xl:w-6.5 xl:h-6.5 rounded-md shrink-0",
+              isIntroView ? "bg-[#1d4ed8] text-white" : "bg-[#243247] text-white/90"
+            )}
+          >
+            <Star className="w-3 h-3 fill-current" />
           </div>
-          <p className={cn("text-[13px] font-medium truncate", isIntroView && "text-sidebar-primary-foreground")}>
-            Introduction
-          </p>
+          <div className="min-w-0 flex-1">
+            <p className={cn("text-[12px] xl:text-[13px] font-bold text-white leading-tight truncate", isIntroView && "text-blue-300")}>
+              Introduction
+            </p>
+            <p className="text-[10px] xl:text-[11px] text-white/60 truncate leading-tight mt-0.5">
+              Course Overview
+            </p>
+          </div>
         </button>
 
+        {/* Modules */}
         {courseModules.map((mod) => {
           const isCompleted = completedModules.includes(mod.id);
           const isCurrent = currentModule === mod.id && !isCompletionView && !isIntroView;
@@ -99,81 +177,115 @@ const CourseSidebar = ({ currentModule, completedModules, onSelectModule, allCom
             <button
               type="button"
               key={mod.id}
-              onClick={() => isClickable && onSelectModule(mod.id)}
+              onClick={() => {
+                if (isClickable) {
+                  onSelectModule(mod.id);
+                  onClose?.();
+                }
+              }}
               disabled={!isClickable}
               aria-disabled={!isClickable}
               className={cn(
-                "w-full flex items-center gap-2.5 px-4 py-1.5 text-left transition-colors shrink-0",
-                isCurrent ?
-                "bg-sidebar-accent text-sidebar-accent-foreground" :
-                isLocked ?
-                "opacity-60 cursor-not-allowed" :
-                "text-sidebar-foreground/80 hover:bg-sidebar-accent/60 cursor-pointer"
-              )}>
+                "w-full flex items-center gap-2.5 px-3 py-1.5 xl:py-2 text-left transition-all shrink-0",
+                isCurrent
+                  ? "bg-[#1c2e4a] border-l-2 border-blue-500"
+                  : isLocked
+                  ? "opacity-80 hover:bg-white/5 cursor-not-allowed"
+                  : "hover:bg-white/5 cursor-pointer"
+              )}
+            >
               <div
                 className={cn(
-                  "flex items-center justify-center w-6 h-6 rounded-md shrink-0 text-[11px] font-bold",
-                  isCompleted ?
-                  "bg-success text-success-foreground" :
-                  isCurrent ?
-                  "bg-sidebar-primary text-sidebar-primary-foreground" :
-                  "bg-sidebar-primary text-sidebar-foreground/50"
-                )}>
-                {isCompleted ? <Check className="w-3 h-3" /> : isLocked ? <Lock className="w-3 h-3" /> : mod.id}
+                  "flex items-center justify-center w-6 h-6 xl:w-6.5 xl:h-6.5 rounded-md shrink-0 text-[11px] font-bold",
+                  isCompleted
+                    ? "bg-[#9da5a5] text-white"
+                    : isCurrent
+                    ? "bg-[#0070f3] text-white"
+                    : "bg-[#1d4ed8] text-white"
+                )}
+              >
+                {isCompleted ? (
+                  <Check className="w-3 h-3 stroke-[2.5]" />
+                ) : isLocked ? (
+                  <Lock className="w-3 h-3" />
+                ) : (
+                  mod.id
+                )}
               </div>
-              <p
-                className={cn(
-                  "text-[13px] font-medium truncate",
-                  isCurrent && "text-sidebar-primary-foreground"
-                )}>
-                {mod.title}
-              </p>
-            </button>);
+              <div className="min-w-0 flex-1">
+                <p className={cn("text-[12px] xl:text-[13px] font-bold text-white leading-tight truncate", isCurrent && "text-blue-300")}>
+                  {mod.title}
+                </p>
+                <p className="text-[10px] xl:text-[11px] text-white/60 truncate leading-tight mt-0.5">
+                  {getModuleSubtitle(mod.id, mod.subtitle)}
+                </p>
+              </div>
+            </button>
+          );
         })}
 
         {/* Completion tab */}
         <button
           type="button"
-          onClick={() => allCompleted && onSelectCompletion?.()}
+          onClick={() => {
+            if (allCompleted) {
+              onSelectCompletion?.();
+              onClose?.();
+            }
+          }}
           disabled={!allCompleted}
           aria-disabled={!allCompleted}
           className={cn(
-            "w-full flex items-center gap-2.5 px-4 py-1.5 text-left transition-colors border-t border-sidebar-border mt-auto shrink-0",
-            !allCompleted ?
-            "opacity-50 cursor-not-allowed" :
-            isCompletionView ?
-            "bg-sidebar-accent text-sidebar-accent-foreground" :
-            "text-sidebar-foreground/80 hover:bg-sidebar-accent/60 cursor-pointer"
-          )}>
-          <div className={cn(
-            "flex items-center justify-center w-6 h-6 rounded-md shrink-0",
-            allCompleted ? "bg-success text-success-foreground" : "bg-sidebar-primary text-sidebar-foreground/50"
-          )}>
+            "w-full flex items-center gap-2.5 px-3 py-1.5 xl:py-2 text-left transition-all shrink-0",
+            !allCompleted
+              ? "opacity-80 cursor-not-allowed"
+              : isCompletionView
+              ? "bg-[#1c2e4a] border-l-2 border-blue-500"
+              : "hover:bg-white/5 cursor-pointer"
+          )}
+        >
+          <div
+            className={cn(
+              "flex items-center justify-center w-6 h-6 xl:w-6.5 xl:h-6.5 rounded-md shrink-0",
+              allCompleted
+                ? "bg-[#9da5a5] text-white"
+                : "bg-[#1d4ed8] text-white"
+            )}
+          >
             {allCompleted ? <Award className="w-3 h-3" /> : <Lock className="w-3 h-3" />}
           </div>
-          <p className={cn("text-[13px] font-medium truncate", isCompletionView && "text-sidebar-primary-foreground")}>
-            Completion
-          </p>
+          <div className="min-w-0 flex-1">
+            <p className={cn("text-[12px] xl:text-[13px] font-bold text-white leading-tight truncate", isCompletionView && "text-blue-300")}>
+              Completion
+            </p>
+            <p className="text-[10px] xl:text-[11px] text-white/60 truncate leading-tight mt-0.5">
+              Complete all the modules to earn a certificate
+            </p>
+          </div>
         </button>
       </nav>
 
       {/* Footer */}
-      <div className="px-3 py-2 border-t border-sidebar-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(0,0%,5%)] flex items-center justify-between shrink-0">
-        <p className="text-[10px] text-white/70 truncate">
-          Designed for IDs
-        </p>
-        {onHome && (
-          <button
-            onClick={onHome}
-            className="w-7 h-7 rounded-md bg-white/15 hover:bg-white/25 flex items-center justify-center transition-colors shrink-0"
-            title="Back to Login"
-          >
-            <Home className="w-3.5 h-3.5 text-white" />
-          </button>
-        )}
+      <div className="px-3 py-1.5 xl:py-2 border-t border-sidebar-border bg-gradient-to-br from-[hsl(210,100%,45%)] to-[hsl(0,0%,5%)] flex items-center justify-end gap-1.5 shrink-0">
+        <div className="flex items-center gap-1.5 shrink-0">
+          <ThemeToggle className="w-7 h-7 text-white/80 hover:text-white hover:bg-white/10" />
+          {onHome && (
+            <button
+              id="sidebar-home-button"
+              onClick={() => {
+                onHome();
+                onClose?.();
+              }}
+              className="w-7 h-7 rounded-md bg-white/15 hover:bg-white/25 flex items-center justify-center transition-colors shrink-0 text-white"
+              title="Sign Out"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+            </button>
+          )}
+        </div>
       </div>
-    </aside>);
-
+    </aside>
+  );
 };
 
 export default CourseSidebar;

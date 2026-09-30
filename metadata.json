@@ -1,0 +1,8 @@
+{
+  "name": "Storyline Coder Kit",
+  "description": "An interactive web development course for instructional designers learning HTML, CSS, JavaScript, and Articulate Storyline integration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

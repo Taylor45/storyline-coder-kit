@@ -1,4 +1,4 @@
-import { Globe, FileCode, Palette, Zap, Layers, Rocket, FlaskConical } from "lucide-react";
+import { Compass, Code2, Layout, Terminal, GitBranch, Share2, Laptop } from "lucide-react";
 
 export interface QuizQuestion {
   question: string;
@@ -24,7 +24,7 @@ export interface CourseModule {
   id: number;
   title: string;
   subtitle: string;
-  icon: typeof Globe;
+  icon: typeof Compass;
   color: string;
   sections: ModuleSection[];
   flashCards?: FlashCard[];
@@ -41,7 +41,7 @@ export const courseModules: CourseModule[] = [
     id: 1,
     title: "How the Web Works",
     subtitle: "Understand the foundations of the internet and web technologies",
-    icon: Globe,
+    icon: Compass,
     color: "primary",
     sections: [
       {
@@ -92,7 +92,7 @@ export const courseModules: CourseModule[] = [
     id: 2,
     title: "HTML for Learning Content",
     subtitle: "Structure your educational content with semantic HTML",
-    icon: FileCode,
+    icon: Code2,
     color: "info",
     sections: [
       {
@@ -170,7 +170,7 @@ export const courseModules: CourseModule[] = [
     id: 3,
     title: "CSS for Visual Design & UX",
     subtitle: "Create beautiful, accessible learning interfaces with CSS",
-    icon: Palette,
+    icon: Layout,
     color: "accent",
     sections: [
       {
@@ -241,8 +241,8 @@ export const courseModules: CourseModule[] = [
   {
     id: 4,
     title: "JavaScript in Storyline: The Basics",
-    subtitle: "Use JavaScript to extend Storyline's built-in functionality",
-    icon: Zap,
+    subtitle: "Extend Storyline's built-in functionality",
+    icon: Terminal,
     color: "warning",
     sections: [
       {
@@ -363,7 +363,7 @@ player.SetVar("ResultMessage", resultMessage);`,
     id: 5,
     title: "Advanced Storyline JavaScript Techniques",
     subtitle: "Dynamic content, branching scenarios, and DOM manipulation in Storyline",
-    icon: Layers,
+    icon: GitBranch,
     color: "success",
     sections: [
       {
@@ -559,7 +559,7 @@ for (var i = 0; i < allText.length; i++) {
     id: 6,
     title: "Storyline + External Integrations",
     subtitle: "Connect Storyline courses to external tools, APIs, and data sources",
-    icon: Rocket,
+    icon: Share2,
     color: "destructive",
     sections: [
       {
@@ -736,8 +736,8 @@ if (scormAPI) {
   {
     id: 7,
     title: "Live Code Lab",
-    subtitle: "Practice writing Storyline JavaScript with hands-on challenges",
-    icon: FlaskConical,
+    subtitle: "Practice with hands-on Storyline challenges",
+    icon: Laptop,
     color: "info",
     sections: [
       {
